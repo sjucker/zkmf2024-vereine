@@ -1,0 +1,36 @@
+<div>
+  <mat-toolbar color="primary">
+    Login
+  </mat-toolbar>
+
+  <mat-card>
+    <mat-card-title>
+      Login
+    </mat-card-title>
+    <mat-card-content fxLayout="row">
+      <form role="form" (ngSubmit)="login()" [formGroup]="loginForm" fxFlex.gt-md="25%">
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Email</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 name="email"
+                 id="email"
+                 formControlName="email"
+                 #email/>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Password</mat-label>
+          <input type="password"
+                 autocomplete="off"
+                 matInput
+                 name="password"
+                 formControlName="password"
+                 id="password"/>
+        </mat-form-field>
+        <button color="primary" mat-flat-button>Login</button>
+        <p *ngIf="authenticationError">Username/Password is not correct!</p>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
