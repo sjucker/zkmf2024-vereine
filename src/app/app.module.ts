@@ -15,12 +15,16 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatButtonModule} from "@angular/material/button";
 import {AuthenticationInterceptor} from "./interceptors/authentication-interceptor.service";
 import {MainComponent} from "./main/main.component";
+import {MatIconModule} from "@angular/material/icon";
+import {HeaderComponent} from "./header/header.component";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     MainComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,6 +39,8 @@ import {MainComponent} from "./main/main.component";
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
+    MatIconModule,
+    MatTooltipModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},],
   bootstrap: [AppComponent]
