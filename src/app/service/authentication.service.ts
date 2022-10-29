@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {ChangePasswordRequestDTO, LoginRequestDTO, LoginResponseDTO} from "../rest";
+import {LoginRequestDTO, LoginResponseDTO} from "../rest";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 
@@ -11,7 +11,7 @@ export class AuthenticationService {
 
   private readonly token = 'token';
   private readonly userId = 'user-id';
-  private readonly admin = 'admin';
+  private readonly role = 'role';
 
   private baseUrl = environment.baseUrl;
 
@@ -24,24 +24,17 @@ export class AuthenticationService {
       password: password
     };
 
-    return this.httpClient.post<LoginResponseDTO>(`${this.baseUrl}/authenticate`, request);
+    return this.httpClient.post<LoginResponseDTO>(`${this.baseUrl}/public/auth`, request);
   }
 
   logout(): void {
     localStorage.clear();
   }
 
-  changePassword(oldPassword: string, newPassword: string): Observable<any> {
-    const request: ChangePasswordRequestDTO = {
-      oldPassword: oldPassword,
-      newPassword: newPassword
-    }
-    return this.httpClient.post<any>(`${this.baseUrl}/authenticate/change-password`, request);
-  }
-
   setCredentials(dto: LoginResponseDTO): void {
     localStorage.setItem(this.token, dto.jwt);
-    localStorage.setItem(this.userId, String(dto.id));
+    localStorage.setItem(this.userId, dto.email);
+    localStorage.setItem(this.role, dto.role);
   }
 
   getAuthorizationToken(): string | null {
