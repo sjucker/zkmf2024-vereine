@@ -26,8 +26,8 @@
                  formControlName="password"
                  id="password"/>
         </mat-form-field>
-        <button color="primary" mat-flat-button>Login</button>
-        <p *ngIf="authenticationError">Username/Password is not correct!</p>
+        <button color="primary" mat-flat-button [disabled]="authenticating">Login</button>
+        <span *ngIf="authenticationError">Email oder Passwort nicht korrekt!</span>
       </form>
     </mat-card-content>
   </mat-card>
