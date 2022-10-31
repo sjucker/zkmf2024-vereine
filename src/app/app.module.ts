@@ -18,6 +18,7 @@ import {MainComponent} from "./main/main.component";
 import {MatIconModule} from "@angular/material/icon";
 import {HeaderComponent} from "./header/header.component";
 import {MatTooltipModule} from "@angular/material/tooltip";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -41,6 +42,7 @@ import {MatTooltipModule} from "@angular/material/tooltip";
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
+    MatProgressBarModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},],
   bootstrap: [AppComponent]

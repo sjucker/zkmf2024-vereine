@@ -1,12 +1,37 @@
 <div>
   <app-header header="ZKMF2024 - Vereinsbereich"></app-header>
 
-  <mat-card>
-    <mat-card-title>
-      Bereich
-    </mat-card-title>
+  <mat-card *ngIf="band">
+    <mat-card-title>{{band.name}}</mat-card-title>
     <mat-card-content fxLayout="row">
+      <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               [value]="band.name"
+               disabled="true">
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               [value]="band.email"
+               disabled="true">
+      </mat-form-field>
+    </mat-card-content>
+  </mat-card>
 
+  <mat-card *ngIf="!band && !notFound">
+    <mat-card-content fxLayout="row">
+      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="notFound">
+    <mat-card-content fxLayout="row">
+      <p>Es wurde kein Verein für diesen Login gefunden.</p>
     </mat-card-content>
   </mat-card>
 </div>

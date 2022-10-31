@@ -2,7 +2,7 @@
   <img src="/assets/logo.png" class="header-logo" alt="ZKMF2024 Logo" fxHide fxShow.gt-sm/>
   <span class="header-title">{{header}}</span>
   <span class="header-spacer"></span>
-  <button mat-icon-button matTooltip="Logout" *ngIf="loggedIn" (click)="logout()">
+  <button mat-icon-button *ngIf="loggedIn" (click)="logout()">
     <mat-icon>logout</mat-icon>
   </button>
 </mat-toolbar>
