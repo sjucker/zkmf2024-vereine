@@ -1,15 +1,15 @@
 <div>
   <app-header header="ZKMF2024 - Vereinsbereich"></app-header>
 
-  <mat-card *ngIf="band">
-    <mat-card-title>{{band.name}}</mat-card-title>
+  <mat-card *ngIf="verein">
+    <mat-card-title>{{verein.vereinsname}}</mat-card-title>
     <mat-card-content fxLayout="row">
       <mat-form-field appearance="fill">
         <mat-label>Name</mat-label>
         <input type="text"
                autocomplete="off"
                matInput
-               [value]="band.name"
+               [value]="verein.vereinsname"
                disabled="true">
       </mat-form-field>
       <mat-form-field appearance="fill">
@@ -17,13 +17,13 @@
         <input type="text"
                autocomplete="off"
                matInput
-               [value]="band.email"
+               [value]="verein.email"
                disabled="true">
       </mat-form-field>
     </mat-card-content>
   </mat-card>
 
-  <mat-card *ngIf="!band && !notFound">
+  <mat-card *ngIf="!verein && !notFound">
     <mat-card-content fxLayout="row">
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </mat-card-content>

@@ -1,0 +1,48 @@
+<div>
+  <app-header header="Vereinsanmeldung"></app-header>
+
+  <mat-card>
+    <mat-card-title>
+      Vereinsaccount erstellen
+    </mat-card-title>
+    <mat-card-content *ngIf="success">
+      <p>Der Vereinsaccount wurde erfolgreich erstellt! Du kannst dich nun hier einloggen: <a [routerLink]="loginUrl">Login</a></p>
+    </mat-card-content>
+    <mat-card-content *ngIf="!success">
+      <p>Vereinsaccount erstellen, die restlichen Angaben werden nach dem <a [routerLink]="loginUrl">Login</a> erfasst.</p>
+      <form role="form" (ngSubmit)="register()" [formGroup]="registerForm">
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Vereinsname (kann später noch geändert werden)</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 name="vereinsname"
+                 id="vereinsname"
+                 formControlName="vereinsname"
+                 #vereinsname/>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Email (wird für den Login benötigt)</mat-label>
+          <input type="email"
+                 autocomplete="off"
+                 matInput
+                 name="email"
+                 id="email"
+                 formControlName="email"
+                 #email/>
+        </mat-form-field>
+        <mat-form-field appearance="outline" color="accent">
+          <mat-label>Passwort</mat-label>
+          <input type="password"
+                 autocomplete="off"
+                 matInput
+                 name="password"
+                 formControlName="password"
+                 id="password"/>
+        </mat-form-field>
+        <button color="primary" mat-flat-button [disabled]="registering">Erstellen</button>
+        <span *ngIf="error">{{errorMessage}}</span>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>

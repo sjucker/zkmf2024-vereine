@@ -19,6 +19,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {HeaderComponent} from "./header/header.component";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { RegisterComponent } from './register/register.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
     LoginComponent,
     MainComponent,
     HeaderComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,

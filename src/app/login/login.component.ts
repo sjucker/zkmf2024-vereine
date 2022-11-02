@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AuthenticationService} from "../service/authentication.service";
 import {Router} from "@angular/router";
+import {ANMELDUNG_PATH} from "../app-routing.module";
 
 @Component({
   selector: 'app-login',
@@ -13,10 +14,11 @@ export class LoginComponent {
   authenticating = false;
   authenticationError = false;
 
+  anmeldungUrl = `/${ANMELDUNG_PATH}`;
+
   loginForm = this.formBuilder.group({
     email: [null, [Validators.required]],
     password: [null, [Validators.required]],
-    rememberMe: [false],
   });
 
   constructor(private formBuilder: FormBuilder,

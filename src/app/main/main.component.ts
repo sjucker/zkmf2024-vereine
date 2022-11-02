@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from "../service/backend.service";
-import {BandDTO} from "../rest";
+import {VereinDTO} from "../rest";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
@@ -10,7 +10,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class MainComponent implements OnInit {
 
-  band?: BandDTO;
+  verein?: VereinDTO;
   notFound = false;
 
   constructor(private backendService: BackendService) {
@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
   ngOnInit(): void {
     this.backendService.get().subscribe({
       next: response => {
-        this.band = response;
+        this.verein = response;
       },
       error: (err: HttpErrorResponse) => {
         if (err.status === 404) {
