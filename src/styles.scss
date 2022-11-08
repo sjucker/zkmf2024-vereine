@@ -29,3 +29,33 @@ mat-form-field {
 mat-card {
   margin: 1em;
 }
+
+.form-layout-2 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  mat-form-field {
+    width: 49%;
+  }
+}
+
+.form-layout-3 {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  mat-form-field {
+    width: 32%;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .form-layout-2, .form-layout-3 {
+    flex-direction: column;
+
+    mat-form-field {
+      width: 100%;
+    }
+  }
+}

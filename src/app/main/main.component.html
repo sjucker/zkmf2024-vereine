@@ -2,35 +2,77 @@
   <app-header header="ZKMF2024 - Vereinsbereich"></app-header>
 
   <mat-card *ngIf="verein">
-    <mat-card-title>{{verein.vereinsname}}</mat-card-title>
-    <mat-card-content fxLayout="row">
-      <mat-form-field appearance="fill">
-        <mat-label>Name</mat-label>
-        <input type="text"
-               autocomplete="off"
-               matInput
-               [value]="verein.vereinsname"
-               disabled="true">
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Email</mat-label>
-        <input type="text"
-               autocomplete="off"
-               matInput
-               [value]="verein.email"
-               disabled="true">
-      </mat-form-field>
+    <mat-card-content>
+      <h2>Vereinsangaben</h2>
+      <div class="form-layout-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 [(ngModel)]="verein.email"
+                 disabled="true">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Vereinsname</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 [(ngModel)]="verein.angaben.vereinsname">
+        </mat-form-field>
+      </div>
+
+      <div class="form-layout-3">
+        <mat-form-field appearance="outline">
+          <mat-label>Adresse</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 [(ngModel)]="verein.angaben.adresse">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>PLZ</mat-label>
+          <input type="number"
+                 autocomplete="off"
+                 matInput
+                 [(ngModel)]="verein.angaben.plz">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Ort</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 [(ngModel)]="verein.angaben.ort">
+        </mat-form-field>
+      </div>
+      <div class="form-layout-2">
+        <mat-form-field appearance="outline">
+          <mat-label>Homepage</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 [(ngModel)]="verein.angaben.homepage">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>PC/IBAN</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 [(ngModel)]="verein.angaben.iban">
+        </mat-form-field>
+      </div>
+      <button color="primary" mat-flat-button [disabled]="saving" (click)="save()">Speichern</button>
     </mat-card-content>
   </mat-card>
 
   <mat-card *ngIf="!verein && !notFound">
-    <mat-card-content fxLayout="row">
+    <mat-card-content>
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
     </mat-card-content>
   </mat-card>
 
   <mat-card *ngIf="notFound">
-    <mat-card-content fxLayout="row">
+    <mat-card-content>
       <p>Es wurde kein Verein für diesen Login gefunden.</p>
     </mat-card-content>
   </mat-card>

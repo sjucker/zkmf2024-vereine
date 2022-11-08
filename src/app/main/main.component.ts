@@ -12,6 +12,7 @@ export class MainComponent implements OnInit {
 
   verein?: VereinDTO;
   notFound = false;
+  saving = false;
 
   constructor(private backendService: BackendService) {
   }
@@ -29,4 +30,16 @@ export class MainComponent implements OnInit {
     });
   }
 
+  save() {
+    if (this.verein) {
+      this.backendService.update(this.verein).subscribe({
+        next: value => {
+          this.verein = value;
+        },
+        error: err => {
+// TODO handle error
+        }
+      });
+    }
+  }
 }

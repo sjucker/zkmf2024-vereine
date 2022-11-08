@@ -28,4 +28,8 @@ export class BackendService {
     return this.httpClient.get<VereinDTO>(`${this.baseUrl}/secured/verein`);
   }
 
+  public update(verein: VereinDTO): Observable<VereinDTO> {
+    return this.httpClient.put<VereinDTO>(`${this.baseUrl}/secured/verein`, verein);
+  }
+
 }

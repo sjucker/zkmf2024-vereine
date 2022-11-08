@@ -7,7 +7,6 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginComponent} from './login/login.component';
 import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {FlexLayoutModule} from "@angular/flex-layout";
 import {MatToolbarModule} from "@angular/material/toolbar";
 import {MatCardModule} from "@angular/material/card";
 import {MatInputModule} from "@angular/material/input";
@@ -36,7 +35,6 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    FlexLayoutModule,
     MatToolbarModule,
     MatCardModule,
     MatInputModule,

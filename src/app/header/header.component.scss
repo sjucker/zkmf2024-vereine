@@ -11,3 +11,9 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+@media screen and (max-width: 600px) {
+  .header-logo {
+    display: none;
+  }
+}
