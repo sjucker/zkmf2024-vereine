@@ -40,7 +40,7 @@
                  formControlName="password"
                  id="password"/>
         </mat-form-field>
-        <button color="primary" mat-flat-button [disabled]="registering">Erstellen</button>
+        <app-action-button buttonLabel="Erstellen" [processing]="registering"></app-action-button>
         <span *ngIf="error">{{errorMessage}}</span>
       </form>
     </mat-card-content>

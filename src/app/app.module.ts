@@ -18,7 +18,9 @@ import {MatIconModule} from "@angular/material/icon";
 import {HeaderComponent} from "./header/header.component";
 import {MatTooltipModule} from "@angular/material/tooltip";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import { RegisterComponent } from './register/register.component';
+import {RegisterComponent} from './register/register.component';
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {ActionButtonComponent} from './components/action-button/action-button.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,7 @@ import { RegisterComponent } from './register/register.component';
     MainComponent,
     HeaderComponent,
     RegisterComponent,
+    ActionButtonComponent,
   ],
   imports: [
     BrowserModule,
@@ -43,6 +46,7 @@ import { RegisterComponent } from './register/register.component';
     MatIconModule,
     MatTooltipModule,
     MatProgressBarModule,
+    MatProgressSpinnerModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},],
   bootstrap: [AppComponent]

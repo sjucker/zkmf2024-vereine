@@ -61,7 +61,9 @@
                  [(ngModel)]="verein.angaben.iban">
         </mat-form-field>
       </div>
-      <button color="primary" mat-flat-button [disabled]="saving" (click)="save()">Speichern</button>
+      <app-action-button buttonLabel="Speichern"
+                         [processing]="saving"
+                         (buttonClicked)="save()"/>
     </mat-card-content>
   </mat-card>
 

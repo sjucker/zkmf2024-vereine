@@ -1,0 +1,6 @@
+<button color="primary" mat-flat-button [disabled]="processing" (click)="buttonClicked.emit($event)">
+  <span *ngIf="!processing">{{buttonLabel}}</span>
+  <mat-icon *ngIf="processing">
+    <mat-spinner color="accent" diameter="24"></mat-spinner>
+  </mat-icon>
+</button>
