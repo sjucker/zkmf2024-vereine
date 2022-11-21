@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-import {RegisterVereinRequestDTO, VereinDTO} from "../rest";
+import {RegisterVereinRequestDTO, VereinDTO, VerifyEmailRequestDTO} from "../rest";
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +22,15 @@ export class BackendService {
     };
 
     return this.httpClient.post(`${this.baseUrl}/public/verein`, request);
+  }
+
+  public verifyEmail(email: string, verification: string): Observable<any> {
+    const request: VerifyEmailRequestDTO = {
+      email: email,
+      verification: verification
+    };
+
+    return this.httpClient.post(`${this.baseUrl}/public/verein/verification`, request);
   }
 
   public get(): Observable<VereinDTO> {

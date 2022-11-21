@@ -4,9 +4,11 @@ import {MainComponent} from "./main/main.component";
 import {AuthenticationGuard} from "./service/authentication.guard";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
+import {VerificationComponent} from "./verification/verification.component";
 
 export const LOGIN_PATH = 'login'
 export const ANMELDUNG_PATH = 'anmeldung'
+export const VERIFICATION_PATH = 'verification'
 
 const routes: Routes = [
   {
@@ -21,6 +23,10 @@ const routes: Routes = [
   {
     path: ANMELDUNG_PATH,
     component: RegisterComponent
+  },
+  {
+    path: VERIFICATION_PATH + '/:email/:verification',
+    component: VerificationComponent
   },
 ];
 

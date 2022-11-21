@@ -21,6 +21,7 @@ import {MatProgressBarModule} from "@angular/material/progress-bar";
 import {RegisterComponent} from './register/register.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {ActionButtonComponent} from './components/action-button/action-button.component';
+import {VerificationComponent} from './verification/verification.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {ActionButtonComponent} from './components/action-button/action-button.co
     HeaderComponent,
     RegisterComponent,
     ActionButtonComponent,
+    VerificationComponent,
   ],
   imports: [
     BrowserModule,
