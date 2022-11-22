@@ -3,14 +3,22 @@
 .upload-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-evenly;
 }
 
-.upload-container ngx-dropzone {
-  width: 49%;
+.upload-container {
+  margin-bottom: 1em;
 
-  &.ngx-dz-hovered {
-    border-color: $zkmf2024-gruen;
+  ngx-dropzone {
+    width: 49%;
+
+    &.ngx-dz-hovered {
+      border-color: $zkmf2024-gruen;
+    }
+  }
+
+  img {
+    max-height: 180px;
   }
 }
 
@@ -20,6 +28,15 @@
 
     ngx-dropzone {
       width: 100%;
+
+      &:not(:last-child) {
+        margin-bottom: 1em;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      max-height: unset;
 
       &:not(:last-child) {
         margin-bottom: 1em;

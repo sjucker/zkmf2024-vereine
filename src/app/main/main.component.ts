@@ -4,6 +4,7 @@ import {VereinDTO} from "../rest";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NgxDropzoneChangeEvent} from "ngx-dropzone";
+import {environment} from "../../environments/environment";
 
 @Component({
   selector: 'app-main',
@@ -30,6 +31,10 @@ export class MainComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.load();
+  }
+
+  private load() {
     this.backendService.get().subscribe({
       next: response => {
         this.verein = response;
@@ -108,6 +113,7 @@ export class MainComponent implements OnInit {
     this.uploading = true;
     this.backendService.upload(this.logo, this.bild).subscribe({
       next: _ => {
+        this.load();
         this.uploading = false;
         this.snackBar.open("Bild-Upload war erfolgreich", undefined, {
           duration: 2000,
@@ -129,5 +135,12 @@ export class MainComponent implements OnInit {
     })
   }
 
+  get logoImgSrc(): string {
+    return `${environment.baseUrl}/public/image/${this.verein?.logoImgId}`;
+  }
+
+  get bildImgSrc(): string {
+    return `${environment.baseUrl}/public/image/${this.verein?.bildImgId}`;
+  }
 
 }
