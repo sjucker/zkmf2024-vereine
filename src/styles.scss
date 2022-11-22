@@ -1,4 +1,5 @@
 @use '@angular/material' as mat;
+@import "@angular/cdk/overlay-prebuilt.css";
 @import 'src/zkmf2024-theme';
 
 @include mat.all-component-themes($zkmf2024-theme);
@@ -48,6 +49,21 @@ mat-card {
   mat-form-field {
     width: 32%;
   }
+}
+
+.success {
+  color: $zkmf2024-papier;
+  background-color: $zkmf2024-gruen;
+}
+
+.info {
+  color: $zkmf2024-papier;
+  background-color: $zkmf2024-violett;
+}
+
+.error {
+  color: $zkmf2024-papier;
+  background-color: $zkmf2024-rot;
 }
 
 @media screen and (max-width: 600px) {

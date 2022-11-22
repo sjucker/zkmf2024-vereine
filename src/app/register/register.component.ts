@@ -42,7 +42,6 @@ export class RegisterComponent {
         },
         error: (err: HttpErrorResponse) => {
           this.registering = false;
-          console.log(err)
           this.errorMessage = err.status == 400 ? 'Diese Email wurde schon registriert.' : 'Es ist ein Fehler aufgetreten...';
         }
       });

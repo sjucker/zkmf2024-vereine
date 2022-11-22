@@ -22,6 +22,7 @@ import {RegisterComponent} from './register/register.component';
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {ActionButtonComponent} from './components/action-button/action-button.component';
 import {VerificationComponent} from './verification/verification.component';
+import {MatSnackBarModule} from "@angular/material/snack-bar";
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import {VerificationComponent} from './verification/verification.component';
     MatTooltipModule,
     MatProgressBarModule,
     MatProgressSpinnerModule,
+    MatSnackBarModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},],
   bootstrap: [AppComponent]

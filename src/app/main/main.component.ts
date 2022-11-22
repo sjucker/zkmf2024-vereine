@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {BackendService} from "../service/backend.service";
 import {VereinDTO} from "../rest";
 import {HttpErrorResponse} from "@angular/common/http";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-main',
@@ -11,11 +12,14 @@ import {HttpErrorResponse} from "@angular/common/http";
 export class MainComponent implements OnInit {
 
   verein?: VereinDTO;
+
   notFound = false;
-  saving = false;
   error = false;
 
-  constructor(private backendService: BackendService) {
+  saving = false;
+
+  constructor(private backendService: BackendService,
+              public snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -35,12 +39,26 @@ export class MainComponent implements OnInit {
 
   save() {
     if (this.verein) {
+      this.saving = true;
       this.backendService.update(this.verein).subscribe({
         next: value => {
           this.verein = value;
+          this.saving = false;
+          this.snackBar.open('Speichern war erfolgreich', undefined, {
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            duration: 2000,
+            panelClass: 'success'
+          });
         },
-        error: err => {
-// TODO handle error
+        error: _ => {
+          this.saving = false;
+          this.snackBar.open('Es ist ein Fehler aufgetreten...', undefined, {
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            duration: 3000,
+            panelClass: 'error'
+          });
         }
       });
     }
