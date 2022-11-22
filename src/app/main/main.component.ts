@@ -13,6 +13,7 @@ export class MainComponent implements OnInit {
   verein?: VereinDTO;
   notFound = false;
   saving = false;
+  error = false;
 
   constructor(private backendService: BackendService) {
   }
@@ -25,6 +26,8 @@ export class MainComponent implements OnInit {
       error: (err: HttpErrorResponse) => {
         if (err.status === 404) {
           this.notFound = true;
+        } else {
+          this.error = true;
         }
       }
     });

@@ -21,6 +21,10 @@ const routes: Routes = [
     component: LoginComponent
   },
   {
+    path: LOGIN_PATH + '/:email',
+    component: LoginComponent
+  },
+  {
     path: ANMELDUNG_PATH,
     component: RegisterComponent
   },

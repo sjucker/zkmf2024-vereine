@@ -1,7 +1,7 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AuthenticationService} from "../service/authentication.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ANMELDUNG_PATH} from "../app-routing.module";
 
 @Component({
@@ -9,7 +9,7 @@ import {ANMELDUNG_PATH} from "../app-routing.module";
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
 
   authenticating = false;
   authenticationError = false;
@@ -17,13 +17,25 @@ export class LoginComponent {
   anmeldungUrl = `/${ANMELDUNG_PATH}`;
 
   loginForm = this.formBuilder.group({
-    email: [null, [Validators.required]],
-    password: [null, [Validators.required]],
+    email: ['', [Validators.required]],
+    password: ['', [Validators.required]],
   });
 
   constructor(private formBuilder: FormBuilder,
               private router: Router,
+              private route: ActivatedRoute,
               private authenticationService: AuthenticationService) {
+  }
+
+
+  ngOnInit(): void {
+    const email = this.route.snapshot.paramMap.get('email');
+    if (email) {
+      this.loginForm.setValue({
+        email: email,
+        password: ''
+      });
+    }
   }
 
   login(): void {

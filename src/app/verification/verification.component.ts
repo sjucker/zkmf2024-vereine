@@ -10,7 +10,7 @@ import {BackendService} from "../service/backend.service";
 })
 export class VerificationComponent implements OnInit {
 
-  loginUrl = `/${LOGIN_PATH}`
+  loginUrl = ''
 
   verifying = false;
   error = false;
@@ -30,6 +30,7 @@ export class VerificationComponent implements OnInit {
         next: _ => {
           this.verifying = false;
           this.success = true;
+          this.loginUrl = `/${LOGIN_PATH}/${email}`
         },
         error: _ => {
           this.verifying = false;

@@ -15,7 +15,7 @@ export class RegisterComponent {
   errorMessage = '';
   success = false;
 
-  loginUrl = `/${LOGIN_PATH}`
+  loginUrl = '';
 
   registerForm = this.formBuilder.group({
     vereinsname: [null, [Validators.required]],
@@ -38,6 +38,7 @@ export class RegisterComponent {
         next: response => {
           this.registering = false;
           this.success = true;
+          this.loginUrl = `/${LOGIN_PATH}/${val.email}`
         },
         error: (err: HttpErrorResponse) => {
           this.registering = false;
