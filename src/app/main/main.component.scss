@@ -1,0 +1,29 @@
+@import 'src/zkmf2024-theme';
+
+.upload-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.upload-container ngx-dropzone {
+  width: 49%;
+
+  &.ngx-dz-hovered {
+    border-color: $zkmf2024-gruen;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .upload-container {
+    flex-direction: column;
+
+    ngx-dropzone {
+      width: 100%;
+
+      &:not(:last-child) {
+        margin-bottom: 1em;
+      }
+    }
+  }
+}

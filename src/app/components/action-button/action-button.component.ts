@@ -13,6 +13,9 @@ export class ActionButtonComponent {
   @Input()
   processing = false
 
+  @Input()
+  disabled = false;
+
   @Output()
   buttonClicked = new EventEmitter<any>()
 

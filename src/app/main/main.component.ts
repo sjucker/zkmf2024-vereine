@@ -3,6 +3,7 @@ import {BackendService} from "../service/backend.service";
 import {VereinDTO} from "../rest";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {NgxDropzoneChangeEvent} from "ngx-dropzone";
 
 @Component({
   selector: 'app-main',
@@ -11,12 +12,18 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class MainComponent implements OnInit {
 
+  maxFileSize = 1000000;
+
   verein?: VereinDTO;
 
   notFound = false;
   error = false;
 
   saving = false;
+  uploading = false;
+
+  logo?: File;
+  bild?: File;
 
   constructor(private backendService: BackendService,
               public snackBar: MatSnackBar) {
@@ -63,4 +70,64 @@ export class MainComponent implements OnInit {
       });
     }
   }
+
+  onDrop(event: NgxDropzoneChangeEvent, logo: boolean) {
+    console.log(event);
+    if (event.rejectedFiles.length > 0) {
+      let errorMessage = "Es sind nur Datein vom Typ 'jpeg' erlaubt."
+      if (event.rejectedFiles[0].size > this.maxFileSize) {
+        errorMessage = "Maximal-Grösse von 1 MB überschritten."
+      }
+
+      this.snackBar.open(errorMessage, undefined, {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: 'info'
+      });
+    }
+
+    if (event.addedFiles.length === 1) {
+      if (logo) {
+        this.logo = event.addedFiles[0];
+      } else {
+        this.bild = event.addedFiles[0];
+      }
+    }
+  }
+
+  onRemove(logo: boolean) {
+    if (logo) {
+      this.logo = undefined;
+    } else {
+      this.bild = undefined;
+    }
+  }
+
+  upload() {
+    this.uploading = true;
+    this.backendService.upload(this.logo, this.bild).subscribe({
+      next: _ => {
+        this.uploading = false;
+        this.snackBar.open("Bild-Upload war erfolgreich", undefined, {
+          duration: 2000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          panelClass: 'success'
+        });
+
+      },
+      error: _ => {
+        this.uploading = false;
+        this.snackBar.open("Es ist ein Fehler aufgetreten...", undefined, {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          panelClass: 'error'
+        });
+      }
+    })
+  }
+
+
 }

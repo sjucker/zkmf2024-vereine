@@ -3,6 +3,37 @@
 
   <mat-card *ngIf="verein">
     <mat-card-content>
+      <h2>Vereinsinfo (Website)</h2>
+      <div class="upload-container">
+        <ngx-dropzone (change)="onDrop($event, true)"
+                      [multiple]="false"
+                      accept="image/jpeg,image/jpg"
+                      [maxFileSize]="maxFileSize">
+          <ngx-dropzone-label>Vereinslogo-Upload (max. 1 MB)<br/>(Drag-and-Drop oder hier Klicken)</ngx-dropzone-label>
+          <ngx-dropzone-preview [removable]="true" (removed)="onRemove(true)" *ngIf="logo">
+            <ngx-dropzone-label>{{ logo.name }} ({{ logo.type }})</ngx-dropzone-label>
+          </ngx-dropzone-preview>
+        </ngx-dropzone>
+
+        <ngx-dropzone (change)="onDrop($event, false)"
+                      [multiple]="false"
+                      accept="image/jpeg,image/jpg"
+                      [maxFileSize]="maxFileSize">
+          <ngx-dropzone-label>Vereinsbild-Upload (max. 1 MB)<br/>(Drag-and-Drop oder hier Klicken)</ngx-dropzone-label>
+          <ngx-dropzone-preview [removable]="true" (removed)="onRemove(false)" *ngIf="bild">
+            <ngx-dropzone-label>{{ bild.name }} ({{ bild.type }})</ngx-dropzone-label>
+          </ngx-dropzone-preview>
+        </ngx-dropzone>
+      </div>
+      <app-action-button buttonLabel="Upload"
+                         [processing]="uploading"
+                         [disabled]="!logo && !bild"
+                         (buttonClicked)="upload()"></app-action-button>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="verein">
+    <mat-card-content>
       <h2>Vereinsangaben</h2>
       <div class="form-layout-2">
         <mat-form-field appearance="outline">

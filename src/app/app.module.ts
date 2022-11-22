@@ -25,6 +25,7 @@ import {VerificationComponent} from './verification/verification.component';
 import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {KontaktFormComponent} from './components/kontakt-form/kontakt-form.component';
 import {MatExpansionModule} from "@angular/material/expansion";
+import {NgxDropzoneModule} from "ngx-dropzone";
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import {MatExpansionModule} from "@angular/material/expansion";
     MatProgressSpinnerModule,
     MatSnackBarModule,
     MatExpansionModule,
+    NgxDropzoneModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},],
   bootstrap: [AppComponent]

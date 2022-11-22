@@ -41,4 +41,17 @@ export class BackendService {
     return this.httpClient.put<VereinDTO>(`${this.baseUrl}/secured/verein`, verein);
   }
 
+  public upload(logo?: File, bild?: File): Observable<any> {
+    const formData: FormData = new FormData();
+
+    if (logo) {
+      formData.append('logo', logo);
+    }
+    if (bild) {
+      formData.append('bild', bild);
+    }
+
+    return this.httpClient.post(`${this.baseUrl}/secured/verein/bilder-upload`, formData);
+  }
+
 }
