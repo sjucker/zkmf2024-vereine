@@ -1,0 +1,66 @@
+<div>
+  <div class="form-layout-2">
+    <mat-form-field appearance="outline">
+      <mat-label>Vorname</mat-label>
+      <input type="text"
+             autocomplete="off"
+             matInput
+             [(ngModel)]="kontakt.vorname">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Nachname</mat-label>
+      <input type="text"
+             autocomplete="off"
+             matInput
+             [(ngModel)]="kontakt.nachname">
+    </mat-form-field>
+  </div>
+
+  <div class="form-layout-3">
+    <mat-form-field appearance="outline">
+      <mat-label>Adresse</mat-label>
+      <input type="text"
+             autocomplete="off"
+             matInput
+             [(ngModel)]="kontakt.adresse">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>PLZ</mat-label>
+      <input type="number"
+             autocomplete="off"
+             matInput
+             [(ngModel)]="kontakt.plz">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Ort</mat-label>
+      <input type="text"
+             autocomplete="off"
+             matInput
+             [(ngModel)]="kontakt.ort">
+    </mat-form-field>
+  </div>
+
+  <div class="form-layout-3">
+    <mat-form-field appearance="outline">
+      <mat-label>Email</mat-label>
+      <input type="email"
+             autocomplete="off"
+             matInput
+             [(ngModel)]="kontakt.email">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Telefon privat</mat-label>
+      <input type="tel"
+             autocomplete="off"
+             matInput
+             [(ngModel)]="kontakt.telefonPrivat">
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+      <mat-label>Telefon mobile</mat-label>
+      <input type="tel"
+             autocomplete="off"
+             matInput
+             [(ngModel)]="kontakt.telefonMobile">
+    </mat-form-field>
+  </div>
+</div>

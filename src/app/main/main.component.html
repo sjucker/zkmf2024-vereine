@@ -67,6 +67,39 @@
     </mat-card-content>
   </mat-card>
 
+  <mat-card *ngIf="verein">
+    <mat-card-content>
+      <h2>Kontaktangaben - Präsident</h2>
+      <app-kontakt-form [kontakt]="verein.praesident"></app-kontakt-form>
+
+      <app-action-button buttonLabel="Speichern"
+                         [processing]="saving"
+                         (buttonClicked)="save()"></app-action-button>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="verein">
+    <mat-card-content>
+      <h2>Kontaktangaben - Kassier</h2>
+      <app-kontakt-form [kontakt]="verein.kassier"></app-kontakt-form>
+
+      <app-action-button buttonLabel="Speichern"
+                         [processing]="saving"
+                         (buttonClicked)="save()"></app-action-button>
+    </mat-card-content>
+  </mat-card>
+
+  <mat-card *ngIf="verein">
+    <mat-card-content>
+      <h2>Kontaktangaben - Direktion</h2>
+      <app-kontakt-form [kontakt]="verein.direktion"></app-kontakt-form>
+
+      <app-action-button buttonLabel="Speichern"
+                         [processing]="saving"
+                         (buttonClicked)="save()"></app-action-button>
+    </mat-card-content>
+  </mat-card>
+
   <mat-card *ngIf="!verein && !notFound && !error">
     <mat-card-content>
       <mat-progress-bar mode="indeterminate"></mat-progress-bar>
