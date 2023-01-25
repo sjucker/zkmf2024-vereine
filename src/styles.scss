@@ -1,21 +1,20 @@
-@use '@angular/material' as mat;
+@use "@angular/material" as mat;
+@use "variables";
 @import "@angular/cdk/overlay-prebuilt.css";
-@import 'src/zkmf2024-theme';
+@import "src/zkmf2024-theme";
+@import "responsive";
+
+@include mat.all-component-typographies();
+@include mat.core();
 
 @include mat.all-component-themes($zkmf2024-theme);
 
 html, body {
   height: 100%;
-  background-color: $zkmf2024-silber;
 }
 
 body {
   margin: 0;
-  font-family: Poppins, "Helvetica Neue", sans-serif;
-}
-
-a {
-  color: $zkmf2024-hellblau;
 }
 
 .mat-grid-tile-content {
@@ -27,7 +26,7 @@ mat-form-field {
   width: 100%;
 }
 
-mat-card {
+.mat-mdc-card {
   margin: 1em;
 }
 
@@ -52,26 +51,40 @@ mat-card {
 }
 
 .success {
-  color: $zkmf2024-papier;
-  background-color: $zkmf2024-gruen;
+  color: variables.$papier;
+  background-color: variables.$gruen;
 }
 
 .info {
-  color: $zkmf2024-papier;
-  background-color: $zkmf2024-violett;
+  color: variables.$papier;
+  background-color: variables.$violett;
 }
 
 .error {
-  color: $zkmf2024-papier;
-  background-color: $zkmf2024-rot;
+  color: variables.$papier;
+  background-color: variables.$rot;
 }
 
-@media screen and (max-width: 600px) {
+@include responsive('lt-sm') {
   .form-layout-2, .form-layout-3 {
     flex-direction: column;
 
     mat-form-field {
       width: 100%;
     }
+  }
+}
+
+.show-gt-sm {
+  display: none;
+
+  @include responsive('gt-sm') {
+    display: inherit;
+  }
+}
+
+.hide-gt-sm {
+  @include responsive('gt-sm') {
+    display: none;
   }
 }

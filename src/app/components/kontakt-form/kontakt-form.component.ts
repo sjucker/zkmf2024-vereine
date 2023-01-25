@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {KontaktDTO} from "../../rest";
 
 @Component({
@@ -9,10 +9,9 @@ import {KontaktDTO} from "../../rest";
 export class KontaktFormComponent {
 
   @Input()
-  kontakt: KontaktDTO = {
+  kontakt: KontaktDTO = {};
 
-  };
-
-  constructor() { }
+  constructor() {
+  }
 
 }

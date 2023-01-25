@@ -1,4 +1,6 @@
-@import 'src/zkmf2024-theme';
+@import "src/zkmf2024-theme";
+@import "../../responsive";
+@use "../../variables";
 
 .upload-container {
   display: flex;
@@ -13,7 +15,7 @@
     width: 49%;
 
     &.ngx-dz-hovered {
-      border-color: $zkmf2024-gruen;
+      border-color: variables.$gruen;
     }
   }
 
@@ -22,7 +24,7 @@
   }
 }
 
-@media screen and (max-width: 600px) {
+@include responsive('lt-sm') {
   .upload-container {
     flex-direction: column;
 

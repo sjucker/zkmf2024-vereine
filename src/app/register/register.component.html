@@ -1,15 +1,19 @@
 <div>
   <app-header header="Vereinsanmeldung"></app-header>
 
-  <mat-card>
-    <mat-card-title>
-      Vereinsaccount erstellen
-    </mat-card-title>
+  <mat-card appearance="outlined">
+    <mat-card-header>
+      <mat-card-title>
+        Vereinsaccount erstellen
+      </mat-card-title>
+    </mat-card-header>
     <mat-card-content *ngIf="success">
-      <p>Der Vereinsaccount wurde erfolgreich erstellt! Du kannst dich nun hier einloggen: <a [routerLink]="loginUrl">Login</a></p>
+      <p>Der Vereinsaccount wurde erfolgreich erstellt! Du kannst dich nun hier einloggen: <a [routerLink]="loginUrl">Login</a>
+      </p>
     </mat-card-content>
     <mat-card-content *ngIf="!success">
-      <p>Vereinsaccount erstellen, die restlichen Angaben werden nach dem <a [routerLink]="loginUrl">Login</a> erfasst.</p>
+      <p>Vereinsaccount erstellen, die restlichen Angaben werden nach dem <a [routerLink]="loginUrl">Login</a> erfasst.
+      </p>
       <form role="form" (ngSubmit)="register()" [formGroup]="registerForm">
         <mat-form-field appearance="outline" color="accent">
           <mat-label>Vereinsname (kann später noch geändert werden)</mat-label>
