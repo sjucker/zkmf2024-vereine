@@ -1,17 +1,21 @@
 @use "../../variables";
 @import "../../responsive";
 
+.max-width-container {
+  padding: 1em;
+}
+
 .upload-container {
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  gap: 2em;
 }
 
 .upload-container {
   margin-bottom: 1em;
 
   ngx-dropzone {
-    width: 49%;
+    width: 100%;
 
     &.ngx-dz-hovered {
       border-color: variables.$gruen;
@@ -23,13 +27,31 @@
   }
 }
 
+.anmeldung-container {
+  display: flex;
+  flex-direction: row;
+  gap: 1em;
+
+  > div {
+    flex: 1 1 0;
+  }
+
+  .selection {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
 @include responsive('lt-sm') {
+  .anmeldung-container {
+    flex-direction: column;
+  }
+
   .upload-container {
     flex-direction: column;
+    gap: 1em;
 
     ngx-dropzone {
-      width: 100%;
-
       &:not(:last-child) {
         margin-bottom: 1em;
       }
