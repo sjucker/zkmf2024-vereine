@@ -1,142 +1,223 @@
 <div>
   <app-header header="ZKMF2024 - Vereinsbereich"></app-header>
 
-  <mat-card appearance="outlined" *ngIf="verein">
-    <mat-card-content>
-      <h2>Vereinsangaben</h2>
-      <div class="form-layout">
-        <mat-form-field appearance="outline">
-          <mat-label>Email</mat-label>
-          <input type="text"
-                 autocomplete="off"
-                 matInput
-                 [(ngModel)]="verein.email"
-                 disabled="true">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Vereinsname</mat-label>
-          <input type="text"
-                 autocomplete="off"
-                 matInput
-                 [(ngModel)]="verein.angaben.vereinsname">
-        </mat-form-field>
-      </div>
+  <div class="max-width-container" *ngIf="verein">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Vereinsangaben</mat-panel-title>
+          <mat-panel-description>
+            <app-validation-state [valid]="verein.angaben.valid"></app-validation-state>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="form-layout">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input type="text"
+                   autocomplete="off"
+                   matInput
+                   [(ngModel)]="verein.email"
+                   disabled="true">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Vereinsname</mat-label>
+            <input type="text"
+                   autocomplete="off"
+                   matInput
+                   [(ngModel)]="verein.angaben.vereinsname">
+          </mat-form-field>
+        </div>
 
-      <div class="form-layout">
-        <mat-form-field appearance="outline">
-          <mat-label>Adresse</mat-label>
-          <input type="text"
-                 autocomplete="off"
-                 matInput
-                 [(ngModel)]="verein.angaben.adresse">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>PLZ</mat-label>
-          <input type="number"
-                 autocomplete="off"
-                 matInput
-                 [(ngModel)]="verein.angaben.plz">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Ort</mat-label>
-          <input type="text"
-                 autocomplete="off"
-                 matInput
-                 [(ngModel)]="verein.angaben.ort">
-        </mat-form-field>
-      </div>
-      <div class="form-layout">
-        <mat-form-field appearance="outline">
-          <mat-label>Homepage</mat-label>
-          <input type="text"
-                 autocomplete="off"
-                 matInput
-                 [(ngModel)]="verein.angaben.homepage">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>PC/IBAN</mat-label>
-          <input type="text"
-                 autocomplete="off"
-                 matInput
-                 [(ngModel)]="verein.angaben.iban">
-        </mat-form-field>
-      </div>
-      <app-action-button buttonLabel="Speichern"
-                         [processing]="saving"
-                         (buttonClicked)="save()"></app-action-button>
-    </mat-card-content>
-  </mat-card>
+        <div class="form-layout">
+          <mat-form-field appearance="outline">
+            <mat-label>Adresse</mat-label>
+            <input type="text"
+                   autocomplete="off"
+                   matInput
+                   [(ngModel)]="verein.angaben.adresse">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>PLZ</mat-label>
+            <input type="number"
+                   autocomplete="off"
+                   matInput
+                   [(ngModel)]="verein.angaben.plz">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Ort</mat-label>
+            <input type="text"
+                   autocomplete="off"
+                   matInput
+                   [(ngModel)]="verein.angaben.ort">
+          </mat-form-field>
+        </div>
+        <div class="form-layout">
+          <mat-form-field appearance="outline">
+            <mat-label>Homepage</mat-label>
+            <input type="text"
+                   autocomplete="off"
+                   matInput
+                   [(ngModel)]="verein.angaben.homepage">
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>PC/IBAN</mat-label>
+            <input type="text"
+                   autocomplete="off"
+                   matInput
+                   [(ngModel)]="verein.angaben.iban">
+          </mat-form-field>
+        </div>
+        <app-action-button buttonLabel="Speichern"
+                           [processing]="saving"
+                           (buttonClicked)="save()"></app-action-button>
+      </mat-expansion-panel>
 
-  <mat-card appearance="outlined" *ngIf="verein">
-    <mat-card-content>
-      <h2>Vereinsinfo (Website)</h2>
-      <div class="upload-container">
-        <ngx-dropzone (change)="onDrop($event, true)"
-                      [multiple]="false"
-                      accept="image/jpeg,image/jpg"
-                      [maxFileSize]="maxFileSize"
-                      *ngIf="!verein.logoImgId">
-          <ngx-dropzone-label>Vereinslogo-Upload (max. 1 MB)<br/>(Drag-and-Drop oder hier Klicken)</ngx-dropzone-label>
-          <ngx-dropzone-preview [removable]="true" (removed)="onRemove(true)" *ngIf="logo">
-            <ngx-dropzone-label>{{ logo.name }} ({{ logo.type }})</ngx-dropzone-label>
-          </ngx-dropzone-preview>
-        </ngx-dropzone>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Anmeldung</mat-panel-title>
+          <mat-panel-description>
+            <app-validation-state [valid]="verein.anmeldung.valid"></app-validation-state>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="anmeldung-container">
 
-        <img [src]="logoImgSrc" *ngIf="verein.logoImgId" alt="Vereinslogo"/>
+          <div class="selection">
+            <div><span class="mat-headline-6">Modul</span><br/>(mindestens ein Modul auswählen)</div>
 
-        <ngx-dropzone (change)="onDrop($event, false)"
-                      [multiple]="false"
-                      accept="image/jpeg,image/jpg"
-                      [maxFileSize]="maxFileSize"
-                      *ngIf="!verein.bildImgId">
-          <ngx-dropzone-label>Vereinsbild-Upload (max. 1 MB)<br/>(Drag-and-Drop oder hier Klicken)</ngx-dropzone-label>
-          <ngx-dropzone-preview [removable]="true" (removed)="onRemove(false)" *ngIf="bild">
-            <ngx-dropzone-label>{{ bild.name }} ({{ bild.type }})</ngx-dropzone-label>
-          </ngx-dropzone-preview>
-        </ngx-dropzone>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulA">A - Konzertmusik</mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulB">B - Unterhaltungsmusik</mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulC">C - Platzkonzerte</mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulD">D - Parademusik traditionell</mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulE">E - Parademusik mit Evolutionen</mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulF">F - Hallen-/Rasenshow</mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulG">G - Tambouren</mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulH">H - Perkussionsensembles</mat-checkbox>
+          </div>
+          <div class="selection">
+            <div><span class="mat-headline-6">Stärkeklasse</span><br/>&nbsp;</div>
+            <div
+              *ngIf="!verein.anmeldung.modulA && !verein.anmeldung.modulB && !verein.anmeldung.modulH">
+              Bitte ein entsprechendes Modul auswählen
+            </div>
+            <mat-form-field appearance="outline" *ngIf="verein.anmeldung.modulA">
+              <mat-label>Stärkeklasse Modul A</mat-label>
+              <mat-select [(ngModel)]="verein.anmeldung.klasseModulA" required>
+                <mat-option [value]="HOECHSTKLASSE">Höchstklasse</mat-option>
+                <mat-option [value]="KLASSE_1">1. Klasse</mat-option>
+                <mat-option [value]="KLASSE_2">2. Klasse</mat-option>
+                <mat-option [value]="KLASSE_3">3. Klasse</mat-option>
+                <mat-option [value]="KLASSE_4">4. Klasse</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="verein.anmeldung.modulB">
+              <mat-label>Stärkeklasse Modul B</mat-label>
+              <mat-select [(ngModel)]="verein.anmeldung.klasseModulB" required>
+                <mat-option [value]="OBERSTUFE">Oberstufe</mat-option>
+                <mat-option [value]="MITTELSTUFE">Mittelstufe</mat-option>
+                <mat-option [value]="UNTERSTUFE">Unterstufe</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="verein.anmeldung.modulH">
+              <mat-label>Stärkeklasse Modul H</mat-label>
+              <mat-select [(ngModel)]="verein.anmeldung.klasseModulH" required>
+                <mat-option [value]="OBERSTUFE">Oberstufe</mat-option>
+                <mat-option [value]="MITTELSTUFE">Mittelstufe</mat-option>
+                <mat-option [value]="UNTERSTUFE">Unterstufe</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          <div class="selection">
+            <div><span class="mat-headline-6">Besetzung</span><br/>&nbsp;</div>
 
-        <img [src]="bildImgSrc" *ngIf="verein.bildImgId" alt="Vereinsbild"/>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.harmonie"
+                          [disabled]="verein.anmeldung.brassBand || verein.anmeldung.fanfare">Harmonie
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.brassBand"
+                          [disabled]="verein.anmeldung.harmonie || verein.anmeldung.fanfare">Brass Band
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.fanfare"
+                          [disabled]="verein.anmeldung.harmonie || verein.anmeldung.brassBand">Fanfare
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.tambouren">Tambouren</mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.perkussionsensemble">Perkussionsensemble</mat-checkbox>
+          </div>
+        </div>
 
-      </div>
-      <app-action-button buttonLabel="Upload"
-                         [processing]="uploading"
-                         [disabled]="!logo && !bild"
-                         (buttonClicked)="upload()"></app-action-button>
-    </mat-card-content>
-  </mat-card>
+        <app-action-button buttonLabel="Speichern"
+                           [processing]="saving"
+                           (buttonClicked)="saveAnmeldung()"></app-action-button>
+      </mat-expansion-panel>
 
-  <mat-card appearance="outlined" *ngIf="verein">
-    <mat-card-content>
-      <h2>Kontaktangaben - Präsident</h2>
-      <app-kontakt-form [kontakt]="verein.praesident"></app-kontakt-form>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Vereinsinfo (Website)</mat-panel-title>
+          <mat-panel-description>
+            <app-validation-state [valid]="verein.info.valid"></app-validation-state>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="upload-container">
+          <ngx-dropzone (change)="onDrop($event, true)"
+                        [multiple]="false"
+                        accept="image/jpeg,image/jpg"
+                        [maxFileSize]="maxFileSize"
+                        *ngIf="!verein.info.logoImgId">
+            <ngx-dropzone-label>Vereinslogo (max. 1 MB)<br/>(Drag-and-Drop oder hier klicken)</ngx-dropzone-label>
+            <ngx-dropzone-preview [removable]="true" (removed)="onRemove(true)" *ngIf="logo">
+              <ngx-dropzone-label>{{ logo.name }} ({{ logo.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
 
-      <app-action-button buttonLabel="Speichern"
-                         [processing]="saving"
-                         (buttonClicked)="save()"></app-action-button>
-    </mat-card-content>
-  </mat-card>
+          <img [src]="logoImgSrc" *ngIf="verein.info.logoImgId" alt="Vereinslogo"/>
 
-  <mat-card appearance="outlined" *ngIf="verein">
-    <mat-card-content>
-      <h2>Kontaktangaben - Kassier</h2>
-      <app-kontakt-form [kontakt]="verein.kassier"></app-kontakt-form>
+          <ngx-dropzone (change)="onDrop($event, false)"
+                        [multiple]="false"
+                        accept="image/jpeg,image/jpg"
+                        [maxFileSize]="maxFileSize"
+                        *ngIf="!verein.info.bildImgId">
+            <ngx-dropzone-label>Vereinsbild (max. 1 MB)<br/>(Drag-and-Drop oder hier klicken)</ngx-dropzone-label>
+            <ngx-dropzone-preview [removable]="true" (removed)="onRemove(false)" *ngIf="bild">
+              <ngx-dropzone-label>{{ bild.name }} ({{ bild.type }})</ngx-dropzone-label>
+            </ngx-dropzone-preview>
+          </ngx-dropzone>
 
-      <app-action-button buttonLabel="Speichern"
-                         [processing]="saving"
-                         (buttonClicked)="save()"></app-action-button>
-    </mat-card-content>
-  </mat-card>
+          <img [src]="bildImgSrc" *ngIf="verein.info.bildImgId" alt="Vereinsbild"/>
 
-  <mat-card appearance="outlined" *ngIf="verein">
-    <mat-card-content>
-      <h2>Kontaktangaben - Direktion</h2>
-      <app-kontakt-form [kontakt]="verein.direktion"></app-kontakt-form>
+        </div>
+        <app-action-button buttonLabel="Upload"
+                           [processing]="uploading"
+                           [disabled]="!logo && !bild"
+                           (buttonClicked)="upload()"></app-action-button>
+      </mat-expansion-panel>
 
-      <app-action-button buttonLabel="Speichern"
-                         [processing]="saving"
-                         (buttonClicked)="save()"></app-action-button>
-    </mat-card-content>
-  </mat-card>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Kontaktangaben - Präsident</mat-panel-title>
+          <mat-panel-description>
+            <app-validation-state [valid]="verein.praesident.valid"></app-validation-state>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-kontakt-form [kontakt]="verein.praesident"></app-kontakt-form>
+
+        <app-action-button buttonLabel="Speichern"
+                           [processing]="saving"
+                           (buttonClicked)="save()"></app-action-button>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Kontaktangaben - Direktion</mat-panel-title>
+          <mat-panel-description>
+            <app-validation-state [valid]="verein.direktion.valid"></app-validation-state>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-kontakt-form [kontakt]="verein.direktion"></app-kontakt-form>
+
+        <app-action-button buttonLabel="Speichern"
+                           [processing]="saving"
+                           (buttonClicked)="save()"></app-action-button>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </div>
 
   <mat-card appearance="outlined" *ngIf="!verein && !notFound && !error">
     <mat-card-content>

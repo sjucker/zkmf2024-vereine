@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from "../service/backend.service";
-import {VereinDTO} from "../rest";
+import {Klasse, VereinDTO} from "../rest";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NgxDropzoneChangeEvent} from "ngx-dropzone";
@@ -12,6 +12,15 @@ import {environment} from "../../environments/environment";
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+
+  HOECHSTKLASSE = Klasse.HOECHSTKLASSE;
+  KLASSE_1 = Klasse.KLASSE_1;
+  KLASSE_2 = Klasse.KLASSE_2;
+  KLASSE_3 = Klasse.KLASSE_3;
+  KLASSE_4 = Klasse.KLASSE_4;
+  OBERSTUFE = Klasse.OBERSTUFE;
+  MITTELSTUFE = Klasse.MITTELSTUFE;
+  UNTERSTUFE = Klasse.UNTERSTUFE;
 
   maxFileSize = 1000000;
 
@@ -47,6 +56,42 @@ export class MainComponent implements OnInit {
         }
       }
     });
+  }
+
+  saveAnmeldung() {
+    if (this.verein) {
+      if (this.verein.anmeldung.modulA && !this.verein.anmeldung.klasseModulA) {
+        this.snackBar.open("Stärkeklasse Modul A auswählen", undefined, {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 2000,
+          panelClass: 'error'
+        })
+        return;
+      }
+
+      if (this.verein.anmeldung.modulB && !this.verein.anmeldung.klasseModulB) {
+        this.snackBar.open("Stärkeklasse Modul B auswählen", undefined, {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 2000,
+          panelClass: 'error'
+        })
+        return;
+      }
+
+      if (this.verein.anmeldung.modulH && !this.verein.anmeldung.klasseModulH) {
+        this.snackBar.open("Stärkeklasse Modul H auswählen", undefined, {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 2000,
+          panelClass: 'error'
+        })
+        return;
+      }
+
+      this.save();
+    }
   }
 
   save() {
@@ -136,11 +181,11 @@ export class MainComponent implements OnInit {
   }
 
   get logoImgSrc(): string {
-    return `${environment.baseUrl}/public/image/${this.verein?.logoImgId}`;
+    return `${environment.baseUrl}/public/image/${this.verein?.info.logoImgId}`;
   }
 
   get bildImgSrc(): string {
-    return `${environment.baseUrl}/public/image/${this.verein?.bildImgId}`;
+    return `${environment.baseUrl}/public/image/${this.verein?.info.bildImgId}`;
   }
 
 }

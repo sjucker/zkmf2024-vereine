@@ -48,19 +48,25 @@ mat-form-field {
   }
 }
 
-.success {
-  color: variables.$papier;
-  background-color: variables.$gruen;
+a {
+  color: variables.$hellblau;
 }
 
-.info {
-  color: variables.$papier;
-  background-color: variables.$violett;
-}
+.mat-mdc-snack-bar-container {
+  &.success {
+    color: variables.$papier;
+    --mdc-snackbar-container-color: #{variables.$gruen};
+  }
 
-.error {
-  color: variables.$papier;
-  background-color: variables.$rot;
+  &.info {
+    color: variables.$papier;
+    --mdc-snackbar-container-color: #{variables.$hellblau};
+  }
+
+  &.error {
+    color: variables.$papier;
+    --mdc-snackbar-container-color: #{variables.$rot};
+  }
 }
 
 .show-gt-sm {
@@ -75,4 +81,8 @@ mat-form-field {
   @include responsive('gt-sm') {
     display: none;
   }
+}
+
+.max-width-container {
+  max-width: $max-width;
 }

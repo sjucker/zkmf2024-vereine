@@ -26,6 +26,9 @@ import {MatSnackBarModule} from "@angular/material/snack-bar";
 import {KontaktFormComponent} from './components/kontakt-form/kontakt-form.component';
 import {MatExpansionModule} from "@angular/material/expansion";
 import {NgxDropzoneModule} from "ngx-dropzone";
+import {MatCheckboxModule} from "@angular/material/checkbox";
+import {MatSelectModule} from "@angular/material/select";
+import {ValidationStateComponent} from "./components/validation-state/validation-state.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +38,7 @@ import {NgxDropzoneModule} from "ngx-dropzone";
     HeaderComponent,
     RegisterComponent,
     ActionButtonComponent,
+    ValidationStateComponent,
     VerificationComponent,
     KontaktFormComponent,
   ],
@@ -57,6 +61,8 @@ import {NgxDropzoneModule} from "ngx-dropzone";
     MatSnackBarModule,
     MatExpansionModule,
     NgxDropzoneModule,
+    MatCheckboxModule,
+    MatSelectModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},],
   bootstrap: [AppComponent]

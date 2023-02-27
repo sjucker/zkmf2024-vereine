@@ -9,7 +9,9 @@ import {KontaktDTO} from "../../rest";
 export class KontaktFormComponent {
 
   @Input()
-  kontakt: KontaktDTO = {};
+  kontakt: KontaktDTO = {
+    valid: false
+  };
 
   constructor() {
   }
