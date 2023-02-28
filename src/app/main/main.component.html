@@ -128,18 +128,28 @@
           </div>
           <div class="selection">
             <div><span class="mat-headline-6">Besetzung</span><br/>&nbsp;</div>
+            <div *ngIf="noModulSelected">
+              Bitte ein Modul auswählen
+            </div>
 
-            <mat-checkbox [(ngModel)]="verein.anmeldung.harmonie"
+            <mat-checkbox *ngIf="harmonieVisible"
+                          [(ngModel)]="verein.anmeldung.harmonie"
                           [disabled]="verein.anmeldung.brassBand || verein.anmeldung.fanfare">Harmonie
             </mat-checkbox>
-            <mat-checkbox [(ngModel)]="verein.anmeldung.brassBand"
+            <mat-checkbox *ngIf="brassBandVisible"
+                          [(ngModel)]="verein.anmeldung.brassBand"
                           [disabled]="verein.anmeldung.harmonie || verein.anmeldung.fanfare">Brass Band
             </mat-checkbox>
-            <mat-checkbox [(ngModel)]="verein.anmeldung.fanfare"
+            <mat-checkbox *ngIf="fanfareVisible"
+                          [(ngModel)]="verein.anmeldung.fanfare"
                           [disabled]="verein.anmeldung.harmonie || verein.anmeldung.brassBand">Fanfare
             </mat-checkbox>
-            <mat-checkbox [(ngModel)]="verein.anmeldung.tambouren">Tambouren</mat-checkbox>
-            <mat-checkbox [(ngModel)]="verein.anmeldung.perkussionsensemble">Perkussionsensemble</mat-checkbox>
+            <mat-checkbox *ngIf="tambourenVisible"
+                          [(ngModel)]="verein.anmeldung.tambouren">Tambouren
+            </mat-checkbox>
+            <mat-checkbox *ngIf="perkussionsensembleVisible"
+                          [(ngModel)]="verein.anmeldung.perkussionsensemble">Perkussionsensemble
+            </mat-checkbox>
           </div>
         </div>
 

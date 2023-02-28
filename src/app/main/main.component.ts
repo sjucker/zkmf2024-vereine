@@ -188,4 +188,47 @@ export class MainComponent implements OnInit {
     return `${environment.baseUrl}/public/image/${this.verein?.info.bildImgId}`;
   }
 
+  get harmonieVisible(): boolean {
+    if (this.verein) {
+      return this.verein.anmeldung.modulA ||
+        this.verein.anmeldung.modulB ||
+        this.verein.anmeldung.modulC ||
+        this.verein.anmeldung.modulD ||
+        this.verein.anmeldung.modulE ||
+        this.verein.anmeldung.modulF ||
+        this.verein.anmeldung.modulG;
+    }
+    return false;
+  }
+
+  get brassBandVisible(): boolean {
+    return this.harmonieVisible
+  }
+
+  get fanfareVisible(): boolean {
+    return this.harmonieVisible
+  }
+
+  get tambourenVisible(): boolean {
+    if (this.verein) {
+      return this.verein.anmeldung.modulC ||
+        this.verein.anmeldung.modulD ||
+        this.verein.anmeldung.modulE ||
+        this.verein.anmeldung.modulF ||
+        this.verein.anmeldung.modulG;
+    }
+    return false;
+  }
+
+  get perkussionsensembleVisible(): boolean {
+    if (this.verein) {
+      return this.verein.anmeldung.modulC || this.verein.anmeldung.modulH;
+    }
+    return false;
+  }
+
+  get noModulSelected(): boolean {
+    return !(this.harmonieVisible || this.tambourenVisible || this.perkussionsensembleVisible)
+  }
+
 }
