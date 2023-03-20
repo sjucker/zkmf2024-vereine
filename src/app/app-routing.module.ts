@@ -1,20 +1,24 @@
-import {NgModule} from '@angular/core';
+import {inject, NgModule} from '@angular/core';
 import {RouterModule, Routes} from "@angular/router";
 import {MainComponent} from "./main/main.component";
 import {AuthenticationGuard} from "./service/authentication.guard";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {VerificationComponent} from "./verification/verification.component";
+import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 
 export const LOGIN_PATH = 'login'
 export const ANMELDUNG_PATH = 'anmeldung'
 export const VERIFICATION_PATH = 'verification'
+export const FORGOT_PASSWORD_PATH = 'passwort-vergessen'
+export const RESET_PASSWORD_PATH = 'reset-passwort'
 
 const routes: Routes = [
   {
     path: '',
     component: MainComponent,
-    canActivate: [AuthenticationGuard]
+    canActivate: [() => inject(AuthenticationGuard).canActivate()]
   },
   {
     path: LOGIN_PATH,
@@ -31,6 +35,14 @@ const routes: Routes = [
   {
     path: VERIFICATION_PATH + '/:email/:verification',
     component: VerificationComponent
+  },
+  {
+    path: FORGOT_PASSWORD_PATH,
+    component: ForgotPasswordComponent
+  },
+  {
+    path: RESET_PASSWORD_PATH + '/:email/:token',
+    component: ResetPasswordComponent
   },
 ];
 

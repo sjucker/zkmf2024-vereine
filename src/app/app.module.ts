@@ -29,6 +29,8 @@ import {NgxDropzoneModule} from "ngx-dropzone";
 import {MatCheckboxModule} from "@angular/material/checkbox";
 import {MatSelectModule} from "@angular/material/select";
 import {ValidationStateComponent} from "./components/validation-state/validation-state.component";
+import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
+import {ResetPasswordComponent} from './reset-password/reset-password.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import {ValidationStateComponent} from "./components/validation-state/validation
     ValidationStateComponent,
     VerificationComponent,
     KontaktFormComponent,
+    ForgotPasswordComponent,
+    ResetPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -2,7 +2,13 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
-import {RegisterVereinRequestDTO, VereinDTO, VerifyEmailRequestDTO} from "../rest";
+import {
+  ForgotPasswordRequestDTO,
+  RegisterVereinRequestDTO,
+  ResetPasswordRequestDTO,
+  VereinDTO,
+  VerifyEmailRequestDTO
+} from "../rest";
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +38,23 @@ export class BackendService {
 
     return this.httpClient.post(`${this.baseUrl}/public/verein/verification`, request);
   }
+
+  public forgotPassword(email: string): Observable<any> {
+    const request: ForgotPasswordRequestDTO = {
+      email: email
+    };
+    return this.httpClient.post(`${this.baseUrl}/public/verein/forgot-password`, request);
+  }
+
+  public resetPassword(email: string, token: string, newPassword: string): Observable<any> {
+    const request: ResetPasswordRequestDTO = {
+      email: email,
+      token: token,
+      newPassword: newPassword
+    };
+    return this.httpClient.post(`${this.baseUrl}/public/verein/reset-password`, request);
+  }
+
 
   public get(): Observable<VereinDTO> {
     return this.httpClient.get<VereinDTO>(`${this.baseUrl}/secured/verein`);
