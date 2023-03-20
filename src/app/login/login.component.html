@@ -30,7 +30,7 @@
                  id="password"/>
         </mat-form-field>
         <app-action-button buttonLabel="Login" [processing]="authenticating"></app-action-button>
-        <span *ngIf="authenticationError" class="error-msg">Email oder Passwort nicht korrekt!</span>
+        <p><a [routerLink]="forgotPasswordUrl">Passwort vergessen?</a></p>
       </form>
     </mat-card-content>
   </mat-card>

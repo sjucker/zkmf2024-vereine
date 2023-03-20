@@ -5,10 +5,14 @@ import {AuthenticationGuard} from "./service/authentication.guard";
 import {LoginComponent} from "./login/login.component";
 import {RegisterComponent} from "./register/register.component";
 import {VerificationComponent} from "./verification/verification.component";
+import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
+import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 
 export const LOGIN_PATH = 'login'
 export const ANMELDUNG_PATH = 'anmeldung'
 export const VERIFICATION_PATH = 'verification'
+export const FORGOT_PASSWORD_PATH = 'passwort-vergessen'
+export const RESET_PASSWORD_PATH = 'reset-passwort'
 
 const routes: Routes = [
   {
@@ -31,6 +35,14 @@ const routes: Routes = [
   {
     path: VERIFICATION_PATH + '/:email/:verification',
     component: VerificationComponent
+  },
+  {
+    path: FORGOT_PASSWORD_PATH,
+    component: ForgotPasswordComponent
+  },
+  {
+    path: RESET_PASSWORD_PATH + '/:email/:token',
+    component: ResetPasswordComponent
   },
 ];
 
