@@ -165,6 +165,18 @@
             <app-validation-state [valid]="verein.info.valid"></app-validation-state>
           </mat-panel-description>
         </mat-expansion-panel-header>
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label>Vorstellungstext</mat-label>
+          <textarea matInput
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="4"
+                    cdkAutosizeMaxRows="10"
+                    maxlength="4096"
+                    [(ngModel)]="verein.info.websiteText"></textarea>
+        </mat-form-field>
+        <app-action-button buttonLabel="Speichern"
+                           [processing]="saving"
+                           (buttonClicked)="save()"></app-action-button>
         <div class="upload-container">
           <ngx-dropzone (change)="onDrop($event, true)"
                         [multiple]="false"

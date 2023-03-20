@@ -2,17 +2,15 @@
 @import "../../responsive";
 
 .max-width-container {
-  padding: 1em;
+  padding: variables.$padding;
 }
 
 .upload-container {
   display: flex;
   flex-direction: row;
-  gap: 2em;
-}
-
-.upload-container {
-  margin-bottom: 1em;
+  gap: variables.$padding;
+  margin-top: variables.$padding;
+  margin-bottom: variables.$padding;
 
   ngx-dropzone {
     width: 100%;
@@ -30,7 +28,7 @@
 .anmeldung-container {
   display: flex;
   flex-direction: row;
-  gap: 1em;
+  gap: variables.$padding;
 
   > div {
     flex: 1 1 0;
@@ -49,11 +47,11 @@
 
   .upload-container {
     flex-direction: column;
-    gap: 1em;
+    gap: variables.$padding;
 
     ngx-dropzone {
       &:not(:last-child) {
-        margin-bottom: 1em;
+        margin-bottom: variables.$padding;
       }
     }
 
@@ -62,7 +60,7 @@
       max-height: unset;
 
       &:not(:last-child) {
-        margin-bottom: 1em;
+        margin-bottom: variables.$padding;
       }
     }
   }
