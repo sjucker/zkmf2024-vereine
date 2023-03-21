@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from "../service/backend.service";
-import {Klasse, VereinDTO} from "../rest";
+import {Klasse, PhaseStatus, VereinDTO} from "../rest";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NgxDropzoneChangeEvent} from "ngx-dropzone";
@@ -229,6 +229,10 @@ export class MainComponent implements OnInit {
 
   get noModulSelected(): boolean {
     return !(this.harmonieVisible || this.tambourenVisible || this.perkussionsensembleVisible)
+  }
+
+  isPhaseDone(status: PhaseStatus): boolean {
+    return status === PhaseStatus.DONE;
   }
 
 }

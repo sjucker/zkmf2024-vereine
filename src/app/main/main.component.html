@@ -2,6 +2,11 @@
   <app-header header="ZKMF2024 - Vereinsbereich"></app-header>
 
   <div class="max-width-container" *ngIf="verein">
+    <h2>
+      Phase 1 (bis 15.09.2023)
+      <mat-icon class="done" *ngIf="isPhaseDone(verein.phase1Status)">check_circle</mat-icon>
+      <mat-icon *ngIf="!isPhaseDone(verein.phase1Status)">error_circle_rounded</mat-icon>
+    </h2>
     <mat-accordion>
       <mat-expansion-panel>
         <mat-expansion-panel-header>
@@ -160,6 +165,34 @@
 
       <mat-expansion-panel>
         <mat-expansion-panel-header>
+          <mat-panel-title>Kontaktangaben - Präsident/in</mat-panel-title>
+          <mat-panel-description>
+            <app-validation-state [valid]="verein.praesident.valid"></app-validation-state>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-kontakt-form [kontakt]="verein.praesident"></app-kontakt-form>
+
+        <app-action-button buttonLabel="Speichern"
+                           [processing]="saving"
+                           (buttonClicked)="save()"></app-action-button>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>Kontaktangaben - Direktion</mat-panel-title>
+          <mat-panel-description>
+            <app-validation-state [valid]="verein.direktion.valid"></app-validation-state>
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <app-kontakt-form [kontakt]="verein.direktion"></app-kontakt-form>
+
+        <app-action-button buttonLabel="Speichern"
+                           [processing]="saving"
+                           (buttonClicked)="save()"></app-action-button>
+      </mat-expansion-panel>
+
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
           <mat-panel-title>Vereinsinfo (Website)</mat-panel-title>
           <mat-panel-description>
             <app-validation-state [valid]="verein.info.valid"></app-validation-state>
@@ -209,34 +242,6 @@
                            [processing]="uploading"
                            [disabled]="!logo && !bild"
                            (buttonClicked)="upload()"></app-action-button>
-      </mat-expansion-panel>
-
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Kontaktangaben - Präsident/in</mat-panel-title>
-          <mat-panel-description>
-            <app-validation-state [valid]="verein.praesident.valid"></app-validation-state>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <app-kontakt-form [kontakt]="verein.praesident"></app-kontakt-form>
-
-        <app-action-button buttonLabel="Speichern"
-                           [processing]="saving"
-                           (buttonClicked)="save()"></app-action-button>
-      </mat-expansion-panel>
-
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>Kontaktangaben - Direktion</mat-panel-title>
-          <mat-panel-description>
-            <app-validation-state [valid]="verein.direktion.valid"></app-validation-state>
-          </mat-panel-description>
-        </mat-expansion-panel-header>
-        <app-kontakt-form [kontakt]="verein.direktion"></app-kontakt-form>
-
-        <app-action-button buttonLabel="Speichern"
-                           [processing]="saving"
-                           (buttonClicked)="save()"></app-action-button>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

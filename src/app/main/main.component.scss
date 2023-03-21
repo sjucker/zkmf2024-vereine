@@ -5,6 +5,19 @@
   padding: variables.$padding;
 }
 
+h2 {
+  display: flex;
+  flex-direction: row;
+  gap: variables.$padding;
+  align-items: center;
+
+  .mat-icon {
+    &.done {
+      color: variables.$gruen;
+    }
+  }
+}
+
 .upload-container {
   display: flex;
   flex-direction: row;
