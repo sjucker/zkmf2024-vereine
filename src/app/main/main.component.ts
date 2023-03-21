@@ -211,11 +211,7 @@ export class MainComponent implements OnInit {
 
   get tambourenVisible(): boolean {
     if (this.verein) {
-      return this.verein.anmeldung.modulC ||
-        this.verein.anmeldung.modulD ||
-        this.verein.anmeldung.modulE ||
-        this.verein.anmeldung.modulF ||
-        this.verein.anmeldung.modulG;
+      return this.verein.anmeldung.modulG;
     }
     return false;
   }
