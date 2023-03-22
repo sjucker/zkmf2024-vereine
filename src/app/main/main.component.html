@@ -3,7 +3,7 @@
 
   <div class="max-width-container" *ngIf="verein">
     <h2>
-      Phase 1 (bis 15.09.2023)
+      Phase 1 (bis 30.06.2023)
       <mat-icon class="done" *ngIf="isPhaseDone(verein.phase1Status)">check_circle</mat-icon>
       <mat-icon *ngIf="!isPhaseDone(verein.phase1Status)">error_circle_rounded</mat-icon>
     </h2>
@@ -18,7 +18,7 @@
         <div class="form-layout">
           <mat-form-field appearance="outline">
             <mat-label>Email</mat-label>
-            <input type="text"
+            <input type="email"
                    autocomplete="off"
                    matInput
                    [(ngModel)]="verein.email"
@@ -29,7 +29,9 @@
             <input type="text"
                    autocomplete="off"
                    matInput
-                   [(ngModel)]="verein.angaben.vereinsname">
+                   [(ngModel)]="verein.angaben.vereinsname"
+                   required
+                   maxlength="255">
           </mat-form-field>
         </div>
 
@@ -39,37 +41,46 @@
             <input type="text"
                    autocomplete="off"
                    matInput
-                   [(ngModel)]="verein.angaben.adresse">
+                   [(ngModel)]="verein.angaben.adresse"
+                   required
+                   maxlength="255">
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>PLZ</mat-label>
             <input type="number"
                    autocomplete="off"
                    matInput
-                   [(ngModel)]="verein.angaben.plz">
+                   [(ngModel)]="verein.angaben.plz"
+                   required
+                   maxlength="4"
+                   min="0" max="9999">
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>Ort</mat-label>
             <input type="text"
                    autocomplete="off"
                    matInput
-                   [(ngModel)]="verein.angaben.ort">
+                   [(ngModel)]="verein.angaben.ort"
+                   required
+                   maxlength="255">
           </mat-form-field>
         </div>
         <div class="form-layout">
           <mat-form-field appearance="outline">
             <mat-label>Homepage</mat-label>
-            <input type="text"
+            <input type="url"
                    autocomplete="off"
                    matInput
-                   [(ngModel)]="verein.angaben.homepage">
+                   [(ngModel)]="verein.angaben.homepage"
+                   maxlength="255">
           </mat-form-field>
           <mat-form-field appearance="outline">
             <mat-label>PC/IBAN</mat-label>
             <input type="text"
                    autocomplete="off"
                    matInput
-                   [(ngModel)]="verein.angaben.iban">
+                   [(ngModel)]="verein.angaben.iban"
+                   maxlength="255">
           </mat-form-field>
         </div>
         <app-action-button buttonLabel="Speichern"

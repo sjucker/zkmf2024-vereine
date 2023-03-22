@@ -5,14 +5,18 @@
       <input type="text"
              autocomplete="off"
              matInput
-             [(ngModel)]="kontakt.vorname">
+             [(ngModel)]="kontakt.vorname"
+             required
+             maxlength="255">
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Nachname</mat-label>
       <input type="text"
              autocomplete="off"
              matInput
-             [(ngModel)]="kontakt.nachname">
+             [(ngModel)]="kontakt.nachname"
+             required
+             maxlength="255">
     </mat-form-field>
   </div>
 
@@ -22,21 +26,29 @@
       <input type="text"
              autocomplete="off"
              matInput
-             [(ngModel)]="kontakt.adresse">
+             [(ngModel)]="kontakt.adresse"
+             required
+             maxlength="255">
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>PLZ</mat-label>
       <input type="number"
              autocomplete="off"
              matInput
-             [(ngModel)]="kontakt.plz">
+             [(ngModel)]="kontakt.plz"
+             required
+             maxlength="4"
+             min="0"
+             max="9999">
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Ort</mat-label>
       <input type="text"
              autocomplete="off"
              matInput
-             [(ngModel)]="kontakt.ort">
+             [(ngModel)]="kontakt.ort"
+             required
+             maxlength="255">
     </mat-form-field>
   </div>
 
@@ -46,21 +58,25 @@
       <input type="email"
              autocomplete="off"
              matInput
-             [(ngModel)]="kontakt.email">
+             [(ngModel)]="kontakt.email"
+             required
+             maxlength="255">
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Telefon privat</mat-label>
       <input type="tel"
              autocomplete="off"
              matInput
-             [(ngModel)]="kontakt.telefonPrivat">
+             [(ngModel)]="kontakt.telefonPrivat"
+             maxlength="255">
     </mat-form-field>
     <mat-form-field appearance="outline">
       <mat-label>Telefon mobile</mat-label>
       <input type="tel"
              autocomplete="off"
              matInput
-             [(ngModel)]="kontakt.telefonMobile">
+             [(ngModel)]="kontakt.telefonMobile"
+             maxlength="255">
     </mat-form-field>
   </div>
 </div>

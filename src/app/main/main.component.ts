@@ -195,8 +195,7 @@ export class MainComponent implements OnInit {
         this.verein.anmeldung.modulC ||
         this.verein.anmeldung.modulD ||
         this.verein.anmeldung.modulE ||
-        this.verein.anmeldung.modulF ||
-        this.verein.anmeldung.modulG;
+        this.verein.anmeldung.modulF;
     }
     return false;
   }
