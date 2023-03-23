@@ -53,6 +53,7 @@ export class LoginComponent implements OnInit {
         error: _ => {
           this.authenticating = false;
           this.snackBar.open("Email oder Passwort nicht korrekt", undefined, {
+            duration: 3000,
             verticalPosition: "top",
             panelClass: "error"
           });
