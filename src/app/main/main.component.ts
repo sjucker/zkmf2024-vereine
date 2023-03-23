@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, TrackByFunction} from '@angular/core';
 import {BackendService} from "../service/backend.service";
-import {Klasse, PhaseStatus, VereinDTO} from "../rest";
+import {Klasse, TitelDTO, VereinDTO, VereinProgrammDTO, VereinProgrammTitelDTO} from "../rest";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NgxDropzoneChangeEvent} from "ngx-dropzone";
@@ -8,6 +8,7 @@ import {environment} from "../../environments/environment";
 import {MatDialog} from "@angular/material/dialog";
 import {GeneralInfoDialogComponent} from "../general-info-dialog/general-info-dialog.component";
 import {ConfirmRegistrationDialogComponent} from "../confirm-registration-dialog/confirm-registration-dialog.component";
+import {formatDuration, toDurationInSeconds} from "../components/duration-input/duration-input.component";
 
 @Component({
   selector: 'app-main',
@@ -29,6 +30,14 @@ export class MainComponent implements OnInit {
 
   verein?: VereinDTO;
 
+  newTitel: TitelDTO = {
+    pflichtStueck: false,
+    durationInSeconds: 0
+  };
+  newTitelDuration = '';
+
+  selectedTitel?: TitelDTO;
+
   notFound = false;
   error = false;
 
@@ -41,6 +50,9 @@ export class MainComponent implements OnInit {
 
   anmeldungDisabled = true;
   unsavedChanges = false;
+
+  durationPattern = new RegExp('[0-9]{1,2}:[0-9]{2}', '');
+  gradPattern = new RegExp('[1-6](\\.[0-9])?', '');
 
   constructor(private backendService: BackendService,
               public snackBar: MatSnackBar,
@@ -149,7 +161,6 @@ export class MainComponent implements OnInit {
   }
 
   onDrop(event: NgxDropzoneChangeEvent, logo: boolean) {
-    console.log(event);
     if (event.rejectedFiles.length > 0) {
       let errorMessage = "Es sind nur Datein vom Typ 'jpeg' erlaubt."
       if (event.rejectedFiles[0].size > this.maxFileSize) {
@@ -213,10 +224,9 @@ export class MainComponent implements OnInit {
     if (imageId) {
       this.uploading = true
       this.backendService.deleteImage(imageId).subscribe({
-        next: value => {
+        next: _ => {
           this.load()
           this.uploading = false;
-          console.log(value);
         },
         error: _ => {
           this.uploading = false;
@@ -277,10 +287,6 @@ export class MainComponent implements OnInit {
     return !(this.harmonieVisible || this.tambourenVisible || this.perkussionsensembleVisible)
   }
 
-  isPhaseDone(status: PhaseStatus): boolean {
-    return status === PhaseStatus.DONE;
-  }
-
   openInfoDialog() {
     this.dialog.open(GeneralInfoDialogComponent)
   }
@@ -336,5 +342,105 @@ export class MainComponent implements OnInit {
 
   onChange() {
     this.unsavedChanges = true;
+  }
+
+  get newTitelValid(): boolean {
+    return !!this.newTitel.titelName && !!this.newTitel.composer &&
+      (this.newTitel.grad != undefined && this.gradPattern.test(this.newTitel.grad.toString())) &&
+      (this.newTitelDuration != undefined && this.durationPattern.test(this.newTitelDuration))
+  }
+
+  addNewTitel() {
+    if (this.verein) {
+      this.verein.titel = [...this.verein.titel, {
+        titelName: this.newTitel.titelName,
+        composer: this.newTitel.composer,
+        arrangeur: this.newTitel.arrangeur,
+        grad: Math.round((this.newTitel.grad ?? 0) * 10) / 10,
+        durationInSeconds: toDurationInSeconds(this.newTitelDuration),
+        pflichtStueck: false
+      }];
+      this.newTitel = {
+        pflichtStueck: false,
+        durationInSeconds: 0
+      }
+      this.newTitelDuration = ''
+    }
+  }
+
+  deleteTitel(titel: TitelDTO) {
+    if (this.verein) {
+      const index = this.verein.titel.findIndex(dto => dto === titel);
+      if (index > -1) {
+        this.verein.titel.splice(index, 1);
+      }
+    }
+  }
+
+  get trackById(): TrackByFunction<VereinProgrammDTO> {
+    return (index, item) => item.id;
+  }
+
+  addNewProgrammTitel(programm: VereinProgrammDTO) {
+    if (this.selectedTitel) {
+      programm.ablauf = [...programm.ablauf, {
+        titel: this.selectedTitel
+      }];
+    }
+    programm.totalDurationInSeconds = this.calculateTotalDurationInSeconds(programm.ablauf);
+  }
+
+  deleteProgrammTitel(programm: VereinProgrammDTO, vereinProgrammTitel: VereinProgrammTitelDTO) {
+    const index = programm.ablauf.findIndex(dto => dto === vereinProgrammTitel);
+    if (index > -1) {
+      programm.ablauf.splice(index, 1);
+      programm.totalDurationInSeconds = this.calculateTotalDurationInSeconds(programm.ablauf);
+    }
+  }
+
+  updateApplaus(programm: VereinProgrammDTO, vereinProgrammTitel: VereinProgrammTitelDTO, duration: number) {
+    vereinProgrammTitel.applausInSeconds = duration;
+    programm.totalDurationInSeconds = this.calculateTotalDurationInSeconds(programm.ablauf);
+  }
+
+  private calculateTotalDurationInSeconds(ablauf: VereinProgrammTitelDTO[]) {
+    // TODO latest applaus not counted
+    const totalDurationInSeconds = ablauf.map(value => value.titel.durationInSeconds)
+      .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
+
+    const totalApplausInSeconds = ablauf.map(value => value.applausInSeconds)
+      .reduce((previousValue, currentValue) => (previousValue ?? 0) + (currentValue ?? 0), 0);
+
+    return totalDurationInSeconds + (totalApplausInSeconds ?? 0);
+  }
+
+  isInRange(programm: VereinProgrammDTO) {
+    if (programm.totalDurationInSeconds && programm.minDurationInSeconds && programm.maxDurationInSeconds) {
+      return programm.totalDurationInSeconds >= programm.minDurationInSeconds && programm.totalDurationInSeconds <= programm.maxDurationInSeconds;
+    }
+    return true;
+  }
+
+  getDiffToVorgabe(programm: VereinProgrammDTO): number {
+    if (programm.totalDurationInSeconds && programm.minDurationInSeconds && programm.maxDurationInSeconds) {
+      if (programm.totalDurationInSeconds < programm.minDurationInSeconds) {
+        return programm.totalDurationInSeconds - programm.minDurationInSeconds;
+      } else {
+        return programm.totalDurationInSeconds - programm.maxDurationInSeconds;
+      }
+    }
+    return 0;
+  }
+
+  protected readonly formatDuration = formatDuration;
+
+  moveUp(programm: VereinProgrammDTO, entry: VereinProgrammTitelDTO) {
+    const index = programm.ablauf.indexOf(entry);
+    [programm.ablauf[index - 1], programm.ablauf[index]] = [programm.ablauf[index], programm.ablauf[index - 1]];
+  }
+
+  moveDown(programm: VereinProgrammDTO, entry: VereinProgrammTitelDTO) {
+    const index = programm.ablauf.indexOf(entry);
+    [programm.ablauf[index], programm.ablauf[index + 1]] = [programm.ablauf[index + 1], programm.ablauf[index]];
   }
 }

@@ -63,7 +63,7 @@ a {
     --mdc-snackbar-container-color: #{variables.$hellblau};
   }
 
-  &.error {
+  &.invalid {
     color: variables.$papier;
     --mdc-snackbar-container-color: #{variables.$rot};
   }
@@ -89,4 +89,8 @@ a {
 
 .padding-bottom {
   padding-bottom: variables.$padding;
+}
+
+.clickable {
+  cursor: pointer;
 }

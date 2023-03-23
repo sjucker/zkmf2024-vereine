@@ -71,9 +71,40 @@ h2 {
   }
 }
 
+.form-layout {
+  align-items: baseline;
+}
+
 .button-container {
   display: flex;
   gap: variables.$padding;
+  align-items: baseline;
+}
+
+.action-column {
+  flex: 0 0 100px;
+}
+
+.valid {
+  color: variables.$gruen;
+}
+
+.invalid {
+  color: variables.$rot;
+}
+
+.spacer {
+  width: 24px;
+  display: inline-block;
+}
+
+.titel-table {
+  width: 100%;
+  margin: variables.$padding 0;
+
+  th {
+    text-align: left;
+  }
 }
 
 @include responsive('lt-sm') {
