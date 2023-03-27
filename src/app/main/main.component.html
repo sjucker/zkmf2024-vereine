@@ -1,5 +1,9 @@
 <div>
   <app-header header="ZKMF2024 - Vereinsbereich"></app-header>
+  <div class="loading-indicator">
+    <mat-progress-bar mode="indeterminate" color="accent"
+                      *ngIf="(!verein && !notFound && !error) || saving || uploading"></mat-progress-bar>
+  </div>
 
   <div class="max-width-container" *ngIf="verein">
     <h2>Herzlich willkommen bei der Anmeldung fürs ZKMF 2024</h2>
@@ -260,12 +264,6 @@
       </mat-expansion-panel>
     </mat-accordion>
   </div>
-
-  <mat-card appearance="outlined" *ngIf="!verein && !notFound && !error">
-    <mat-card-content>
-      <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-    </mat-card-content>
-  </mat-card>
 
   <mat-card appearance="outlined" *ngIf="notFound">
     <mat-card-content>
