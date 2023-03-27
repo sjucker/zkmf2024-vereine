@@ -234,8 +234,6 @@ export class MainComponent implements OnInit {
   }
 
   openInfoDialog() {
-    this.dialog.open(GeneralInfoDialogComponent, {
-      maxHeight: '80vh'
-    })
+    this.dialog.open(GeneralInfoDialogComponent)
   }
 }
