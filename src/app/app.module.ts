@@ -31,6 +31,8 @@ import {MatSelectModule} from "@angular/material/select";
 import {ValidationStateComponent} from "./components/validation-state/validation-state.component";
 import {ForgotPasswordComponent} from './forgot-password/forgot-password.component';
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
+import {GeneralInfoDialogComponent} from './general-info-dialog/general-info-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
 
 @NgModule({
   declarations: [
@@ -45,6 +47,7 @@ import {ResetPasswordComponent} from './reset-password/reset-password.component'
     KontaktFormComponent,
     ForgotPasswordComponent,
     ResetPasswordComponent,
+    GeneralInfoDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,7 @@ import {ResetPasswordComponent} from './reset-password/reset-password.component'
     NgxDropzoneModule,
     MatCheckboxModule,
     MatSelectModule,
+    MatDialogModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},],
   bootstrap: [AppComponent]

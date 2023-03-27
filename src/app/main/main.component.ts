@@ -5,6 +5,8 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {NgxDropzoneChangeEvent} from "ngx-dropzone";
 import {environment} from "../../environments/environment";
+import {MatDialog} from "@angular/material/dialog";
+import {GeneralInfoDialogComponent} from "../general-info-dialog/general-info-dialog.component";
 
 @Component({
   selector: 'app-main',
@@ -36,7 +38,8 @@ export class MainComponent implements OnInit {
   bild?: File;
 
   constructor(private backendService: BackendService,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -230,4 +233,9 @@ export class MainComponent implements OnInit {
     return status === PhaseStatus.DONE;
   }
 
+  openInfoDialog() {
+    this.dialog.open(GeneralInfoDialogComponent, {
+      maxHeight: '80vh'
+    })
+  }
 }

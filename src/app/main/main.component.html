@@ -2,6 +2,10 @@
   <app-header header="ZKMF2024 - Vereinsbereich"></app-header>
 
   <div class="max-width-container" *ngIf="verein">
+    <h2>Herzlich willkommen bei der Anmeldung fürs ZKMF 2024</h2>
+    <p>
+      <button mat-stroked-button color="primary" (click)="openInfoDialog()">Allgemeine Informationen</button>
+    </p>
     <h2>
       Phase 1 (bis 30.06.2023)
       <mat-icon class="done" *ngIf="isPhaseDone(verein.phase1Status)">check_circle</mat-icon>
