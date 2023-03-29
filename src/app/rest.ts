@@ -91,6 +91,9 @@ export interface VereinsangabenDTO extends IsValid {
   ort?: string;
   homepage?: string;
   iban?: string;
+  direktionDoppeleinsatz: boolean;
+  direktionDoppeleinsatzVerein?: string;
+  mitspielerDoppeleinsatz: boolean;
 }
 
 export interface VereinsanmeldungDTO extends IsValid {
@@ -140,6 +143,7 @@ export enum Aufgaben {
   EGAL = "EGAL",
   KOERPERLICH = "KOERPERLICH",
   MUSIKALISCH = "MUSIKALISCH",
+  JURYSEKRETARIAT = "JURYSEKRETARIAT",
   SERVICE = "SERVICE",
   BUFFET = "BUFFET",
   KUECHE = "KUECHE",
@@ -147,7 +151,6 @@ export enum Aufgaben {
   AUSSENSTAND = "AUSSENSTAND",
   RAHMENPROGRAMM = "RAHMENPROGRAMM",
   AUFBAU = "AUFBAU",
-  BETREUUNG = "BETREUUNG",
   AUFSICHT = "AUFSICHT",
 }
 

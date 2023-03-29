@@ -61,13 +61,29 @@ export class MainComponent implements OnInit {
     });
   }
 
+  saveVereinsangaben() {
+    if (this.verein) {
+      if (this.verein.angaben.direktionDoppeleinsatz && !this.verein.angaben.direktionDoppeleinsatzVerein) {
+        this.snackBar.open("Bitte Vereinsname angeben, für welchen Dirigent/in auch noch teilnimmt", undefined, {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 4000,
+          panelClass: 'error'
+        })
+        return;
+      }
+
+      this.save()
+    }
+  }
+
   saveAnmeldung() {
     if (this.verein) {
       if (this.verein.anmeldung.modulA && !this.verein.anmeldung.klasseModulA) {
         this.snackBar.open("Stärkeklasse Modul A auswählen", undefined, {
           verticalPosition: 'top',
           horizontalPosition: 'center',
-          duration: 2000,
+          duration: 4000,
           panelClass: 'error'
         })
         return;
@@ -77,7 +93,7 @@ export class MainComponent implements OnInit {
         this.snackBar.open("Stärkeklasse Modul B auswählen", undefined, {
           verticalPosition: 'top',
           horizontalPosition: 'center',
-          duration: 2000,
+          duration: 4000,
           panelClass: 'error'
         })
         return;
@@ -87,7 +103,7 @@ export class MainComponent implements OnInit {
         this.snackBar.open("Stärkeklasse Modul H auswählen", undefined, {
           verticalPosition: 'top',
           horizontalPosition: 'center',
-          duration: 2000,
+          duration: 4000,
           panelClass: 'error'
         })
         return;
@@ -235,5 +251,11 @@ export class MainComponent implements OnInit {
 
   openInfoDialog() {
     this.dialog.open(GeneralInfoDialogComponent)
+  }
+
+  direktionDoppeleinsatzChanged($event: boolean) {
+    if (this.verein && !$event) {
+      this.verein.angaben.direktionDoppeleinsatzVerein = ''
+    }
   }
 }

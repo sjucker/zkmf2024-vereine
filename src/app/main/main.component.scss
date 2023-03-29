@@ -57,6 +57,16 @@ h2 {
   }
 }
 
+.text-with-icon {
+  display: flex;
+  align-items: center;
+  gap: variables.$padding-half;
+
+  .mat-icon {
+    flex-shrink: 0;
+  }
+}
+
 @include responsive('lt-sm') {
   .anmeldung-container {
     flex-direction: column;

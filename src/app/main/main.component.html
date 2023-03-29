@@ -6,7 +6,7 @@
   </div>
 
   <div class="max-width-container" *ngIf="verein">
-    <h2>Herzlich willkommen bei der Anmeldung fürs ZKMF 2024</h2>
+    <h2>Herzlich willkommen bei der Anmeldung für das ZKMF 2024</h2>
     <p>
       <button mat-stroked-button color="primary" (click)="openInfoDialog()">Allgemeine Informationen</button>
     </p>
@@ -91,9 +91,35 @@
                    maxlength="255">
           </mat-form-field>
         </div>
+
+        <div class="form-layout">
+          <mat-checkbox [(ngModel)]="verein.angaben.mitspielerDoppeleinsatz">
+            <div class="text-with-icon">
+              Mitspieler/innen: Doppelteilnahme
+              <mat-icon matTooltip="Doppelteilnahmen von Musikanten/Musikantinnen können nicht zwingend berücksichtigt werden!">info</mat-icon>
+            </div>
+          </mat-checkbox>
+        </div>
+
+        <div class="form-layout">
+          <mat-checkbox [(ngModel)]="verein.angaben.direktionDoppeleinsatz"
+                        (ngModelChange)="direktionDoppeleinsatzChanged($event)">
+            Dirigent/in: Teilnahme mit einem weiteren Verein
+          </mat-checkbox>
+          <mat-form-field appearance="outline">
+            <mat-label>Vereinsname</mat-label>
+            <input type="text"
+                   autocomplete="off"
+                   matInput
+                   [(ngModel)]="verein.angaben.direktionDoppeleinsatzVerein"
+                   maxlength="255"
+                   [disabled]="!verein.angaben.direktionDoppeleinsatz">
+          </mat-form-field>
+        </div>
+
         <app-action-button buttonLabel="Speichern"
                            [processing]="saving"
-                           (buttonClicked)="save()"></app-action-button>
+                           (buttonClicked)="saveVereinsangaben()"></app-action-button>
       </mat-expansion-panel>
 
       <mat-expansion-panel>
