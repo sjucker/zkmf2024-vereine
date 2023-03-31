@@ -93,15 +93,6 @@
         </div>
 
         <div class="form-layout">
-          <mat-checkbox [(ngModel)]="verein.angaben.mitspielerDoppeleinsatz">
-            <div class="text-with-icon">
-              Mitspieler/innen: Doppelteilnahme
-              <mat-icon matTooltip="Doppelteilnahmen von Musikanten/Musikantinnen können nicht zwingend berücksichtigt werden!">info</mat-icon>
-            </div>
-          </mat-checkbox>
-        </div>
-
-        <div class="form-layout">
           <mat-checkbox [(ngModel)]="verein.angaben.direktionDoppeleinsatz"
                         (ngModelChange)="direktionDoppeleinsatzChanged($event)">
             Dirigent/in: Teilnahme mit einem weiteren Verein
@@ -115,6 +106,12 @@
                    maxlength="255"
                    [disabled]="!verein.angaben.direktionDoppeleinsatz">
           </mat-form-field>
+        </div>
+
+        <div class="form-layout padding-bottom">
+          <mat-checkbox [(ngModel)]="verein.angaben.mitspielerDoppeleinsatz">
+              Musikant/innen: Doppelteilnahme <span class="mat-caption">(Doppelteilnahmen von Musikanten/Musikantinnen können nicht zwingend berücksichtigt werden!)</span>
+          </mat-checkbox>
         </div>
 
         <app-action-button buttonLabel="Speichern"

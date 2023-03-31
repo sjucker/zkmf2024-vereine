@@ -86,3 +86,7 @@ a {
 .max-width-container {
   max-width: $max-width;
 }
+
+.padding-bottom {
+  padding-bottom: variables.$padding;
+}
