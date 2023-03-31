@@ -162,8 +162,8 @@ export class MainComponent implements OnInit {
       } else {
         this.bild = event.addedFiles[0];
       }
+      this.upload()
     }
-    this.upload()
   }
 
   onRemove(logo: boolean) {
