@@ -40,6 +40,20 @@ h2 {
   img {
     max-height: 180px;
   }
+
+  .image-container {
+    position: relative;
+
+    .delete-image {
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      background-color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+
 }
 
 .anmeldung-container {

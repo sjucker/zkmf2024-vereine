@@ -110,7 +110,7 @@
 
         <div class="form-layout padding-bottom">
           <mat-checkbox [(ngModel)]="verein.angaben.mitspielerDoppeleinsatz">
-              Musikant/innen: Doppelteilnahme <span class="mat-caption">(Doppelteilnahmen von Musikanten/Musikantinnen können nicht zwingend berücksichtigt werden!)</span>
+            Musikant/innen: Doppelteilnahme <span class="mat-caption">(Doppelteilnahmen von Musikanten/Musikantinnen können nicht zwingend berücksichtigt werden!)</span>
           </mat-checkbox>
         </div>
 
@@ -264,7 +264,12 @@
             </ngx-dropzone-preview>
           </ngx-dropzone>
 
-          <img [src]="logoImgSrc" *ngIf="verein.info.logoImgId" alt="Vereinslogo"/>
+          <div *ngIf="verein.info.logoImgId" class="image-container">
+            <mat-icon class="delete-image" color="primary"
+                      (click)="deleteImage(verein.info.logoImgId)">delete
+            </mat-icon>
+            <img [src]="logoImgSrc" alt="Vereinslogo"/>
+          </div>
 
           <ngx-dropzone (change)="onDrop($event, false)"
                         [multiple]="false"
@@ -277,13 +282,14 @@
             </ngx-dropzone-preview>
           </ngx-dropzone>
 
-          <img [src]="bildImgSrc" *ngIf="verein.info.bildImgId" alt="Vereinsbild"/>
+          <div *ngIf="verein.info.bildImgId" class="image-container">
+            <mat-icon class="delete-image" color="primary"
+                      (click)="deleteImage(verein.info.bildImgId)">delete
+            </mat-icon>
+            <img [src]="bildImgSrc" alt="Vereinsbild"/>
+          </div>
 
         </div>
-        <app-action-button buttonLabel="Upload"
-                           [processing]="uploading"
-                           [disabled]="!logo && !bild"
-                           (buttonClicked)="upload()"></app-action-button>
       </mat-expansion-panel>
     </mat-accordion>
   </div>

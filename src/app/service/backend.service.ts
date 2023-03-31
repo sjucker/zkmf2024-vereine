@@ -77,4 +77,8 @@ export class BackendService {
     return this.httpClient.post(`${this.baseUrl}/secured/verein/bilder-upload`, formData);
   }
 
+  public deleteImage(imageId: number): Observable<any> {
+    return this.httpClient.delete(`${this.baseUrl}/secured/verein/bilder-upload/${imageId}`);
+  }
+
 }

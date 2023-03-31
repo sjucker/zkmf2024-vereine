@@ -163,6 +163,7 @@ export class MainComponent implements OnInit {
         this.bild = event.addedFiles[0];
       }
     }
+    this.upload()
   }
 
   onRemove(logo: boolean) {
@@ -185,7 +186,8 @@ export class MainComponent implements OnInit {
           horizontalPosition: 'center',
           panelClass: 'success'
         });
-
+        this.logo = undefined
+        this.bild = undefined
       },
       error: _ => {
         this.uploading = false;
@@ -197,6 +199,28 @@ export class MainComponent implements OnInit {
         });
       }
     })
+  }
+
+  deleteImage(imageId?: number) {
+    if (imageId) {
+      this.uploading = true
+      this.backendService.deleteImage(imageId).subscribe({
+        next: value => {
+          this.load()
+          this.uploading = false;
+          console.log(value);
+        },
+        error: _ => {
+          this.uploading = false;
+          this.snackBar.open("Es ist ein Fehler aufgetreten...", undefined, {
+            duration: 3000,
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            panelClass: 'error'
+          });
+        }
+      })
+    }
   }
 
   get logoImgSrc(): string {
