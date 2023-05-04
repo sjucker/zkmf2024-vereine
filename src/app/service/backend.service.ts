@@ -64,6 +64,10 @@ export class BackendService {
     return this.httpClient.put<VereinDTO>(`${this.baseUrl}/secured/verein`, verein);
   }
 
+  confirmRegistration() {
+    return this.httpClient.post<VereinDTO>(`${this.baseUrl}/secured/verein/confirm`, {})
+  }
+
   public upload(logo?: File, bild?: File): Observable<any> {
     const formData: FormData = new FormData();
 
@@ -80,5 +84,4 @@ export class BackendService {
   public deleteImage(imageId: number): Observable<any> {
     return this.httpClient.delete(`${this.baseUrl}/secured/verein/bilder-upload/${imageId}`);
   }
-
 }

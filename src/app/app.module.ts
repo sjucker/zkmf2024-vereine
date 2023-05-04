@@ -33,6 +33,7 @@ import {ForgotPasswordComponent} from './forgot-password/forgot-password.compone
 import {ResetPasswordComponent} from './reset-password/reset-password.component';
 import {GeneralInfoDialogComponent} from './general-info-dialog/general-info-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
+import {ConfirmRegistrationDialogComponent} from './confirm-registration-dialog/confirm-registration-dialog.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import {MatDialogModule} from "@angular/material/dialog";
     ForgotPasswordComponent,
     ResetPasswordComponent,
     GeneralInfoDialogComponent,
+    ConfirmRegistrationDialogComponent,
   ],
   imports: [
     BrowserModule,

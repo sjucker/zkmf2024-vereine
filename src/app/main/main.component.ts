@@ -7,6 +7,7 @@ import {NgxDropzoneChangeEvent} from "ngx-dropzone";
 import {environment} from "../../environments/environment";
 import {MatDialog} from "@angular/material/dialog";
 import {GeneralInfoDialogComponent} from "../general-info-dialog/general-info-dialog.component";
+import {ConfirmRegistrationDialogComponent} from "../confirm-registration-dialog/confirm-registration-dialog.component";
 
 @Component({
   selector: 'app-main',
@@ -32,10 +33,14 @@ export class MainComponent implements OnInit {
   error = false;
 
   saving = false;
+  confirming = false;
   uploading = false;
 
   logo?: File;
   bild?: File;
+
+  anmeldungDisabled = true;
+  unsavedChanges = false;
 
   constructor(private backendService: BackendService,
               public snackBar: MatSnackBar,
@@ -50,6 +55,7 @@ export class MainComponent implements OnInit {
     this.backendService.get().subscribe({
       next: response => {
         this.verein = response;
+        this.anmeldungDisabled = response.registrationConfirmed
       },
       error: (err: HttpErrorResponse) => {
         if (err.status === 404) {
@@ -118,8 +124,10 @@ export class MainComponent implements OnInit {
       this.saving = true;
       this.backendService.update(this.verein).subscribe({
         next: value => {
-          this.verein = value;
           this.saving = false;
+          this.unsavedChanges = false;
+          this.verein = value;
+          this.anmeldungDisabled = value.registrationConfirmed
           this.snackBar.open('Speichern war erfolgreich', undefined, {
             verticalPosition: 'top',
             horizontalPosition: 'center',
@@ -281,5 +289,52 @@ export class MainComponent implements OnInit {
     if (this.verein && !$event) {
       this.verein.angaben.direktionDoppeleinsatzVerein = ''
     }
+  }
+
+  canConfirmRegistration(): boolean {
+    if (this.verein) {
+      return !this.verein.registrationConfirmed && this.verein.anmeldung.valid;
+    }
+    return false;
+  }
+
+  confirmRegistration() {
+    if (this.verein && this.verein.anmeldung.valid) {
+      this.dialog.open(ConfirmRegistrationDialogComponent).afterClosed().subscribe(decision => {
+        if (decision) {
+          this.doConfirmRegistration();
+        }
+      });
+    }
+  }
+
+  private doConfirmRegistration() {
+    this.confirming = true;
+    this.backendService.confirmRegistration().subscribe({
+      next: value => {
+        this.confirming = false;
+        this.verein = value;
+        this.anmeldungDisabled = value.registrationConfirmed
+        this.snackBar.open("Anmeldung wurde bestätigt!", undefined, {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          panelClass: 'success'
+        });
+      },
+      error: _ => {
+        this.confirming = false;
+        this.snackBar.open("Es ist ein Fehler aufgetreten...", undefined, {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          panelClass: 'error'
+        });
+      }
+    });
+  }
+
+  onChange() {
+    this.unsavedChanges = true;
   }
 }

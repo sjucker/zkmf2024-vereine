@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
   authenticating = false;
 
   anmeldungUrl = `/${ANMELDUNG_PATH}`;
-  forgotPasswordUrl =  `/${FORGOT_PASSWORD_PATH}`;
+  forgotPasswordUrl = `/${FORGOT_PASSWORD_PATH}`;
 
   loginForm = this.formBuilder.group({
     email: ['', [Validators.required]],
