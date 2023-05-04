@@ -71,6 +71,11 @@ h2 {
   }
 }
 
+.button-container {
+  display: flex;
+  gap: variables.$padding;
+}
+
 @include responsive('lt-sm') {
   .anmeldung-container {
     flex-direction: column;
