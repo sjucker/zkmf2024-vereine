@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Anmeldung bestätigen</h2>
+<mat-dialog-content class="mat-typography">
+  <p>Sind die Angaben (Modul, Stärkeklasse, Besetzung) unter "Anmeldung" korrekt?<br/>
+    Die Angaben können nach dem Bestätigen nicht mehr bearbeitet werden.
+  </p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-stroked-button color="primary" mat-dialog-close>Abbrechen</button>
+  <button mat-flat-button color="primary" [mat-dialog-close]="true">Bestätigen</button>
+</mat-dialog-actions>

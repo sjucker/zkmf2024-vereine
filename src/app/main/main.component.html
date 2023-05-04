@@ -2,13 +2,21 @@
   <app-header header="ZKMF2024 - Vereinsbereich"></app-header>
   <div class="loading-indicator">
     <mat-progress-bar mode="indeterminate" color="accent"
-                      *ngIf="(!verein && !notFound && !error) || saving || uploading"></mat-progress-bar>
+                      *ngIf="(!verein && !notFound && !error) || saving || confirming || uploading"></mat-progress-bar>
   </div>
 
   <div class="max-width-container" *ngIf="verein">
     <h2>Herzlich willkommen bei der Anmeldung für das ZKMF 2024</h2>
-    <p>
+    <p class="button-container">
       <button mat-stroked-button color="primary" (click)="openInfoDialog()">Allgemeine Informationen</button>
+      <button mat-flat-button color="primary"
+              *ngIf="canConfirmRegistration()"
+              [disabled]="unsavedChanges"
+              (click)="confirmRegistration()">Definitiv anmelden
+      </button>
+    </p>
+    <p>
+
     </p>
     <h2>
       Phase 1 (bis 30.06.2023)
@@ -130,14 +138,38 @@
           <div class="selection">
             <div><span class="mat-headline-6">Modul</span><br/>(mindestens ein Modul auswählen)</div>
 
-            <mat-checkbox [(ngModel)]="verein.anmeldung.modulA">A - Konzertmusik</mat-checkbox>
-            <mat-checkbox [(ngModel)]="verein.anmeldung.modulB">B - Unterhaltungsmusik</mat-checkbox>
-            <mat-checkbox [(ngModel)]="verein.anmeldung.modulC">C - Platzkonzerte</mat-checkbox>
-            <mat-checkbox [(ngModel)]="verein.anmeldung.modulD">D - Parademusik traditionell</mat-checkbox>
-            <mat-checkbox [(ngModel)]="verein.anmeldung.modulE">E - Parademusik mit Evolutionen</mat-checkbox>
-            <mat-checkbox [(ngModel)]="verein.anmeldung.modulF">F - Hallen-/Rasenshow</mat-checkbox>
-            <mat-checkbox [(ngModel)]="verein.anmeldung.modulG">G - Tambouren</mat-checkbox>
-            <mat-checkbox [(ngModel)]="verein.anmeldung.modulH">H - Perkussionsensembles</mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulA"
+                          [disabled]="anmeldungDisabled"
+                          (ngModelChange)="onChange()">A - Konzertmusik
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulB"
+                          [disabled]="anmeldungDisabled"
+                          (ngModelChange)="onChange()">B - Unterhaltungsmusik
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulC"
+                          [disabled]="anmeldungDisabled"
+                          (ngModelChange)="onChange()">C - Platzkonzerte
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulD"
+                          [disabled]="anmeldungDisabled"
+                          (ngModelChange)="onChange()">D - Parademusik traditionell
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulE"
+                          [disabled]="anmeldungDisabled"
+                          (ngModelChange)="onChange()">E - Parademusik mit Evolutionen
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulF"
+                          [disabled]="anmeldungDisabled"
+                          (ngModelChange)="onChange()">F - Hallen-/Rasenshow
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulG"
+                          [disabled]="anmeldungDisabled"
+                          (ngModelChange)="onChange()">G - Tambouren
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="verein.anmeldung.modulH"
+                          [disabled]="anmeldungDisabled"
+                          (ngModelChange)="onChange()">H - Perkussionsensembles
+            </mat-checkbox>
           </div>
           <div class="selection">
             <div><span class="mat-headline-6">Stärkeklasse</span><br/>&nbsp;</div>
@@ -147,7 +179,9 @@
             </div>
             <mat-form-field appearance="outline" *ngIf="verein.anmeldung.modulA">
               <mat-label>Stärkeklasse Modul A</mat-label>
-              <mat-select [(ngModel)]="verein.anmeldung.klasseModulA" required>
+              <mat-select [(ngModel)]="verein.anmeldung.klasseModulA" required
+                          (ngModelChange)="onChange()"
+                          [disabled]="anmeldungDisabled">
                 <mat-option [value]="HOECHSTKLASSE">Höchstklasse</mat-option>
                 <mat-option [value]="KLASSE_1">1. Klasse</mat-option>
                 <mat-option [value]="KLASSE_2">2. Klasse</mat-option>
@@ -157,7 +191,9 @@
             </mat-form-field>
             <mat-form-field appearance="outline" *ngIf="verein.anmeldung.modulB">
               <mat-label>Stärkeklasse Modul B</mat-label>
-              <mat-select [(ngModel)]="verein.anmeldung.klasseModulB" required>
+              <mat-select [(ngModel)]="verein.anmeldung.klasseModulB" required
+                          (ngModelChange)="onChange()"
+                          [disabled]="anmeldungDisabled">
                 <mat-option [value]="OBERSTUFE">Oberstufe</mat-option>
                 <mat-option [value]="MITTELSTUFE">Mittelstufe</mat-option>
                 <mat-option [value]="UNTERSTUFE">Unterstufe</mat-option>
@@ -165,7 +201,9 @@
             </mat-form-field>
             <mat-form-field appearance="outline" *ngIf="verein.anmeldung.modulH">
               <mat-label>Stärkeklasse Modul H</mat-label>
-              <mat-select [(ngModel)]="verein.anmeldung.klasseModulH" required>
+              <mat-select [(ngModel)]="verein.anmeldung.klasseModulH" required
+                          (ngModelChange)="onChange()"
+                          [disabled]="anmeldungDisabled">
                 <mat-option [value]="OBERSTUFE">Oberstufe</mat-option>
                 <mat-option [value]="MITTELSTUFE">Mittelstufe</mat-option>
                 <mat-option [value]="UNTERSTUFE">Unterstufe</mat-option>
@@ -180,26 +218,37 @@
 
             <mat-checkbox *ngIf="harmonieVisible"
                           [(ngModel)]="verein.anmeldung.harmonie"
-                          [disabled]="verein.anmeldung.brassBand || verein.anmeldung.fanfare">Harmonie
+                          (ngModelChange)="onChange()"
+                          [disabled]="anmeldungDisabled || verein.anmeldung.brassBand || verein.anmeldung.fanfare">
+              Harmonie
             </mat-checkbox>
             <mat-checkbox *ngIf="brassBandVisible"
                           [(ngModel)]="verein.anmeldung.brassBand"
-                          [disabled]="verein.anmeldung.harmonie || verein.anmeldung.fanfare">Brass Band
+                          (ngModelChange)="onChange()"
+                          [disabled]="anmeldungDisabled || verein.anmeldung.harmonie || verein.anmeldung.fanfare">Brass
+              Band
             </mat-checkbox>
             <mat-checkbox *ngIf="fanfareVisible"
                           [(ngModel)]="verein.anmeldung.fanfare"
-                          [disabled]="verein.anmeldung.harmonie || verein.anmeldung.brassBand">Fanfare
+                          (ngModelChange)="onChange()"
+                          [disabled]="anmeldungDisabled || verein.anmeldung.harmonie || verein.anmeldung.brassBand">
+              Fanfare
             </mat-checkbox>
             <mat-checkbox *ngIf="tambourenVisible"
-                          [(ngModel)]="verein.anmeldung.tambouren">Tambouren
+                          [(ngModel)]="verein.anmeldung.tambouren"
+                          (ngModelChange)="onChange()"
+                          [disabled]="anmeldungDisabled">Tambouren
             </mat-checkbox>
             <mat-checkbox *ngIf="perkussionsensembleVisible"
-                          [(ngModel)]="verein.anmeldung.perkussionsensemble">Perkussionsensemble
+                          [(ngModel)]="verein.anmeldung.perkussionsensemble"
+                          (ngModelChange)="onChange()"
+                          [disabled]="anmeldungDisabled">Perkussionsensemble
             </mat-checkbox>
           </div>
         </div>
 
-        <app-action-button buttonLabel="Speichern"
+        <app-action-button *ngIf="!anmeldungDisabled"
+                           buttonLabel="Speichern"
                            [processing]="saving"
                            (buttonClicked)="saveAnmeldung()"></app-action-button>
       </mat-expansion-panel>
@@ -246,6 +295,7 @@
                     cdkAutosizeMinRows="4"
                     cdkAutosizeMaxRows="10"
                     maxlength="4096"
+                    required
                     [(ngModel)]="verein.info.websiteText"></textarea>
         </mat-form-field>
         <app-action-button buttonLabel="Speichern"
