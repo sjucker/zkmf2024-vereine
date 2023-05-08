@@ -81,6 +81,10 @@ h2 {
     flex-direction: column;
   }
 
+  .button-container {
+    flex-direction: column;
+  }
+
   .upload-container {
     flex-direction: column;
     gap: variables.$padding;
