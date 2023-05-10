@@ -11,7 +11,7 @@
       <button mat-stroked-button color="primary" (click)="openInfoDialog()">Allgemeine Informationen</button>
       <button mat-flat-button color="primary"
               *ngIf="canConfirmRegistration()"
-              [disabled]="unsavedChanges"
+              [disabled]="unsavedChanges || confirming"
               (click)="confirmRegistration()">Definitiv anmelden
       </button>
     </p>
