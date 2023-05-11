@@ -357,7 +357,7 @@ export class MainComponent implements OnInit {
         composer: this.newTitel.composer,
         arrangeur: this.newTitel.arrangeur,
         grad: Math.round((this.newTitel.grad ?? 0) * 10) / 10,
-        durationInSeconds: toDurationInSeconds(this.newTitelDuration),
+        durationInSeconds: toDurationInSeconds(this.newTitelDuration) ?? 0,
         pflichtStueck: false
       }];
       this.newTitel = {
@@ -404,7 +404,7 @@ export class MainComponent implements OnInit {
   }
 
   private calculateTotalDurationInSeconds(ablauf: VereinProgrammTitelDTO[]) {
-    // TODO latest applaus not counted
+    // TODO latest applause not counted
     const totalDurationInSeconds = ablauf.map(value => value.titel.durationInSeconds)
       .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 
@@ -442,5 +442,11 @@ export class MainComponent implements OnInit {
   moveDown(programm: VereinProgrammDTO, entry: VereinProgrammTitelDTO) {
     const index = programm.ablauf.indexOf(entry);
     [programm.ablauf[index], programm.ablauf[index + 1]] = [programm.ablauf[index + 1], programm.ablauf[index]];
+
+    // latest entry does not have applause
+    if (index + 1 == programm.ablauf.length - 1) {
+      entry.applausInSeconds = 0;
+      programm.totalDurationInSeconds = this.calculateTotalDurationInSeconds(programm.ablauf);
+    }
   }
 }

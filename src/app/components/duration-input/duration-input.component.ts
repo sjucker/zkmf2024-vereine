@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output} from '@angular/core';
 
 export function formatDuration(durationInSeconds?: number): string {
   if (durationInSeconds) {
@@ -15,12 +15,14 @@ export function formatDuration(durationInSeconds?: number): string {
   return '';
 }
 
-export function toDurationInSeconds(duration: string): number {
+export function toDurationInSeconds(duration: string): number | undefined { // TODO test this
   const parts = duration.split(":");
-  if (parts.length == 2 && parts[0].length > 0 && parts[1].length > 0) {
+  if (parts.length == 2 && parts[0].length > 0 && parts[1].length == 2) {
     return (parseInt(parts[0]) * 60) + parseInt(parts[1]);
-  } else {
+  } else if (duration.length == 0) {
     return 0;
+  } else {
+    return undefined;
   }
 }
 
@@ -29,7 +31,7 @@ export function toDurationInSeconds(duration: string): number {
   templateUrl: './duration-input.component.html',
   styleUrls: ['./duration-input.component.scss']
 })
-export class DurationInputComponent implements OnInit {
+export class DurationInputComponent implements OnInit, OnChanges {
 
   @Input()
   durationInSeconds: number = 0;
@@ -43,7 +45,14 @@ export class DurationInputComponent implements OnInit {
     this.durationFormatted = formatDuration(this.durationInSeconds);
   }
 
+  ngOnChanges(): void {
+    this.durationFormatted = formatDuration(this.durationInSeconds);
+  }
+
   onChange(value: string): void {
-    this.valueChanged.emit(toDurationInSeconds(value));
+    const duration = toDurationInSeconds(value);
+    if (duration !== undefined) {
+      this.valueChanged.emit(duration);
+    }
   }
 }
