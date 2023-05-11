@@ -460,7 +460,7 @@
                 <div *ngIf="last" class="spacer">&nbsp;</div>
               </td>
               <td>{{i + 1}}</td>
-              <td>{{entry.titel.titelName}} ({{entry.titel.composer}})</td>
+              <td>{{entry.titel.titelName}} ({{entry.titel.composer}})<span *ngIf="entry.titel.pflichtStueck">*</span></td>
               <td>{{formatDuration(entry.titel.durationInSeconds)}}</td>
               <td>
                 <app-duration-input *ngIf="!last"
