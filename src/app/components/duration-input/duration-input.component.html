@@ -1,6 +1,7 @@
 <input type="text"
        autocomplete="off"
        matInput
-       placeholder="Dauer (z.B. 0:30)"
+       placeholder="z.B. 0:30"
+       size="6"
        [ngModel]="durationFormatted"
        (ngModelChange)="onChange($event)">
