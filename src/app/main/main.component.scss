@@ -14,10 +14,4 @@ h2 {
   flex-direction: row;
   gap: variables.$padding;
   align-items: center;
-
-  .mat-icon {
-    &.done {
-      color: variables.$gruen;
-    }
-  }
 }
