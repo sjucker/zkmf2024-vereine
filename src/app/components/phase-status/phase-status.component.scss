@@ -1,4 +1,12 @@
+@use "../../../variables";
+
 div {
   display: flex;
   align-items: center;
+
+  .mat-icon {
+    &.done {
+      color: variables.$gruen;
+    }
+  }
 }
