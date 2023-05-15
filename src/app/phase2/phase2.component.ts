@@ -93,7 +93,6 @@ export class Phase2Component {
   }
 
   private calculateTotalDurationInSeconds(ablauf: VereinProgrammTitelDTO[]) {
-    // TODO latest applause not counted
     const totalDurationInSeconds = ablauf.map(value => value.titel.durationInSeconds)
       .reduce((previousValue, currentValue) => previousValue + currentValue, 0);
 
@@ -124,17 +123,21 @@ export class Phase2Component {
   moveUp(programm: VereinProgrammDTO, entry: VereinProgrammTitelDTO) {
     const index = programm.ablauf.indexOf(entry);
     [programm.ablauf[index - 1], programm.ablauf[index]] = [programm.ablauf[index], programm.ablauf[index - 1]];
+
+    this.updateApplausAndTotalDuration(programm);
   }
 
   moveDown(programm: VereinProgrammDTO, entry: VereinProgrammTitelDTO) {
     const index = programm.ablauf.indexOf(entry);
     [programm.ablauf[index], programm.ablauf[index + 1]] = [programm.ablauf[index + 1], programm.ablauf[index]];
 
+    this.updateApplausAndTotalDuration(programm);
+  }
+
+  private updateApplausAndTotalDuration(programm: VereinProgrammDTO): void {
     // latest entry does not have applause
-    if (index + 1 == programm.ablauf.length - 1) {
-      entry.applausInSeconds = 0;
-      programm.totalDurationInSeconds = this.calculateTotalDurationInSeconds(programm.ablauf);
-    }
+    programm.ablauf[programm.ablauf.length - 1].applausInSeconds = undefined;
+    programm.totalDurationInSeconds = this.calculateTotalDurationInSeconds(programm.ablauf);
   }
 
   save() {
