@@ -36,8 +36,7 @@
         <app-phase-status [status]="verein.phase2Status"></app-phase-status>
       </h2>
 
-      <app-phase2 [titel]="verein.titel"
-                  [programme]="verein.programme"
+      <app-phase2 [verein]="verein"
                   [saving]="saving"
                   (doSave)="save()"></app-phase2>
     </div>

@@ -1,6 +1,6 @@
 import {Component, EventEmitter, Input, Output, TrackByFunction} from '@angular/core';
 import {formatDuration, toDurationInSeconds} from "../components/duration-input/duration-input.component";
-import {TitelDTO, VereinProgrammDTO, VereinProgrammTitelDTO} from "../rest";
+import {TitelDTO, VereinDTO, VereinProgrammDTO, VereinProgrammTitelDTO} from "../rest";
 
 @Component({
   selector: 'app-phase2',
@@ -15,9 +15,8 @@ export class Phase2Component {
   gradPattern = new RegExp('[1-6](\\.[0-9])?', '');
 
   @Input()
-  titel: TitelDTO[] = [];
-  @Input()
-  programme: VereinProgrammDTO[] = [];
+    // @ts-ignore
+  verein: VereinDTO;
   @Input()
   saving: boolean = false;
 
@@ -40,7 +39,7 @@ export class Phase2Component {
   }
 
   addNewTitel() {
-    this.titel = [...this.titel, {
+    this.verein.titel = [...this.verein.titel, {
       titelName: this.newTitel.titelName,
       composer: this.newTitel.composer,
       arrangeur: this.newTitel.arrangeur,
@@ -55,10 +54,15 @@ export class Phase2Component {
     this.newTitelDuration = ''
   }
 
+  canDeleteTitel(titel: TitelDTO): boolean {
+    return !this.verein.programme.some(programm =>
+      programm.ablauf.some(entry => entry.titel.id === titel.id));
+  }
+
   deleteTitel(titel: TitelDTO) {
-    const index = this.titel.findIndex(dto => dto === titel);
+    const index = this.verein.titel.findIndex(dto => dto === titel);
     if (index > -1) {
-      this.titel.splice(index, 1);
+      this.verein.titel.splice(index, 1);
     }
   }
 
@@ -135,5 +139,10 @@ export class Phase2Component {
 
   save() {
     this.doSave.emit();
+  }
+
+  getAvailableTitel(programm: VereinProgrammDTO): TitelDTO[] {
+    const alreadySelectedTitelIds = programm.ablauf.map(v => v.titel.id ?? 0);
+    return programm.availableTitel.filter(t => !alreadySelectedTitelIds.includes(t.id ?? 0));
   }
 }
