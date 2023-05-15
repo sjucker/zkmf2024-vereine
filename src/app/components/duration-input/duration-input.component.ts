@@ -26,6 +26,8 @@ export function toDurationInSeconds(duration: string): number | undefined { // T
   }
 }
 
+export const durationPattern = /^\d{1,2}:\d{2}$/
+
 @Component({
   selector: 'app-duration-input',
   templateUrl: './duration-input.component.html',
@@ -33,10 +35,13 @@ export function toDurationInSeconds(duration: string): number | undefined { // T
 })
 export class DurationInputComponent implements OnInit, OnChanges {
 
-  @Input()
+  @Input({required: true})
   durationInSeconds: number = 0;
+  @Input()
+  maxDurationInSeconds: number = 30;
 
   durationFormatted: string = "";
+  invalid = false;
 
   @Output()
   valueChanged: EventEmitter<number> = new EventEmitter<number>();
@@ -50,9 +55,15 @@ export class DurationInputComponent implements OnInit, OnChanges {
   }
 
   onChange(value: string): void {
+    this.invalid = false;
     const duration = toDurationInSeconds(value);
     if (duration !== undefined) {
-      this.valueChanged.emit(duration);
+      if (duration <= this.maxDurationInSeconds) {
+        this.valueChanged.emit(duration);
+      } else {
+        this.invalid = true;
+      }
     }
   }
+
 }

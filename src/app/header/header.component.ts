@@ -10,7 +10,7 @@ import {LOGIN_PATH} from "../app-routing.module";
 })
 export class HeaderComponent {
 
-  @Input()
+  @Input({required: true})
   header = '';
 
   constructor(private router: Router,

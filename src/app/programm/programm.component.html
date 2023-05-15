@@ -1,0 +1,290 @@
+<mat-expansion-panel>
+  <mat-expansion-panel-header>
+    <mat-panel-title>Modul {{programm.modul}} - Programm</mat-panel-title>
+    <mat-panel-description>
+      <app-validation-state [valid]="programm.valid"></app-validation-state>
+    </mat-panel-description>
+  </mat-expansion-panel-header>
+
+  <div class="programm-container">
+    <div>
+      <span class="mat-h2">Allgemeine Angaben</span>
+      <span><br/><b>Modul</b>: {{programm.modulDescription}}</span>
+      <span *ngIf="programm.klasse"><br/><b>Klasse</b>: {{programm.klasse}}</span>
+      <span *ngIf="programm.besetzung"><br/><b>Besetzung</b>: {{programm.besetzung}}</span>
+      <span *ngIf="hasVorgabeDauer">
+        <br/>
+        <b>Vorgabe Dauer</b>:
+        {{formatDuration(programm.minDurationInSeconds)}} - {{formatDuration(programm.maxDurationInSeconds)}}
+      </span>
+      <span *ngIf="isModulGH">
+        <br/>
+        Die musikalischen Angaben in diesem Modul müssen erst am <b>31.01.2024</b> eingereicht werden.
+      </span>
+    </div>
+
+    <div *ngIf="isModulAB">
+      <mat-form-field appearance="outline">
+        <mat-label>Programmtitel</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="programm.titel"
+               (ngModelChange)="onChange()"
+               maxlength="255"
+               required>
+      </mat-form-field>
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Erläuterungen zum Selbstwahlprogramm (Konzept, roter Faden)</mat-label>
+        <textarea matInput
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="4"
+                  cdkAutosizeMaxRows="10"
+                  maxlength="4096"
+                  required
+                  [(ngModel)]="programm.infoModeration"
+                  (ngModelChange)="onChange()"></textarea>
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="isModulB">
+      <span class="mat-h2">Weitere Angaben</span><br/>
+      <mat-checkbox [(ngModel)]="programm.unterhaltungPA"
+                    (ngModelChange)="onChange()">PA wird benötigt
+      </mat-checkbox>
+      <div>
+        Wir nutzen diese Zusatzinstrumente:
+        <mat-checkbox [(ngModel)]="programm.unterhaltungEGitarre"
+                      (ngModelChange)="onChange()">E-Gitarre
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="programm.unterhaltungEBass"
+                      (ngModelChange)="onChange()">E-Bass
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="programm.unterhaltungKeyboard"
+                      (ngModelChange)="onChange()">Keyboard
+        </mat-checkbox>
+        <mat-checkbox [(ngModel)]="programm.unterhaltungGesang"
+                      (ngModelChange)="onChange()">Gesang
+        </mat-checkbox>
+      </div>
+    </div>
+
+    <div *ngIf="!isModulD && !isModulG">
+      <div class="mat-h2" *ngIf="isModulAB">Selbstwahlstück hinzufügen</div>
+      <div class="mat-h2" *ngIf="!isModulAB">Stück hinzufügen</div>
+      <div class="form-layout">
+        <mat-form-field appearance="outline">
+          <mat-label>Titel*</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 maxlength="255"
+                 [(ngModel)]="newTitel.titelName">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Komponist/in*</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 maxlength="255"
+                 [(ngModel)]="newTitel.composer">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Arrangeur/in</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 maxlength="255"
+                 [(ngModel)]="newTitel.arrangeur">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" *ngIf="!isModulC">
+          <mat-label>Dauer (z.B. 7:45)*</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 [pattern]="durationPattern"
+                 [(ngModel)]="newTitelDuration">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" *ngIf="isModulAB">
+          <mat-label>Grad (1.0-6.0)*</mat-label>
+          <input type="number"
+                 autocomplete="off"
+                 matInput
+                 min="1.0"
+                 max="6.0"
+                 [pattern]="gradPattern"
+                 [(ngModel)]="newTitel.grad">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" *ngIf="isModulH">
+          <mat-label>Schwierigkeitsgrad*</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 maxlength="255"
+                 [(ngModel)]="newTitel.schwierigkeitsgrad">
+        </mat-form-field>
+
+        <div class="action-column">
+          <button color="primary" mat-flat-button
+                  [disabled]="!newTitelValid"
+                  (click)="addNewProgrammTitel()">
+            {{newTitel.id ? 'aktualisieren' : 'erfassen'}}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="!isModulD && !isModulG">
+      <div class="mat-h2">Ablauf</div>
+      <table class="titel-table">
+        <tr>
+          <th></th>
+          <th>Nr.</th>
+          <th>Musikstück</th>
+          <th *ngIf="!isModulC">Dauer Stück</th>
+          <th *ngIf="isModulAB || isModulH">Dauer Applaus (max. 0:30)</th>
+          <th></th>
+          <th></th>
+        </tr>
+        <tr *ngFor="let entry of programm.ablauf; let i = index; let first = first; let last = last;">
+          <td>
+            <div *ngIf="first" class="spacer">&nbsp;</div>
+            <mat-icon *ngIf="!first" (click)="moveUp(entry)" class="clickable">arrow_upward</mat-icon>
+
+            <mat-icon *ngIf="!last" (click)="moveDown(entry)" class="clickable">arrow_downward</mat-icon>
+            <div *ngIf="last" class="spacer">&nbsp;</div>
+          </td>
+          <td>{{i + 1}}</td>
+          <td>{{entry.titel.titelName}} ({{entry.titel.composer}})<span *ngIf="entry.titel.pflichtStueck">*</span></td>
+          <td *ngIf="!isModulC">{{formatDuration(entry.titel.durationInSeconds)}}</td>
+          <td *ngIf="isModulAB || isModulH">
+            <app-duration-input *ngIf="!last"
+                                [durationInSeconds]="entry.applausInSeconds ?? 0"
+                                (valueChanged)="updateApplaus(entry, $event)"></app-duration-input>
+          </td>
+          <td>
+            <button mat-icon-button color="primary"
+                    [disabled]="entry.titel.pflichtStueck || !entry.titel.id"
+                    (click)="editProgrammTitel(entry)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </td>
+          <td>
+            <button mat-icon-button color="primary"
+                    [disabled]="entry.titel.pflichtStueck"
+                    (click)="deleteProgrammTitel(entry)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td>
+        </tr>
+      </table>
+
+      <p *ngIf="hasVorgabeDauer && !this.isModulC && programm.ablauf.length > 0">
+        <b><span
+          [ngClass]="{'valid': isInRange}">Total Dauer</span></b>: {{formatDuration(programm.totalDurationInSeconds)}}
+        <br/>
+        <span *ngIf="!isInRange"
+              class="invalid"><b>Differenz zur Vorgabe</b>: {{formatDuration(diffToVorgabe)}}</span>
+      </p>
+    </div>
+
+    <div *ngIf="isModulAB && selbstwahlTitel.length > 0">
+      <div class="mat-h2">Infos für die Moderation</div>
+      <div *ngFor="let titel of selbstwahlTitel">
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label>Infos für die Moderation: {{titel.titelName}}</mat-label>
+          <textarea matInput
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="3"
+                    cdkAutosizeMaxRows="10"
+                    maxlength="4096"
+                    required
+                    [(ngModel)]="titel.infoModeration"
+                    (ngModelChange)="onChange()"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div *ngIf="isModulD">
+      <app-parademusik-titel label="Komposition 1 (Schweizer Marsch)"
+                             [titel]="programm.parademusikTitel1"
+                             (changed)="onChange()"></app-parademusik-titel>
+
+      <app-parademusik-titel label="Komposition 2"
+                             [titel]="programm.parademusikTitel2"
+                             (changed)="onChange()"></app-parademusik-titel>
+    </div>
+
+    <div *ngIf="isModulG">
+      <div *ngIf="programm.tambourenKatA">
+        <h2>Kategorie A</h2>
+        <div>
+          <h4>Grundlage 1</h4>
+          <mat-radio-group color="primary"
+                           [(ngModel)]="programm.tambourenKatAGrundlage1" required
+                           (ngModelChange)="onChange()">
+            <mat-radio-button [value]="WIRBEL">Wirbel</mat-radio-button>
+            <mat-radio-button [value]="RUF">5er Ruf</mat-radio-button>
+          </mat-radio-group>
+        </div>
+        <div>
+          <h4>Grundlage 2</h4>
+          <mat-radio-group color="primary"
+                           [(ngModel)]="programm.tambourenKatAGrundlage2" required
+                           (ngModelChange)="onChange()">
+            <mat-radio-button [value]="BATAFLAFLA">Bataflafla</mat-radio-button>
+            <mat-radio-button [value]="DOUBLE">Doublé</mat-radio-button>
+          </mat-radio-group>
+        </div>
+
+        <div>
+          <h4>Frei gewählter Baslermarsch (BM) oder Marsch (M)</h4>
+          <app-tambouren-titel [titel]="programm.tambourenKatATitel1"
+                               (changed)="onChange()"></app-tambouren-titel>
+        </div>
+        <div>
+          <h4>Frei gewählte Komposition</h4>
+          <app-tambouren-titel [titel]="programm.tambourenKatATitel2"
+                               (changed)="onChange()"></app-tambouren-titel>
+        </div>
+      </div>
+
+      <div *ngIf="programm.tambourenKatB">
+        <h2>Kategorie B</h2>
+        <h4>Komposition</h4>
+        <app-tambouren-titel [titel]="programm.tambourenKatBTitel"
+                             (changed)="onChange()"></app-tambouren-titel>
+      </div>
+    </div>
+
+    <div *ngIf="programm.tambourenKatC">
+      <h2>Kategorie C</h2>
+      <h4>Komposition</h4>
+      <app-tambouren-titel [titel]="programm.tambourenKatCTitel"
+                           (changed)="onChange()"></app-tambouren-titel>
+    </div>
+
+    <div *ngIf="isModulC">
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Kommentar</mat-label>
+        <textarea matInput
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="4"
+                  cdkAutosizeMaxRows="10"
+                  maxlength="4096"
+                  [(ngModel)]="programm.infoModeration"
+                  (ngModelChange)="onChange()"></textarea>
+      </mat-form-field>
+    </div>
+
+    <app-action-button buttonLabel="Speichern"
+                       [processing]="saving"
+                       [disabled]="!unsavedChanges"
+                       (buttonClicked)="save()"></app-action-button>
+  </div>
+</mat-expansion-panel>

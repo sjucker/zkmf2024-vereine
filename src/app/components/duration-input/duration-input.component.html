@@ -4,4 +4,5 @@
        placeholder="z.B. 0:30"
        size="6"
        [ngModel]="durationFormatted"
-       (ngModelChange)="onChange($event)">
+       (ngModelChange)="onChange($event)"
+       [ngClass]="{'invalid': invalid}">

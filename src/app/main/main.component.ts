@@ -116,9 +116,9 @@ export class MainComponent implements OnInit {
         next: value => {
           this.saving = false;
           this.unsavedChanges = false;
-          this.verein = value;
           this.anmeldungDisabled = value.registrationConfirmed;
           if (!silent) {
+            this.verein = value;
             this.snackBar.open('Speichern war erfolgreich', undefined, {
               verticalPosition: 'top',
               horizontalPosition: 'center',
@@ -238,7 +238,7 @@ export class MainComponent implements OnInit {
 
   get phase2Enabled(): boolean {
     if (this.verein) {
-      return this.verein.registrationConfirmed && false;
+      return this.verein.registrationConfirmed;
     }
 
     return false;
