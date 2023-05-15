@@ -1,0 +1,32 @@
+@use "../../variables";
+@import "../../responsive";
+
+.spacer {
+  width: 24px;
+  display: inline-block;
+}
+
+.titel-table {
+  width: 100%;
+  margin: variables.$padding 0;
+
+  th {
+    text-align: left;
+  }
+}
+
+.form-layout {
+  align-items: baseline;
+}
+
+.action-column {
+  flex: 0 0 100px;
+}
+
+.valid {
+  color: variables.$gruen;
+}
+
+.invalid {
+  color: variables.$rot;
+}

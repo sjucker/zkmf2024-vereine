@@ -94,3 +94,15 @@ a {
 .clickable {
   cursor: pointer;
 }
+
+.button-container {
+  display: flex;
+  gap: variables.$padding;
+  align-items: baseline;
+}
+
+@include responsive('lt-sm') {
+  .button-container {
+    flex-direction: column;
+  }
+}
