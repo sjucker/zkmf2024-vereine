@@ -184,7 +184,7 @@ export class MainComponent implements OnInit {
 
   get phase2Enabled(): boolean {
     if (this.verein) {
-      return this.verein.registrationConfirmed;
+      return this.verein.registrationConfirmed && false;
     }
 
     return false;
