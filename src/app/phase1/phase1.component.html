@@ -281,11 +281,9 @@
                     [multiple]="false"
                     accept="image/jpeg,image/jpg"
                     [maxFileSize]="maxFileSize"
+                    [disabled]="uploading"
                     *ngIf="!verein.info.logoImgId">
         <ngx-dropzone-label>Vereinslogo (max. 1 MB)<br/>(Drag-and-Drop oder hier klicken)</ngx-dropzone-label>
-        <ngx-dropzone-preview [removable]="true" (removed)="onRemove(true)" *ngIf="logo">
-          <ngx-dropzone-label>{{ logo.name }} ({{ logo.type }})</ngx-dropzone-label>
-        </ngx-dropzone-preview>
       </ngx-dropzone>
 
       <div *ngIf="verein.info.logoImgId" class="image-container">
@@ -299,11 +297,9 @@
                     [multiple]="false"
                     accept="image/jpeg,image/jpg"
                     [maxFileSize]="maxFileSize"
+                    [disabled]="uploading"
                     *ngIf="!verein.info.bildImgId">
         <ngx-dropzone-label>Vereinsbild (max. 1 MB)<br/>(Drag-and-Drop oder hier klicken)</ngx-dropzone-label>
-        <ngx-dropzone-preview [removable]="true" (removed)="onRemove(false)" *ngIf="bild">
-          <ngx-dropzone-label>{{ bild.name }} ({{ bild.type }})</ngx-dropzone-label>
-        </ngx-dropzone-preview>
       </ngx-dropzone>
 
       <div *ngIf="verein.info.bildImgId" class="image-container">

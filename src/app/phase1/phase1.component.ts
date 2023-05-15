@@ -28,10 +28,10 @@ export class Phase1Component {
   @Input()
     // @ts-ignore
   verein: VereinDTO;
-
   @Input()
   saving = false;
-
+  @Input()
+  uploading = false;
   @Input()
   anmeldungDisabled = true;
 
@@ -43,9 +43,6 @@ export class Phase1Component {
   doUpload = new EventEmitter<UploadData>();
   @Output()
   doDeleteImage = new EventEmitter<number>();
-
-  logo?: File;
-  bild?: File;
 
   constructor(public snackBar: MatSnackBar,
               public dialog: MatDialog) {
@@ -179,24 +176,10 @@ export class Phase1Component {
     }
 
     if (event.addedFiles.length === 1) {
-      if (logo) {
-        this.logo = event.addedFiles[0];
-      } else {
-        this.bild = event.addedFiles[0];
-      }
-
       this.doUpload.emit({
-        logo: this.logo,
-        bild: this.bild
+        logo: logo ? event.addedFiles[0] : undefined,
+        bild: !logo ? event.addedFiles[0] : undefined
       });
-    }
-  }
-
-  onRemove(logo: boolean) {
-    if (logo) {
-      this.logo = undefined;
-    } else {
-      this.bild = undefined;
     }
   }
 
