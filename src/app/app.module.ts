@@ -34,8 +34,10 @@ import {ResetPasswordComponent} from './reset-password/reset-password.component'
 import {GeneralInfoDialogComponent} from './general-info-dialog/general-info-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {ConfirmRegistrationDialogComponent} from './confirm-registration-dialog/confirm-registration-dialog.component';
-import { PhaseStatusComponent } from './components/phase-status/phase-status.component';
-import { DurationInputComponent } from './components/duration-input/duration-input.component';
+import {PhaseStatusComponent} from './components/phase-status/phase-status.component';
+import {DurationInputComponent} from './components/duration-input/duration-input.component';
+import {Phase2Component} from './phase2/phase2.component';
+import {Phase1Component} from './phase1/phase1.component';
 
 @NgModule({
   declarations: [
@@ -54,6 +56,8 @@ import { DurationInputComponent } from './components/duration-input/duration-inp
     ConfirmRegistrationDialogComponent,
     PhaseStatusComponent,
     DurationInputComponent,
+    Phase2Component,
+    Phase1Component,
   ],
   imports: [
     BrowserModule,

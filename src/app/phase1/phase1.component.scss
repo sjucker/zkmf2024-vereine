@@ -1,0 +1,80 @@
+@use "../../variables";
+@import "../../responsive";
+
+.anmeldung-container {
+  display: flex;
+  flex-direction: row;
+  gap: variables.$padding;
+
+  > div {
+    flex: 1 1 0;
+  }
+
+  .selection {
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+.upload-container {
+  display: flex;
+  flex-direction: row;
+  gap: variables.$padding;
+  margin-top: variables.$padding;
+  margin-bottom: variables.$padding;
+
+  ngx-dropzone {
+    width: 100%;
+
+    &.ngx-dz-hovered {
+      border-color: variables.$gruen;
+    }
+  }
+
+  img {
+    max-height: 180px;
+  }
+
+  .image-container {
+    position: relative;
+
+    .delete-image {
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      background-color: white;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+}
+
+@include responsive('lt-sm') {
+  .anmeldung-container {
+    flex-direction: column;
+  }
+
+  .upload-container {
+    flex-direction: column;
+    gap: variables.$padding;
+
+    ngx-dropzone {
+      &:not(:last-child) {
+        margin-bottom: variables.$padding;
+      }
+    }
+
+    img {
+      max-width: 100%;
+      max-height: unset;
+
+      &:not(:last-child) {
+        margin-bottom: variables.$padding;
+      }
+    }
+  }
+}
+
+.form-layout {
+  align-items: baseline;
+}

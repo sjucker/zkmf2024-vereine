@@ -1,0 +1,175 @@
+<mat-accordion>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      Selbstwahlstücke erfassen
+    </mat-expansion-panel-header>
+    <div class="form-layout">
+      <mat-form-field appearance="outline">
+        <mat-label>Titel*</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               maxlength="255"
+               [(ngModel)]="newTitel.titelName">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Komponist/in*</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               maxlength="255"
+               [(ngModel)]="newTitel.composer">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Arrangeur/in</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               maxlength="255"
+               [(ngModel)]="newTitel.arrangeur">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Dauer (z.B. 7:45)*</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               [pattern]="durationPattern"
+               [(ngModel)]="newTitelDuration">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Grad (1.0-6.0)*</mat-label>
+        <input type="number"
+               autocomplete="off"
+               matInput
+               min="1.0"
+               max="6.0"
+               [pattern]="gradPattern"
+               [(ngModel)]="newTitel.grad">
+      </mat-form-field>
+      <div class="action-column">
+        <button color="primary" mat-flat-button
+                [disabled]="!newTitelValid"
+                (click)="addNewTitel()">
+          erfassen
+        </button>
+      </div>
+    </div>
+
+    <div *ngFor="let t of titel" class="form-layout">
+      <div>{{t.titelName}}</div>
+      <div>{{t.composer}}</div>
+      <div>{{t.arrangeur}}</div>
+      <div>{{formatDuration(t.durationInSeconds)}}</div>
+      <div>{{t.grad | number: '1.1-1'}}</div>
+      <div class="action-column">
+        <mat-icon color="primary" (click)="deleteTitel(t)" class="clickable">delete</mat-icon>
+      </div>
+    </div>
+
+    <p>&nbsp;</p>
+
+    <app-action-button buttonLabel="Speichern"
+                       [processing]="saving"
+                       (buttonClicked)="save()"></app-action-button>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel *ngFor="let programm of programme; trackBy: trackById;">
+    <mat-expansion-panel-header>
+      Modul {{programm.modul}} - Programm erfassen
+    </mat-expansion-panel-header>
+
+    <p>
+      <span *ngIf="programm.klasse"><b>Klasse</b>: {{programm.klasse}}<br/></span>
+      <span *ngIf="programm.besetzung"><b>Besetzung</b>: {{programm.besetzung}}<br/></span>
+      <span *ngIf="programm.minDurationInSeconds && programm.maxDurationInSeconds">
+              <b>Vorgabe Dauer</b>: {{formatDuration(programm.minDurationInSeconds)}}
+        - {{formatDuration(programm.maxDurationInSeconds)}}
+            </span>
+    </p>
+
+    <table class="titel-table">
+      <tr>
+        <th></th>
+        <th>Nr.</th>
+        <th>Musikstück</th>
+        <th>Dauer Stück</th>
+        <th>Dauer Applaus (optional)</th>
+        <th></th>
+      </tr>
+      <tr *ngFor="let entry of programm.ablauf; let i = index; let first = first; let last = last;">
+        <td>
+          <div *ngIf="first" class="spacer">&nbsp;</div>
+          <mat-icon *ngIf="!first" (click)="moveUp(programm, entry)" class="clickable">arrow_upward</mat-icon>
+
+          <mat-icon *ngIf="!last" (click)="moveDown(programm, entry)" class="clickable">arrow_downward</mat-icon>
+          <div *ngIf="last" class="spacer">&nbsp;</div>
+        </td>
+        <td>{{i + 1}}</td>
+        <td>{{entry.titel.titelName}} ({{entry.titel.composer}})<span *ngIf="entry.titel.pflichtStueck">*</span></td>
+        <td>{{formatDuration(entry.titel.durationInSeconds)}}</td>
+        <td>
+          <app-duration-input *ngIf="!last"
+                              [durationInSeconds]="entry.applausInSeconds ?? 0"
+                              (valueChanged)="updateApplaus(programm, entry, $event)"></app-duration-input>
+        </td>
+        <td>
+          <mat-icon color="primary" (click)="deleteProgrammTitel(programm, entry)" class="clickable">delete
+          </mat-icon>
+        </td>
+      </tr>
+    </table>
+
+    <p>
+      <b><span
+        [ngClass]="{'valid': isInRange(programm)}">Total Dauer</span></b>: {{formatDuration(programm.totalDurationInSeconds)}}
+      <br/>
+      <span *ngIf="!isInRange(programm)"
+            class="invalid"><b>Differenz zur Vorgabe</b>: {{formatDuration(getDiffToVorgabe(programm))}}</span>
+    </p>
+
+    <div class="button-container">
+      <mat-form-field appearance="outline">
+        <mat-label>Stück</mat-label>
+        <mat-select [(ngModel)]="selectedTitel">
+          <mat-option *ngFor="let titel of programm.availableTitel" [value]="titel">{{titel.titelName}}
+            ({{titel.composer}})<span *ngIf="titel.pflichtStueck">*</span>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <button color="primary" mat-flat-button
+              (click)="addNewProgrammTitel(programm)"
+              [disabled]="!selectedTitel">Hinzufügen
+      </button>
+    </div>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Programmtitel</mat-label>
+      <input type="text"
+             autocomplete="off"
+             matInput
+             [(ngModel)]="programm.titel"
+             maxlength="255"
+             required>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" color="primary">
+      <mat-label>Informationen für die Moderation</mat-label>
+      <textarea matInput
+                cdkTextareaAutosize
+                cdkAutosizeMinRows="4"
+                cdkAutosizeMaxRows="10"
+                maxlength="4096"
+                required
+                [(ngModel)]="programm.infoModeration"></textarea>
+    </mat-form-field>
+
+    <app-action-button buttonLabel="Speichern"
+                       [processing]="saving"
+                       (buttonClicked)="save()"></app-action-button>
+  </mat-expansion-panel>
+</mat-accordion>
