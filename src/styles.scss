@@ -63,7 +63,7 @@ a {
     --mdc-snackbar-container-color: #{variables.$hellblau};
   }
 
-  &.invalid {
+  &.error {
     color: variables.$papier;
     --mdc-snackbar-container-color: #{variables.$rot};
   }

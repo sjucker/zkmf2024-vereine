@@ -59,14 +59,14 @@
       </div>
     </div>
 
-    <div *ngFor="let t of titel" class="form-layout">
+    <div *ngFor="let t of verein.titel" class="form-layout">
       <div>{{t.titelName}}</div>
       <div>{{t.composer}}</div>
       <div>{{t.arrangeur}}</div>
       <div>{{formatDuration(t.durationInSeconds)}}</div>
       <div>{{t.grad | number: '1.1-1'}}</div>
       <div class="action-column">
-        <mat-icon color="primary" (click)="deleteTitel(t)" class="clickable">delete</mat-icon>
+        <mat-icon color="primary" *ngIf="canDeleteTitel(t)" (click)="deleteTitel(t)" class="clickable">delete</mat-icon>
       </div>
     </div>
 
@@ -77,7 +77,7 @@
                        (buttonClicked)="save()"></app-action-button>
   </mat-expansion-panel>
 
-  <mat-expansion-panel *ngFor="let programm of programme; trackBy: trackById;">
+  <mat-expansion-panel *ngFor="let programm of verein.programme; trackBy: trackById;">
     <mat-expansion-panel-header>
       Modul {{programm.modul}} - Programm erfassen
     </mat-expansion-panel-header>
@@ -135,7 +135,7 @@
       <mat-form-field appearance="outline">
         <mat-label>Stück</mat-label>
         <mat-select [(ngModel)]="selectedTitel">
-          <mat-option *ngFor="let titel of programm.availableTitel" [value]="titel">{{titel.titelName}}
+          <mat-option *ngFor="let titel of getAvailableTitel(programm)" [value]="titel">{{titel.titelName}}
             ({{titel.composer}})<span *ngIf="titel.pflichtStueck">*</span>
           </mat-option>
         </mat-select>
