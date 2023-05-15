@@ -1,0 +1,37 @@
+<div class="form-layout">
+  <mat-form-field appearance="outline">
+    <mat-label>Titel*</mat-label>
+    <input type="text"
+           autocomplete="off"
+           matInput
+           maxlength="255"
+           [(ngModel)]="titel.titelName"
+           (ngModelChange)="onChange()">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Komponist/in*</mat-label>
+    <input type="text"
+           autocomplete="off"
+           matInput
+           maxlength="255"
+           [(ngModel)]="titel.composer"
+           (ngModelChange)="onChange()">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Klasse (1-6)*</mat-label>
+    <input type="number"
+           autocomplete="off"
+           matInput
+           min="1"
+           max="6"
+           [pattern]="klassePattern"
+           [(ngModel)]="titel.grad"
+           (ngModelChange)="onChange()">
+  </mat-form-field>
+
+  <div>
+    <mat-icon *ngIf="valid" color="primary">check_circle</mat-icon>
+  </div>
+</div>

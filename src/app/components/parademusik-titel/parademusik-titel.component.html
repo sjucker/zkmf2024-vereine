@@ -1,0 +1,46 @@
+<h2>{{label}}</h2>
+<div class="form-layout">
+  <mat-form-field appearance="outline">
+    <mat-label>Titel*</mat-label>
+    <input type="text"
+           autocomplete="off"
+           matInput
+           maxlength="255"
+           [(ngModel)]="titel.titelName"
+           (ngModelChange)="onChange()">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Komponist/in*</mat-label>
+    <input type="text"
+           autocomplete="off"
+           matInput
+           maxlength="255"
+           [(ngModel)]="titel.composer"
+           (ngModelChange)="onChange()">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Arrangeur/in</mat-label>
+    <input type="text"
+           autocomplete="off"
+           matInput
+           maxlength="255"
+           [(ngModel)]="titel.arrangeur"
+           (ngModelChange)="onChange()">
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Dauer (z.B. 2:45)*</mat-label>
+    <input type="text"
+           autocomplete="off"
+           matInput
+           [pattern]="durationPattern"
+           [(ngModel)]="titelDuration"
+           (ngModelChange)="updateDuration()">
+  </mat-form-field>
+
+  <div>
+    <mat-icon *ngIf="valid" color="primary">check_circle</mat-icon>
+  </div>
+</div>

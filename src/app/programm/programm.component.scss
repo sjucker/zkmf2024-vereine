@@ -1,0 +1,43 @@
+@use "../../variables";
+@import "../../responsive";
+
+.programm-container {
+
+  display: flex;
+  flex-direction: column;
+  gap: variables.$padding;
+
+  .spacer {
+    width: 24px;
+    display: inline-block;
+  }
+
+  .titel-table {
+    max-width: 100%;
+    margin: variables.$padding 0;
+
+    th {
+      text-align: left;
+    }
+
+    th, td {
+      padding: 0 variables.$padding-half;
+    }
+  }
+
+  .form-layout {
+    align-items: baseline;
+  }
+
+  .action-column {
+    flex: 0 0 100px;
+  }
+
+  .valid {
+    color: variables.$gruen;
+  }
+
+  .invalid {
+    color: variables.$rot;
+  }
+}

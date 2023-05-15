@@ -8,7 +8,7 @@ import {KontaktDTO} from "../../rest";
 })
 export class KontaktFormComponent {
 
-  @Input()
+  @Input({required: true})
     // @ts-ignore
   kontakt: KontaktDTO;
 

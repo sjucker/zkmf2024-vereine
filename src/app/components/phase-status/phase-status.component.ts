@@ -7,7 +7,7 @@ import {PhaseStatus} from "../../rest";
   styleUrls: ['./phase-status.component.scss']
 })
 export class PhaseStatusComponent {
-  @Input()
+  @Input({required: true})
   status: PhaseStatus = PhaseStatus.NEW;
 
   isPhaseDone(status: PhaseStatus): boolean {

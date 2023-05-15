@@ -38,6 +38,10 @@ import {PhaseStatusComponent} from './components/phase-status/phase-status.compo
 import {DurationInputComponent} from './components/duration-input/duration-input.component';
 import {Phase2Component} from './phase2/phase2.component';
 import {Phase1Component} from './phase1/phase1.component';
+import {ProgrammComponent} from './programm/programm.component';
+import {MatRadioModule} from "@angular/material/radio";
+import {TambourenTitelComponent} from './components/tambouren-titel/tambouren-titel.component';
+import {ParademusikTitelComponent} from './components/parademusik-titel/parademusik-titel.component';
 
 @NgModule({
   declarations: [
@@ -58,6 +62,9 @@ import {Phase1Component} from './phase1/phase1.component';
     DurationInputComponent,
     Phase2Component,
     Phase1Component,
+    ProgrammComponent,
+    TambourenTitelComponent,
+    ParademusikTitelComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +88,7 @@ import {Phase1Component} from './phase1/phase1.component';
     MatCheckboxModule,
     MatSelectModule,
     MatDialogModule,
+    MatRadioModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},],
   bootstrap: [AppComponent]

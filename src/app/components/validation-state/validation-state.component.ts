@@ -7,7 +7,7 @@ import {Component, Input} from '@angular/core';
 })
 export class ValidationStateComponent {
 
-  @Input()
+  @Input({required: true})
   valid = false
 
   constructor() {

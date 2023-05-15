@@ -7,10 +7,10 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 })
 export class ActionButtonComponent {
 
-  @Input()
+  @Input({required: true})
   buttonLabel = ''
 
-  @Input()
+  @Input({required: true})
   processing = false
 
   @Input()
