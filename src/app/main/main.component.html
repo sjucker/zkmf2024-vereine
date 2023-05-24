@@ -25,8 +25,9 @@
                 [saving]="saving"
                 [uploading]="uploading"
                 [anmeldungDisabled]="anmeldungDisabled"
+                [unsavedChanges]="unsavedChanges"
                 (changed)="onChange()"
-                (doSave)="save()"
+                (doSave)="save($event)"
                 (doUpload)="upload($event)"
                 (doDeleteImage)="deleteImage($event)"></app-phase1>
 
@@ -39,7 +40,7 @@
 
       <app-phase2 [verein]="verein"
                   [saving]="saving"
-                  (doSave)="save()"></app-phase2>
+                  (doSave)="save($event)"></app-phase2>
     </div>
   </div>
 

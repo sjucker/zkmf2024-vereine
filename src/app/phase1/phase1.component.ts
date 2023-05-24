@@ -34,11 +34,13 @@ export class Phase1Component {
   uploading = false;
   @Input()
   anmeldungDisabled = true;
+  @Input()
+  unsavedChanges = false;
 
   @Output()
   changed = new EventEmitter<void>();
   @Output()
-  doSave = new EventEmitter<void>();
+  doSave = new EventEmitter<boolean>();
   @Output()
   doUpload = new EventEmitter<UploadData>();
   @Output()
@@ -56,10 +58,11 @@ export class Phase1Component {
     if (this.verein && !$event) {
       this.verein.angaben.direktionDoppeleinsatzVerein = ''
     }
+    this.onChange();
   }
 
-  save(): void {
-    this.doSave.emit();
+  save(silent: boolean): void {
+    this.doSave.emit(silent);
   }
 
   saveVereinsangaben() {

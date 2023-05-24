@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {KontaktDTO} from "../../rest";
 
 @Component({
@@ -9,11 +9,14 @@ import {KontaktDTO} from "../../rest";
 export class KontaktFormComponent {
 
   @Input()
-  kontakt: KontaktDTO = {
-    valid: false
-  };
+    // @ts-ignore
+  kontakt: KontaktDTO;
 
-  constructor() {
+  @Output()
+  changed = new EventEmitter<void>();
+
+  onChange() {
+    this.changed.emit();
   }
 
 }

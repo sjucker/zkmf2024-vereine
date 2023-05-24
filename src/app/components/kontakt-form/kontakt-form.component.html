@@ -6,6 +6,7 @@
              autocomplete="off"
              matInput
              [(ngModel)]="kontakt.vorname"
+             (ngModelChange)="onChange()"
              required
              maxlength="255">
     </mat-form-field>
@@ -15,6 +16,7 @@
              autocomplete="off"
              matInput
              [(ngModel)]="kontakt.nachname"
+             (ngModelChange)="onChange()"
              required
              maxlength="255">
     </mat-form-field>
@@ -27,6 +29,7 @@
              autocomplete="off"
              matInput
              [(ngModel)]="kontakt.adresse"
+             (ngModelChange)="onChange()"
              required
              maxlength="255">
     </mat-form-field>
@@ -36,6 +39,7 @@
              autocomplete="off"
              matInput
              [(ngModel)]="kontakt.plz"
+             (ngModelChange)="onChange()"
              required
              maxlength="4"
              min="0"
@@ -47,6 +51,7 @@
              autocomplete="off"
              matInput
              [(ngModel)]="kontakt.ort"
+             (ngModelChange)="onChange()"
              required
              maxlength="255">
     </mat-form-field>
@@ -59,6 +64,7 @@
              autocomplete="off"
              matInput
              [(ngModel)]="kontakt.email"
+             (ngModelChange)="onChange()"
              required
              maxlength="255">
     </mat-form-field>
@@ -68,6 +74,7 @@
              autocomplete="off"
              matInput
              [(ngModel)]="kontakt.telefonPrivat"
+             (ngModelChange)="onChange()"
              maxlength="255">
     </mat-form-field>
     <mat-form-field appearance="outline">
@@ -76,6 +83,7 @@
              autocomplete="off"
              matInput
              [(ngModel)]="kontakt.telefonMobile"
+             (ngModelChange)="onChange()"
              maxlength="255">
     </mat-form-field>
   </div>

@@ -57,7 +57,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  save() {
+  save(silent: boolean) {
     if (this.verein) {
       this.saving = true;
       this.backendService.update(this.verein).subscribe({
@@ -65,13 +65,15 @@ export class MainComponent implements OnInit {
           this.saving = false;
           this.unsavedChanges = false;
           this.verein = value;
-          this.anmeldungDisabled = value.registrationConfirmed
-          this.snackBar.open('Speichern war erfolgreich', undefined, {
-            verticalPosition: 'top',
-            horizontalPosition: 'center',
-            duration: 2000,
-            panelClass: 'success'
-          });
+          this.anmeldungDisabled = value.registrationConfirmed;
+          if (!silent) {
+            this.snackBar.open('Speichern war erfolgreich', undefined, {
+              verticalPosition: 'top',
+              horizontalPosition: 'center',
+              duration: 2000,
+              panelClass: 'success'
+            });
+          }
         },
         error: _ => {
           this.saving = false;

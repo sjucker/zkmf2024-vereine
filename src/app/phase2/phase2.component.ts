@@ -21,7 +21,7 @@ export class Phase2Component {
   saving: boolean = false;
 
   @Output()
-  doSave = new EventEmitter<void>();
+  doSave = new EventEmitter<boolean>();
 
   newTitel: TitelDTO = {
     pflichtStueck: false,
@@ -52,6 +52,8 @@ export class Phase2Component {
       durationInSeconds: 0
     }
     this.newTitelDuration = ''
+
+    this.save(true);
   }
 
   canDeleteTitel(titel: TitelDTO): boolean {
@@ -64,6 +66,8 @@ export class Phase2Component {
     if (index > -1) {
       this.verein.titel.splice(index, 1);
     }
+
+    this.save(true);
   }
 
   get trackById(): TrackByFunction<VereinProgrammDTO> {
@@ -140,8 +144,8 @@ export class Phase2Component {
     programm.totalDurationInSeconds = this.calculateTotalDurationInSeconds(programm.ablauf);
   }
 
-  save() {
-    this.doSave.emit();
+  save(silent: boolean) {
+    this.doSave.emit(silent);
   }
 
   getAvailableTitel(programm: VereinProgrammDTO): TitelDTO[] {

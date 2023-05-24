@@ -1,7 +1,9 @@
 <mat-accordion>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
-      Selbstwahlstücke erfassen
+      <mat-panel-title>
+        Selbstwahlstücke erfassen
+      </mat-panel-title>
     </mat-expansion-panel-header>
     <div class="form-layout">
       <mat-form-field appearance="outline">
@@ -10,7 +12,8 @@
                autocomplete="off"
                matInput
                maxlength="255"
-               [(ngModel)]="newTitel.titelName">
+               [(ngModel)]="newTitel.titelName"
+               [disabled]="saving">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -19,7 +22,8 @@
                autocomplete="off"
                matInput
                maxlength="255"
-               [(ngModel)]="newTitel.composer">
+               [(ngModel)]="newTitel.composer"
+               [disabled]="saving">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -28,7 +32,8 @@
                autocomplete="off"
                matInput
                maxlength="255"
-               [(ngModel)]="newTitel.arrangeur">
+               [(ngModel)]="newTitel.arrangeur"
+               [disabled]="saving">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -37,7 +42,8 @@
                autocomplete="off"
                matInput
                [pattern]="durationPattern"
-               [(ngModel)]="newTitelDuration">
+               [(ngModel)]="newTitelDuration"
+               [disabled]="saving">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -48,11 +54,12 @@
                min="1.0"
                max="6.0"
                [pattern]="gradPattern"
-               [(ngModel)]="newTitel.grad">
+               [(ngModel)]="newTitel.grad"
+               [disabled]="saving">
       </mat-form-field>
       <div class="action-column">
         <button color="primary" mat-flat-button
-                [disabled]="!newTitelValid"
+                [disabled]="!newTitelValid || saving"
                 (click)="addNewTitel()">
           erfassen
         </button>
@@ -66,15 +73,14 @@
       <div>{{formatDuration(t.durationInSeconds)}}</div>
       <div>{{t.grad | number: '1.1-1'}}</div>
       <div class="action-column">
-        <mat-icon color="primary" *ngIf="canDeleteTitel(t)" (click)="deleteTitel(t)" class="clickable">delete</mat-icon>
+        <button mat-icon-button color="primary"
+                *ngIf="canDeleteTitel(t)"
+                (click)="deleteTitel(t)"
+                [disabled]="saving">
+          <mat-icon>delete</mat-icon>
+        </button>
       </div>
     </div>
-
-    <p>&nbsp;</p>
-
-    <app-action-button buttonLabel="Speichern"
-                       [processing]="saving"
-                       (buttonClicked)="save()"></app-action-button>
   </mat-expansion-panel>
 
   <mat-expansion-panel *ngFor="let programm of verein.programme; trackBy: trackById;">
@@ -117,8 +123,11 @@
                               (valueChanged)="updateApplaus(programm, entry, $event)"></app-duration-input>
         </td>
         <td>
-          <mat-icon color="primary" (click)="deleteProgrammTitel(programm, entry)" class="clickable">delete
-          </mat-icon>
+          <button mat-icon-button color="primary"
+                  (click)="deleteProgrammTitel(programm, entry)"
+                  [disabled]="saving">
+            <mat-icon>delete</mat-icon>
+          </button>
         </td>
       </tr>
     </table>
@@ -170,6 +179,6 @@
 
     <app-action-button buttonLabel="Speichern"
                        [processing]="saving"
-                       (buttonClicked)="save()"></app-action-button>
+                       (buttonClicked)="save(false)"></app-action-button>
   </mat-expansion-panel>
 </mat-accordion>
