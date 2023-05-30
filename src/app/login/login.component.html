@@ -1,6 +1,5 @@
 <div>
   <app-header header="Vereinslogin"></app-header>
-  <h1>Es gibt momentan Probleme mit der Anmeldung. Wir arbeiten daran...</h1>
   <mat-card appearance="outlined">
     <mat-card-header>
       <mat-card-title>
@@ -8,6 +7,7 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
+      <h1>Es gibt momentan Probleme mit der Anmeldung. Wir arbeiten daran...</h1>
       <p>Noch kein Login? Dann melde jetzt deinen Verein hier an: <a [routerLink]="anmeldungUrl">Vereinsanmeldung</a>
       </p>
       <form role="form" (ngSubmit)="login()" [formGroup]="loginForm">
