@@ -117,6 +117,14 @@ export interface VereinProgrammTitelDTO {
   applausInSeconds?: number;
 }
 
+export interface VereinTeilnahmeDTO {
+  name: string;
+  logoImgId?: number;
+  bildImgId?: number;
+  homepage?: string;
+  websiteText?: string;
+}
+
 export interface VereinsangabenDTO extends IsValid {
   vereinsname?: string;
   adresse?: string;
@@ -141,6 +149,9 @@ export interface VereinsanmeldungDTO extends IsValid {
   klasseModulA?: Klasse;
   klasseModulB?: Klasse;
   klasseModulH?: Klasse;
+  tambourenKatA: boolean;
+  tambourenKatB: boolean;
+  tambourenKatC: boolean;
   harmonie: boolean;
   brassBand: boolean;
   fanfare: boolean;
@@ -175,6 +186,9 @@ export interface VereinOverviewDTO {
   klasseModulA?: Klasse;
   klasseModulB?: Klasse;
   klasseModulH?: Klasse;
+  tambourenKatA: boolean;
+  tambourenKatB: boolean;
+  tambourenKatC: boolean;
   harmonie: boolean;
   brassBand: boolean;
   fanfare: boolean;

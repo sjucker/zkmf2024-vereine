@@ -99,7 +99,7 @@ export class Phase1Component {
           horizontalPosition: 'center',
           duration: 4000,
           panelClass: 'error'
-        })
+        });
         return;
       }
 
@@ -109,7 +109,18 @@ export class Phase1Component {
           horizontalPosition: 'center',
           duration: 4000,
           panelClass: 'error'
-        })
+        });
+        return;
+      }
+
+      if (this.verein.anmeldung.modulG &&
+        (!this.verein.anmeldung.tambourenKatA && !this.verein.anmeldung.tambourenKatB && !this.verein.anmeldung.tambourenKatC)) {
+        this.snackBar.open("Mindestens eine Wettspielkategorien auswählen", undefined, {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 4000,
+          panelClass: 'error'
+        });
         return;
       }
 

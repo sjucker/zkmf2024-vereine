@@ -194,6 +194,25 @@
             <mat-option [value]="UNTERSTUFE">Unterstufe</mat-option>
           </mat-select>
         </mat-form-field>
+        <div *ngIf="verein.anmeldung.modulG" class="selection">
+          <div>&nbsp;<br/><span class="mat-headline-6">Wettspielkategorien</span></div>
+
+          <mat-checkbox [(ngModel)]="verein.anmeldung.tambourenKatA"
+                        (ngModelChange)="onChange()"
+                        [disabled]="anmeldungDisabled">
+            Kat. A <span class="mat-small">(Grundlagen und einstimmige Trommelkomp)</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="verein.anmeldung.tambourenKatB"
+                        (ngModelChange)="onChange()"
+                        [disabled]="anmeldungDisabled">
+            Kat. B <span class="mat-small">(Mehrstimmige Trommelkomp. oder Trommelkomp. mit grosser Trommel)</span>
+          </mat-checkbox>
+          <mat-checkbox [(ngModel)]="verein.anmeldung.tambourenKatC"
+                        (ngModelChange)="onChange()"
+                        [disabled]="anmeldungDisabled">
+            Kat. C <span class="mat-small">(Trommelkomp. mit Perkussionsinstrumenten)</span>
+          </mat-checkbox>
+        </div>
       </div>
       <div class="selection">
         <div><span class="mat-headline-6">Besetzung</span><br/>&nbsp;</div>
@@ -210,8 +229,8 @@
         <mat-checkbox *ngIf="brassBandVisible"
                       [(ngModel)]="verein.anmeldung.brassBand"
                       (ngModelChange)="onChange()"
-                      [disabled]="anmeldungDisabled || verein.anmeldung.harmonie || verein.anmeldung.fanfare">Brass
-          Band
+                      [disabled]="anmeldungDisabled || verein.anmeldung.harmonie || verein.anmeldung.fanfare">
+          Brass Band
         </mat-checkbox>
         <mat-checkbox *ngIf="fanfareVisible"
                       [(ngModel)]="verein.anmeldung.fanfare"
@@ -222,12 +241,14 @@
         <mat-checkbox *ngIf="tambourenVisible"
                       [(ngModel)]="verein.anmeldung.tambouren"
                       (ngModelChange)="onChange()"
-                      [disabled]="anmeldungDisabled">Tambouren
+                      [disabled]="anmeldungDisabled">
+          Tambouren
         </mat-checkbox>
         <mat-checkbox *ngIf="perkussionsensembleVisible"
                       [(ngModel)]="verein.anmeldung.perkussionsensemble"
                       (ngModelChange)="onChange()"
-                      [disabled]="anmeldungDisabled">Perkussionsensemble
+                      [disabled]="anmeldungDisabled">
+          Perkussionsensemble
         </mat-checkbox>
       </div>
     </div>
