@@ -192,4 +192,13 @@ export class Phase1Component {
     }
   }
 
+  modulTambourenChanged(selected: boolean) {
+    this.verein.anmeldung.tambouren = selected;
+    this.onChange();
+  }
+
+  modulPerkussionsensChanged(selected: boolean) {
+    this.verein.anmeldung.perkussionsensemble = selected;
+    this.onChange();
+  }
 }

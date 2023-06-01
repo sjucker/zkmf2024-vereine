@@ -149,11 +149,11 @@
         </mat-checkbox>
         <mat-checkbox [(ngModel)]="verein.anmeldung.modulG"
                       [disabled]="anmeldungDisabled"
-                      (ngModelChange)="onChange()">G - Tambouren
+                      (ngModelChange)="modulTambourenChanged($event)">G - Tambouren
         </mat-checkbox>
         <mat-checkbox [(ngModel)]="verein.anmeldung.modulH"
                       [disabled]="anmeldungDisabled"
-                      (ngModelChange)="onChange()">H - Perkussionsensembles
+                      (ngModelChange)="modulPerkussionsensChanged($event)">H - Perkussionsensembles
         </mat-checkbox>
       </div>
       <div class="selection">
