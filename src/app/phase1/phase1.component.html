@@ -108,7 +108,7 @@
     <app-action-button buttonLabel="Speichern"
                        [processing]="saving"
                        [disabled]="!unsavedChanges"
-                       (buttonClicked)="saveVereinsangaben()"></app-action-button>
+                       (buttonClicked)="save()"></app-action-button>
   </mat-expansion-panel>
 
   <mat-expansion-panel>
@@ -257,7 +257,7 @@
                        buttonLabel="Speichern"
                        [processing]="saving"
                        [disabled]="!unsavedChanges"
-                       (buttonClicked)="saveAnmeldung()"></app-action-button>
+                       (buttonClicked)="save()"></app-action-button>
   </mat-expansion-panel>
 
   <mat-expansion-panel>
@@ -273,7 +273,7 @@
     <app-action-button buttonLabel="Speichern"
                        [processing]="saving"
                        [disabled]="!unsavedChanges"
-                       (buttonClicked)="save(false)"></app-action-button>
+                       (buttonClicked)="save()"></app-action-button>
   </mat-expansion-panel>
 
   <mat-expansion-panel>
@@ -289,7 +289,7 @@
     <app-action-button buttonLabel="Speichern"
                        [processing]="saving"
                        [disabled]="!unsavedChanges"
-                       (buttonClicked)="save(false)"></app-action-button>
+                       (buttonClicked)="save()"></app-action-button>
   </mat-expansion-panel>
 
   <mat-expansion-panel>
@@ -313,7 +313,7 @@
     <app-action-button buttonLabel="Speichern"
                        [processing]="saving"
                        [disabled]="!unsavedChanges"
-                       (buttonClicked)="save(false)"></app-action-button>
+                       (buttonClicked)="save()"></app-action-button>
     <div class="upload-container">
       <ngx-dropzone (change)="onDrop($event, true)"
                     [multiple]="false"

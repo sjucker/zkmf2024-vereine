@@ -58,7 +58,59 @@ export class MainComponent implements OnInit {
   }
 
   save(silent: boolean) {
+    // first, some validations, don't do this per panel only since user is not forced to save before leaving a panel
     if (this.verein) {
+      if (this.verein.angaben.direktionDoppeleinsatz && !this.verein.angaben.direktionDoppeleinsatzVerein) {
+        this.snackBar.open("Bitte Vereinsname angeben, für welchen Dirigent/in auch noch teilnimmt", undefined, {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 4000,
+          panelClass: 'error'
+        });
+        return;
+      }
+
+      if (this.verein.anmeldung.modulA && !this.verein.anmeldung.klasseModulA) {
+        this.snackBar.open("Stärkeklasse Modul A auswählen", undefined, {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 4000,
+          panelClass: 'error'
+        })
+        return;
+      }
+
+      if (this.verein.anmeldung.modulB && !this.verein.anmeldung.klasseModulB) {
+        this.snackBar.open("Stärkeklasse Modul B auswählen", undefined, {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 4000,
+          panelClass: 'error'
+        });
+        return;
+      }
+
+      if (this.verein.anmeldung.modulH && !this.verein.anmeldung.klasseModulH) {
+        this.snackBar.open("Stärkeklasse Modul H auswählen", undefined, {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 4000,
+          panelClass: 'error'
+        });
+        return;
+      }
+
+      if (this.verein.anmeldung.modulG &&
+        (!this.verein.anmeldung.tambourenKatA && !this.verein.anmeldung.tambourenKatB && !this.verein.anmeldung.tambourenKatC)) {
+        this.snackBar.open("Mindestens eine Wettspielkategorien auswählen", undefined, {
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          duration: 4000,
+          panelClass: 'error'
+        });
+        return;
+      }
+
       this.saving = true;
       this.backendService.update(this.verein).subscribe({
         next: value => {

@@ -61,71 +61,8 @@ export class Phase1Component {
     this.onChange();
   }
 
-  save(silent: boolean): void {
-    this.doSave.emit(silent);
-  }
-
-  saveVereinsangaben() {
-    if (this.verein) {
-      if (this.verein.angaben.direktionDoppeleinsatz && !this.verein.angaben.direktionDoppeleinsatzVerein) {
-        this.snackBar.open("Bitte Vereinsname angeben, für welchen Dirigent/in auch noch teilnimmt", undefined, {
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-          duration: 4000,
-          panelClass: 'error'
-        })
-        return;
-      }
-
-      this.doSave.emit();
-    }
-  }
-
-  saveAnmeldung() {
-    if (this.verein) {
-      if (this.verein.anmeldung.modulA && !this.verein.anmeldung.klasseModulA) {
-        this.snackBar.open("Stärkeklasse Modul A auswählen", undefined, {
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-          duration: 4000,
-          panelClass: 'error'
-        })
-        return;
-      }
-
-      if (this.verein.anmeldung.modulB && !this.verein.anmeldung.klasseModulB) {
-        this.snackBar.open("Stärkeklasse Modul B auswählen", undefined, {
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-          duration: 4000,
-          panelClass: 'error'
-        });
-        return;
-      }
-
-      if (this.verein.anmeldung.modulH && !this.verein.anmeldung.klasseModulH) {
-        this.snackBar.open("Stärkeklasse Modul H auswählen", undefined, {
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-          duration: 4000,
-          panelClass: 'error'
-        });
-        return;
-      }
-
-      if (this.verein.anmeldung.modulG &&
-        (!this.verein.anmeldung.tambourenKatA && !this.verein.anmeldung.tambourenKatB && !this.verein.anmeldung.tambourenKatC)) {
-        this.snackBar.open("Mindestens eine Wettspielkategorien auswählen", undefined, {
-          verticalPosition: 'top',
-          horizontalPosition: 'center',
-          duration: 4000,
-          panelClass: 'error'
-        });
-        return;
-      }
-
-      this.doSave.emit();
-    }
+  save(): void {
+    this.doSave.emit(false);
   }
 
   get logoImgSrc(): string {
@@ -176,7 +113,7 @@ export class Phase1Component {
 
   onDrop(event: NgxDropzoneChangeEvent, logo: boolean) {
     if (event.rejectedFiles.length > 0) {
-      let errorMessage = "Es sind nur Datein vom Typ 'jpeg' erlaubt."
+      let errorMessage = "Es sind nur Dateien vom Typ 'jpg' erlaubt."
       if (event.rejectedFiles[0].size > this.maxFileSize) {
         errorMessage = "Maximal-Grösse von 1 MB überschritten."
       }
