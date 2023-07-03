@@ -8,8 +8,6 @@
       </mat-card-title>
     </mat-card-header>
     <mat-card-content>
-      <p>Noch kein Login? Dann melde jetzt deinen Verein hier an: <a [routerLink]="anmeldungUrl">Vereinsanmeldung</a>
-      </p>
       <form role="form" (ngSubmit)="login()" [formGroup]="loginForm">
         <mat-form-field appearance="outline" color="accent">
           <mat-label>Email</mat-label>
@@ -32,6 +30,7 @@
         <app-action-button buttonLabel="Login" [processing]="authenticating"></app-action-button>
         <p><a [routerLink]="forgotPasswordUrl">Passwort vergessen?</a></p>
       </form>
+      <p>Die Anmeldefrist ist abgelaufen. Meldet euch bei <a href="mailto:info@zkmf2024.ch">info@zkmf2024.ch</a>, falls ihr euch doch noch anmelden wollt.</p>
     </mat-card-content>
   </mat-card>
 </div>

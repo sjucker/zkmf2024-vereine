@@ -9,7 +9,7 @@ import {ForgotPasswordComponent} from "./forgot-password/forgot-password.compone
 import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 
 export const LOGIN_PATH = 'login'
-export const ANMELDUNG_PATH = 'anmeldung'
+export const ANMELDUNG_PATH = 'nachmeldung'
 export const VERIFICATION_PATH = 'verification'
 export const FORGOT_PASSWORD_PATH = 'passwort-vergessen'
 export const RESET_PASSWORD_PATH = 'reset-passwort'
@@ -44,6 +44,11 @@ const routes: Routes = [
     path: RESET_PASSWORD_PATH + '/:email/:token',
     component: ResetPasswordComponent
   },
+  {
+    path: '**',
+    redirectTo: '',
+    pathMatch: 'full'
+  }
 ];
 
 @NgModule({

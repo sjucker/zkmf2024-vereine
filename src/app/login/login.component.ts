@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {AuthenticationService} from "../service/authentication.service";
 import {ActivatedRoute, Router} from "@angular/router";
-import {ANMELDUNG_PATH, FORGOT_PASSWORD_PATH} from "../app-routing.module";
+import {FORGOT_PASSWORD_PATH} from "../app-routing.module";
 import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
@@ -14,7 +14,6 @@ export class LoginComponent implements OnInit {
 
   authenticating = false;
 
-  anmeldungUrl = `/${ANMELDUNG_PATH}`;
   forgotPasswordUrl = `/${FORGOT_PASSWORD_PATH}`;
 
   loginForm = this.formBuilder.group({
