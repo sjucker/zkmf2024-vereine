@@ -9,18 +9,28 @@
   <div class="programm-container">
     <div>
       <span class="mat-h2">Allgemeine Angaben</span>
-      <span><br/><b>Modul</b>: {{programm.modulDescription}}</span>
-      <span *ngIf="programm.klasse"><br/><b>Klasse</b>: {{programm.klasse}}</span>
-      <span *ngIf="programm.besetzung"><br/><b>Besetzung</b>: {{programm.besetzung}}</span>
-      <span *ngIf="hasVorgabeDauer">
-        <br/>
-        <b>Vorgabe Dauer</b>:
-        {{formatDuration(programm.minDurationInSeconds)}} - {{formatDuration(programm.maxDurationInSeconds)}}
-      </span>
-      <span *ngIf="isModulGH">
-        <br/>
+      <div class="allgemeine-angaben">
+        <span><b>Modul</b>: {{programm.modulDescription}}</span>
+        <span *ngIf="programm.klasse"><b>Klasse</b>: {{programm.klasse}}</span>
+        <span *ngIf="programm.besetzung"><b>Besetzung</b>: {{programm.besetzung}}</span>
+        <span *ngIf="hasVorgabeDauer"><b>Vorgabe Dauer</b>:
+          {{formatDuration(programm.minDurationInSeconds)}} - {{formatDuration(programm.maxDurationInSeconds)}}</span>
+      </div>
+      <div *ngIf="isModulAB">
+        <a href="https://www.zkmf2024.ch/reglement/festreglement.pdf" target="_blank">Reglement</a>
+      </div>
+      <div *ngIf="isModulDEF">
+        <a href="https://www.zkmf2024.ch/reglement/festreglement-parademusik.pdf" target="_blank">Reglement</a>
+      </div>
+      <div *ngIf="isModulG">
+        <a href="https://www.zkmf2024.ch/reglement/festreglement-tambouren.pdf" target="_blank">Reglement</a>
+      </div>
+      <div *ngIf="isModulH">
+        <a href="https://www.zkmf2024.ch/reglement/festreglement-perkussionsensembles.pdf" target="_blank">Reglement</a>
+      </div>
+      <div *ngIf="isModulGH">
         Die musikalischen Angaben in diesem Modul müssen erst am <b>31.01.2024</b> eingereicht werden.
-      </span>
+      </div>
     </div>
 
     <div *ngIf="isModulAB">

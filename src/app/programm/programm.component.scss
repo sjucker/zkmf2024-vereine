@@ -40,4 +40,17 @@
   .invalid {
     color: variables.$rot;
   }
+
+  .allgemeine-angaben {
+    display: flex;
+    flex-direction: row;
+    gap: variables.$padding
+  }
+
+  @include responsive('lt-sm') {
+    .allgemeine-angaben {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
 }

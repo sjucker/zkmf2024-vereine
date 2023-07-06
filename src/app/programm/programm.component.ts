@@ -184,6 +184,10 @@ export class ProgrammComponent implements OnChanges {
     return this.programm.modul === Modul.D;
   }
 
+  get isModulDEF(): boolean {
+    return this.programm.modul === Modul.D || this.programm.modul === Modul.E || this.programm.modul === Modul.F;
+  }
+
   get isModulG(): boolean {
     return this.programm.modul === Modul.G;
   }
