@@ -197,7 +197,7 @@ export class MainComponent implements OnInit {
   }
 
   confirmRegistration() {
-    if (this.verein && this.verein.anmeldung.valid) {
+    if (this.verein?.anmeldung.valid) {
       this.dialog.open(ConfirmRegistrationDialogComponent).afterClosed().subscribe(decision => {
         if (decision) {
           this.doConfirmRegistration();
