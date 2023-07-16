@@ -8,9 +8,6 @@ import {Component, Input} from '@angular/core';
 export class ValidationStateComponent {
 
   @Input({required: true})
-  valid = false
-
-  constructor() {
-  }
+  valid = false;
 
 }

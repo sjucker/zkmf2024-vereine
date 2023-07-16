@@ -12,7 +12,7 @@ export class TambourenTitelComponent {
 
   @Input({required: true})
     // @ts-ignore
-  titel: TitelDTO
+  titel: TitelDTO;
 
   @Output()
   changed = new EventEmitter<void>();

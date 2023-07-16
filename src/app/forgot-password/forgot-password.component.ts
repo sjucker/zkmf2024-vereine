@@ -10,7 +10,7 @@ export class ForgotPasswordComponent {
 
   requesting = false;
   requested = false;
-  email = ''
+  email = '';
 
   constructor(private backendService: BackendService) {
   }
@@ -20,11 +20,11 @@ export class ForgotPasswordComponent {
       this.requesting = true;
       this.requested = false;
       this.backendService.forgotPassword(this.email).subscribe({
-        next: value => {
+        next: () => {
           this.requesting = false;
           this.requested = true;
         },
-        error: err => {
+        error: () => {
           this.requesting = false;
           this.requested = false;
         }

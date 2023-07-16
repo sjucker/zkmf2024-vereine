@@ -38,7 +38,7 @@ export class RegisterComponent {
         next: response => {
           this.registering = false;
           this.success = true;
-          this.loginUrl = `/${LOGIN_PATH}/${val.email}`
+          this.loginUrl = `/${LOGIN_PATH}/${val.email}`;
         },
         error: (err: HttpErrorResponse) => {
           this.registering = false;

@@ -76,8 +76,8 @@ export class ProgrammComponent implements OnChanges {
       pflichtStueck: false,
       durationInSeconds: 0,
       valid: false
-    }
-    this.newTitelDuration = ''
+    };
+    this.newTitelDuration = '';
 
     this.programm.totalDurationInSeconds = this.calculateTotalDurationInSeconds(this.programm.ablauf);
     this.onChange();

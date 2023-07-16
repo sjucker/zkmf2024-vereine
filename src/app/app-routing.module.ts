@@ -8,11 +8,11 @@ import {VerificationComponent} from "./verification/verification.component";
 import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
 import {ResetPasswordComponent} from "./reset-password/reset-password.component";
 
-export const LOGIN_PATH = 'login'
-export const ANMELDUNG_PATH = 'nachmeldung'
-export const VERIFICATION_PATH = 'verification'
-export const FORGOT_PASSWORD_PATH = 'passwort-vergessen'
-export const RESET_PASSWORD_PATH = 'reset-passwort'
+export const LOGIN_PATH = 'login';
+export const ANMELDUNG_PATH = 'nachmeldung';
+export const VERIFICATION_PATH = 'verification';
+export const FORGOT_PASSWORD_PATH = 'passwort-vergessen';
+export const RESET_PASSWORD_PATH = 'reset-passwort';
 
 const routes: Routes = [
   {

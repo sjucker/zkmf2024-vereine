@@ -26,7 +26,7 @@ export function toDurationInSeconds(duration: string): number | undefined { // T
   }
 }
 
-export const durationPattern = /^\d{1,2}:\d{2}$/
+export const durationPattern = /^\d{1,2}:\d{2}$/;
 
 @Component({
   selector: 'app-duration-input',
