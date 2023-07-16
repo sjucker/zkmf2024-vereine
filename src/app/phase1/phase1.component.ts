@@ -56,7 +56,7 @@ export class Phase1Component {
 
   direktionDoppeleinsatzChanged($event: boolean) {
     if (this.verein && !$event) {
-      this.verein.angaben.direktionDoppeleinsatzVerein = ''
+      this.verein.angaben.direktionDoppeleinsatzVerein = '';
     }
     this.onChange();
   }
@@ -86,11 +86,11 @@ export class Phase1Component {
   }
 
   get brassBandVisible(): boolean {
-    return this.harmonieVisible
+    return this.harmonieVisible;
   }
 
   get fanfareVisible(): boolean {
-    return this.harmonieVisible
+    return this.harmonieVisible;
   }
 
   get tambourenVisible(): boolean {
@@ -108,14 +108,14 @@ export class Phase1Component {
   }
 
   get noModulSelected(): boolean {
-    return !(this.harmonieVisible || this.tambourenVisible || this.perkussionsensembleVisible)
+    return !(this.harmonieVisible || this.tambourenVisible || this.perkussionsensembleVisible);
   }
 
   onDrop(event: NgxDropzoneChangeEvent, logo: boolean) {
     if (event.rejectedFiles.length > 0) {
-      let errorMessage = "Es sind nur Dateien vom Typ 'jpg' erlaubt."
+      let errorMessage = "Es sind nur Dateien vom Typ 'jpg' erlaubt.";
       if (event.rejectedFiles[0].size > this.maxFileSize) {
-        errorMessage = "Maximal-Grösse von 1 MB überschritten."
+        errorMessage = "Maximal-Grösse von 1 MB überschritten.";
       }
 
       this.snackBar.open(errorMessage, undefined, {

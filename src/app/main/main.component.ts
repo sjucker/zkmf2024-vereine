@@ -45,7 +45,7 @@ export class MainComponent implements OnInit {
     this.backendService.get().subscribe({
       next: response => {
         this.verein = response;
-        this.anmeldungDisabled = response.registrationConfirmed
+        this.anmeldungDisabled = response.registrationConfirmed;
       },
       error: (err: HttpErrorResponse) => {
         if (err.status === 404) {
@@ -76,7 +76,7 @@ export class MainComponent implements OnInit {
           horizontalPosition: 'center',
           duration: 4000,
           panelClass: 'error'
-        })
+        });
         return;
       }
 
@@ -163,14 +163,14 @@ export class MainComponent implements OnInit {
           panelClass: 'error'
         });
       }
-    })
+    });
   }
 
   deleteImage(imageId: number) {
-    this.uploading = true
+    this.uploading = true;
     this.backendService.deleteImage(imageId).subscribe({
       next: _ => {
-        this.load()
+        this.load();
         this.uploading = false;
       },
       error: _ => {
@@ -182,11 +182,11 @@ export class MainComponent implements OnInit {
           panelClass: 'error'
         });
       }
-    })
+    });
   }
 
   openInfoDialog() {
-    this.dialog.open(GeneralInfoDialogComponent)
+    this.dialog.open(GeneralInfoDialogComponent);
   }
 
   canConfirmRegistration(): boolean {
@@ -212,7 +212,7 @@ export class MainComponent implements OnInit {
       next: value => {
         this.confirming = false;
         this.verein = value;
-        this.anmeldungDisabled = value.registrationConfirmed
+        this.anmeldungDisabled = value.registrationConfirmed;
         this.snackBar.open("Anmeldung wurde bestätigt!", undefined, {
           duration: 3000,
           verticalPosition: 'top',

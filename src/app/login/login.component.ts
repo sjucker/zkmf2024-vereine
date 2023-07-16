@@ -57,7 +57,7 @@ export class LoginComponent implements OnInit {
             panelClass: "error"
           });
         }
-      })
+      });
     }
   }
 

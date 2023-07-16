@@ -3,9 +3,15 @@
   "ignorePatterns": [
     "projects/**/*"
   ],
-  "plugins": ["deprecation"],
+  "plugins": [
+    "deprecation"
+  ],
   "rules": {
-    "deprecation/deprecation": "error"
+    "deprecation/deprecation": "error",
+    "semi": [
+      "error",
+      "always"
+    ]
   },
   "overrides": [
     {

@@ -13,7 +13,7 @@ export class ParademusikTitelComponent implements OnInit {
 
   @Input({required: true})
     // @ts-ignore
-  titel: TitelDTO
+  titel: TitelDTO;
 
   @Input({required: true})
   label: string = '';
@@ -29,7 +29,7 @@ export class ParademusikTitelComponent implements OnInit {
 
   get valid(): boolean {
     return !!this.titel.titelName && !!this.titel.composer &&
-      this.isValidDuration()
+      this.isValidDuration();
   }
 
   private isValidDuration() {

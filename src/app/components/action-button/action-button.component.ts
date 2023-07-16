@@ -8,18 +8,15 @@ import {Component, EventEmitter, Input, Output} from '@angular/core';
 export class ActionButtonComponent {
 
   @Input({required: true})
-  buttonLabel = ''
+  buttonLabel = '';
 
   @Input({required: true})
-  processing = false
+  processing = false;
 
   @Input()
   disabled = false;
 
   @Output()
-  buttonClicked = new EventEmitter<any>()
-
-  constructor() {
-  }
+  buttonClicked = new EventEmitter<any>();
 
 }

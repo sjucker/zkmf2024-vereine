@@ -65,7 +65,7 @@ export class BackendService {
   }
 
   confirmRegistration() {
-    return this.httpClient.post<VereinDTO>(`${this.baseUrl}/secured/verein/confirm`, {})
+    return this.httpClient.post<VereinDTO>(`${this.baseUrl}/secured/verein/confirm`, {});
   }
 
   public upload(logo?: File, bild?: File): Observable<any> {

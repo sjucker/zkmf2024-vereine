@@ -10,14 +10,14 @@ import {MatSnackBar} from "@angular/material/snack-bar";
   styleUrls: ['./reset-password.component.scss']
 })
 export class ResetPasswordComponent implements OnInit {
-  loginUrl = ''
-  email?: string | null
-  token?: string | null
+  loginUrl = '';
+  email?: string | null;
+  token?: string | null;
 
-  password = ''
+  password = '';
 
-  processing = false
-  success = false
+  processing = false;
+  success = false;
 
   constructor(private backendService: BackendService,
               private router: Router,
@@ -30,7 +30,7 @@ export class ResetPasswordComponent implements OnInit {
     this.token = this.route.snapshot.paramMap.get('token');
 
     if (!this.email || !this.token) {
-      this.router.navigate(['/']).then()
+      this.router.navigate(['/']).then();
     }
   }
 
@@ -39,18 +39,18 @@ export class ResetPasswordComponent implements OnInit {
       this.processing = true;
       this.backendService.resetPassword(this.email, this.token, this.password).subscribe({
         next: _ => {
-          this.processing = false
+          this.processing = false;
           this.success = true;
-          this.loginUrl = `/${LOGIN_PATH}/${this.email}`
+          this.loginUrl = `/${LOGIN_PATH}/${this.email}`;
         },
         error: _ => {
           this.processing = false;
           this.snackBar.open("Es ist ein Fehler aufgetreten.", undefined, {
             verticalPosition: "top",
             panelClass: "error"
-          })
+          });
         }
-      })
+      });
     }
   }
 }
