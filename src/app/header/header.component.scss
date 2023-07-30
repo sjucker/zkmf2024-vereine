@@ -15,6 +15,11 @@
   text-overflow: ellipsis;
 }
 
+.header-error {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 @include responsive('lt-sm') {
   .header-logo {
     display: none;
