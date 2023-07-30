@@ -7,7 +7,7 @@
       <mat-icon matTooltip="Logout">logout</mat-icon>
     </button>
   </mat-toolbar-row>
-  <mat-toolbar-row>
+  <mat-toolbar-row *ngIf="error">
     <span class="header-error">
       <mat-icon>error_outline</mat-icon> Es gibt momentan technische Probleme mit dem Login, wir arbeiten daran.
     </span>

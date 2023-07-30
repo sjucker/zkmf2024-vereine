@@ -26,4 +26,7 @@ export class HeaderComponent {
     this.router.navigate([LOGIN_PATH]);
   }
 
+  get error(): boolean {
+    return false;
+  }
 }
