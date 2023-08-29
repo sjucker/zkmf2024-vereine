@@ -270,13 +270,13 @@
         <app-tambouren-titel [titel]="programm.tambourenKatBTitel"
                              (changed)="onChange()"></app-tambouren-titel>
       </div>
-    </div>
 
-    <div *ngIf="programm.tambourenKatC">
-      <h2>Kategorie C</h2>
-      <h4>Komposition</h4>
-      <app-tambouren-titel [titel]="programm.tambourenKatCTitel"
-                           (changed)="onChange()"></app-tambouren-titel>
+      <div *ngIf="programm.tambourenKatC">
+        <h2>Kategorie C</h2>
+        <h4>Komposition</h4>
+        <app-tambouren-titel [titel]="programm.tambourenKatCTitel"
+                             (changed)="onChange()"></app-tambouren-titel>
+      </div>
     </div>
 
     <div *ngIf="isModulC">
