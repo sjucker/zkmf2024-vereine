@@ -6,7 +6,7 @@ import {
   ForgotPasswordRequestDTO,
   RegisterVereinRequestDTO,
   ResetPasswordRequestDTO,
-  VereinDTO,
+  VereinDTO, VereinSelectionDTO,
   VerifyEmailRequestDTO
 } from "../rest";
 
@@ -58,6 +58,10 @@ export class BackendService {
 
   public get(): Observable<VereinDTO> {
     return this.httpClient.get<VereinDTO>(`${this.baseUrl}/secured/verein`);
+  }
+
+  public availableVereine(): Observable<VereinSelectionDTO[]> {
+    return this.httpClient.get<VereinSelectionDTO[]>(`${this.baseUrl}/secured/verein/all`);
   }
 
   public update(verein: VereinDTO): Observable<VereinDTO> {

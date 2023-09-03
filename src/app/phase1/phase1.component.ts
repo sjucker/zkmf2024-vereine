@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, Output} from '@angular/core';
-import {Klasse, VereinDTO} from "../rest";
+import {DoppelEinsatzDTO, Klasse, VereinDTO, VereinSelectionDTO} from "../rest";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {environment} from "../../environments/environment";
@@ -29,6 +29,8 @@ export class Phase1Component {
     // @ts-ignore
   verein: VereinDTO;
   @Input({required: true})
+  availableVereine: VereinSelectionDTO[] = [];
+  @Input({required: true})
   saving = false;
   @Input({required: true})
   uploading = false;
@@ -45,6 +47,9 @@ export class Phase1Component {
   doUpload = new EventEmitter<UploadData>();
   @Output()
   doDeleteImage = new EventEmitter<number>();
+
+  doppeleinsatzName: string = '';
+  doppeleinsatzVerein?: VereinSelectionDTO;
 
   constructor(public snackBar: MatSnackBar,
               public dialog: MatDialog) {
@@ -148,5 +153,31 @@ export class Phase1Component {
   modulPerkussionsensChanged(selected: boolean) {
     this.verein.anmeldung.perkussionsensemble = selected;
     this.onChange();
+  }
+
+  get newDoppeleinsatzValid(): boolean {
+    return this.doppeleinsatzName.length > 0 && !!this.doppeleinsatzVerein;
+  }
+
+  addNewDoppeleinsatz() {
+    if (this.doppeleinsatzVerein) {
+      this.verein.doppelEinsatz = [...this.verein.doppelEinsatz, {
+        otherVerein: this.doppeleinsatzVerein,
+        mitspielerName: this.doppeleinsatzName
+      }];
+
+      this.doppeleinsatzName = '';
+      this.doppeleinsatzVerein = undefined;
+
+      this.onChange();
+    }
+  }
+
+  deleteDoppeleinsatz(doppelEinsatz: DoppelEinsatzDTO) {
+    const index = this.verein.doppelEinsatz.findIndex(dto => dto === doppelEinsatz);
+    if (index > -1) {
+      this.verein.doppelEinsatz.splice(index, 1);
+      this.onChange();
+    }
   }
 }
