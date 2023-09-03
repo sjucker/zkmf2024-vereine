@@ -1,5 +1,10 @@
 /* eslint-disable */
 
+export interface DoppelEinsatzDTO {
+  otherVerein: VereinSelectionDTO;
+  mitspielerName: string;
+}
+
 export interface ForgotPasswordRequestDTO {
   email: string;
 }
@@ -28,6 +33,21 @@ export interface KontaktDTO extends IsValid {
   email?: string;
   telefonPrivat?: string;
   telefonMobile?: string;
+}
+
+export interface LocationDTO {
+  name: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  googleMapsAddress: string;
+  googleMapsCoordinates: string;
+  type: LocationType;
+  capacity: string;
+  modules: string;
+  einspiellokal?: LocationDTO;
+  instrumentendepot?: LocationDTO;
+  juryfeedback?: LocationDTO;
 }
 
 export interface LoginRequestDTO {
@@ -89,7 +109,7 @@ export interface ResetPasswordRequestDTO {
   newPassword: string;
 }
 
-export interface TitelDTO {
+export interface TitelDTO extends IsValid {
   id?: number;
   modul?: Modul;
   titelName?: string;
@@ -100,12 +120,12 @@ export interface TitelDTO {
   durationInSeconds: number;
   pflichtStueck: boolean;
   infoModeration?: string;
-  valid: boolean;
 }
 
 export interface VereinDTO {
   email: string;
   angaben: VereinsangabenDTO;
+  doppelEinsatz: DoppelEinsatzDTO[];
   praesident: KontaktDTO;
   direktion: KontaktDTO;
   anmeldung: VereinsanmeldungDTO;
@@ -116,7 +136,7 @@ export interface VereinDTO {
   phase2Status: PhaseStatus;
 }
 
-export interface VereinProgrammDTO {
+export interface VereinProgrammDTO extends IsValid {
   id: number;
   modul: Modul;
   modulDescription: string;
@@ -144,12 +164,16 @@ export interface VereinProgrammDTO {
   unterhaltungGesang: boolean;
   parademusikTitel1: TitelDTO;
   parademusikTitel2: TitelDTO;
-  valid: boolean;
 }
 
 export interface VereinProgrammTitelDTO {
   titel: TitelDTO;
   applausInSeconds?: number;
+}
+
+export interface VereinSelectionDTO {
+  id: number;
+  name: string;
 }
 
 export interface VereinTeilnahmeDTO {
@@ -207,6 +231,28 @@ export interface VerifyEmailRequestDTO {
   verification: string;
 }
 
+export interface UserCreateDTO {
+  email: string;
+  role: UserRole;
+  password: string;
+}
+
+export interface UserDTO {
+  email: string;
+  role: UserRole;
+  lastLogin?: DateAsString;
+}
+
+export interface VereinCommentCreateDTO {
+  comment: string;
+}
+
+export interface VereinCommentDTO {
+  comment: string;
+  createdAt: DateAsString;
+  createdBy: string;
+}
+
 export interface VereinOverviewDTO {
   id: number;
   vereinsname: string;
@@ -232,6 +278,7 @@ export interface VereinOverviewDTO {
   registrationConfirmed: boolean;
   phase1: PhaseStatus;
   phase2: PhaseStatus;
+  hasComments: boolean;
 }
 
 export interface IsValid {
@@ -239,6 +286,14 @@ export interface IsValid {
 }
 
 export type DateAsString = string;
+
+export enum LocationType {
+  PARADEMUSIK = "PARADEMUSIK",
+  EINSPIELLOKAL = "EINSPIELLOKAL",
+  INSTRUMENTENDEPOT = "INSTRUMENTENDEPOT",
+  WETTSPIELLOKAL = "WETTSPIELLOKAL",
+  JURYFEEDBACK = "JURYFEEDBACK",
+}
 
 export enum UserRole {
   VEREIN = "VEREIN",
@@ -252,6 +307,7 @@ export enum Aufgaben {
   EGAL = "EGAL",
   KOERPERLICH = "KOERPERLICH",
   MUSIKALISCH = "MUSIKALISCH",
+  MODERATION = "MODERATION",
   JURYSEKRETARIAT = "JURYSEKRETARIAT",
   SERVICE = "SERVICE",
   BUFFET = "BUFFET",
@@ -271,12 +327,6 @@ export enum Einsatzzeit {
   NACHT = "NACHT",
 }
 
-export enum PhaseStatus {
-  NEW = "NEW",
-  IN_PROGRESS = "IN_PROGRESS",
-  DONE = "DONE",
-}
-
 export enum Modul {
   A = "A",
   B = "B",
@@ -286,6 +336,12 @@ export enum Modul {
   F = "F",
   G = "G",
   H = "H",
+}
+
+export enum PhaseStatus {
+  NEW = "NEW",
+  IN_PROGRESS = "IN_PROGRESS",
+  DONE = "DONE",
 }
 
 export enum TambourenGrundlage {

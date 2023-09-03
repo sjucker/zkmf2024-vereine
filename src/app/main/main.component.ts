@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {BackendService} from "../service/backend.service";
-import {VereinDTO} from "../rest";
+import {VereinDTO, VereinSelectionDTO} from "../rest";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
@@ -22,6 +22,8 @@ export class MainComponent implements OnInit {
 
   verein?: VereinDTO;
 
+  availableVereine: VereinSelectionDTO[] = [];
+
   notFound = false;
   error = false;
 
@@ -39,6 +41,12 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
+    this.backendService.availableVereine().subscribe({
+      next: value => {
+        this.availableVereine = value;
+        console.log(value);
+      }
+    });
   }
 
   private load() {

@@ -77,4 +77,13 @@
 
 .form-layout {
   align-items: baseline;
+
+  .action-column {
+    flex: 0 0 100px;
+  }
+}
+
+.doppeleinsatz-container {
+  display: flex;
+  align-items: center;
 }
