@@ -44,7 +44,6 @@ export class MainComponent implements OnInit {
     this.backendService.availableVereine().subscribe({
       next: value => {
         this.availableVereine = value;
-        console.log(value);
       }
     });
   }
