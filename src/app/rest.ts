@@ -10,6 +10,20 @@ export interface ForgotPasswordRequestDTO {
 }
 
 export interface JudgeReportDTO {
+  id: number;
+  modul: string;
+  klasse?: string;
+  besetzung?: string;
+  location: string;
+  verein: string;
+  dirigent: string;
+  programmTitel?: string;
+  programmInfo?: string;
+  minDurationInSeconds?: number;
+  maxDurationInSeconds?: number;
+  score?: number;
+  status: JudgeReportStatus;
+  titles: JudgeReportTitleDTO[];
 }
 
 export interface JudgeReportOverviewDTO {
@@ -22,6 +36,20 @@ export interface JudgeReportOverviewDTO {
   besetzung?: string;
   start: DateAsString;
   end: DateAsString;
+  status: JudgeReportStatus;
+}
+
+export interface JudgeReportRatingDTO {
+  category: JudgeReportCategory;
+  categoryDescription: string;
+  comment?: string;
+  rating: JudgeReportCategoryRating;
+}
+
+export interface JudgeReportTitleDTO {
+  titel: TitelDTO;
+  comment?: string;
+  ratings: JudgeReportRatingDTO[];
 }
 
 export interface KontaktDTO extends IsValid {
@@ -36,6 +64,7 @@ export interface KontaktDTO extends IsValid {
 }
 
 export interface LocationDTO {
+  id: number;
   name: string;
   address: string;
   latitude: number;
@@ -231,6 +260,50 @@ export interface VerifyEmailRequestDTO {
   verification: string;
 }
 
+export interface JudgeDTO {
+  id: number;
+  name: string;
+  email: string;
+}
+
+export interface JuryLoginCreateDTO {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface LocationSelectionDTO {
+  id: number;
+  name: string;
+}
+
+export interface TimetableEntryCreateDTO {
+  vereinId: number;
+  vereinProgrammId: number;
+  locationId: number;
+  date: DateAsString;
+  start: DateAsString;
+  end: DateAsString;
+  judge1Id: number;
+  judge2Id: number;
+  judge3Id: number;
+}
+
+export interface TimetableEntryDTO {
+  id: number;
+  modul: string;
+  klasse?: string;
+  besetzung?: string;
+  location: string;
+  verein: string;
+  date: DateAsString;
+  start: DateAsString;
+  end: DateAsString;
+  judge1: string;
+  judge2: string;
+  judge3: string;
+}
+
 export interface UserCreateDTO {
   email: string;
   role: UserRole;
@@ -281,11 +354,37 @@ export interface VereinOverviewDTO {
   hasComments: boolean;
 }
 
+export interface VereinProgrammSelectionDTO {
+  id: number;
+  name: string;
+}
+
 export interface IsValid {
   valid: boolean;
 }
 
 export type DateAsString = string;
+
+export enum JudgeReportStatus {
+  NEW = "NEW",
+  IN_PROGRESS = "IN_PROGRESS",
+  DONE = "DONE",
+}
+
+export enum JudgeReportCategory {
+  STIMMUNG_INTONATION = "STIMMUNG_INTONATION",
+  RHYTHMUS_METRUM = "RHYTHMUS_METRUM",
+  DYNAMIK_KLANGAUSGLEICH = "DYNAMIK_KLANGAUSGLEICH",
+  TONKULTUR_TECHNIK_ARTIKULATION = "TONKULTUR_TECHNIK_ARTIKULATION",
+  MUSIKALISCHER_AUSDRUCK = "MUSIKALISCHER_AUSDRUCK",
+  INTERPRETATION = "INTERPRETATION",
+}
+
+export enum JudgeReportCategoryRating {
+  NEGATIVE = "NEGATIVE",
+  NEUTRAL = "NEUTRAL",
+  POSITIVE = "POSITIVE",
+}
 
 export enum LocationType {
   PARADEMUSIK = "PARADEMUSIK",
