@@ -43,6 +43,7 @@ import {MatRadioModule} from "@angular/material/radio";
 import {TambourenTitelComponent} from './components/tambouren-titel/tambouren-titel.component';
 import {ParademusikTitelComponent} from './components/parademusik-titel/parademusik-titel.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {UnsavedChangesDialogComponent} from './unsaved-changes-dialog/unsaved-changes-dialog.component';
 
 @NgModule({
   declarations: [
@@ -66,6 +67,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     ProgrammComponent,
     TambourenTitelComponent,
     ParademusikTitelComponent,
+    UnsavedChangesDialogComponent,
   ],
   imports: [
     BrowserModule,

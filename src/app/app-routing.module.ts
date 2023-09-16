@@ -18,7 +18,8 @@ const routes: Routes = [
   {
     path: '',
     component: MainComponent,
-    canActivate: [() => inject(AuthenticationGuard).canActivate()]
+    canActivate: [() => inject(AuthenticationGuard).canActivate()],
+    canDeactivate: [(component: MainComponent) => component.canDeactivate()]
   },
   {
     path: LOGIN_PATH,

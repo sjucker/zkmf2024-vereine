@@ -6,6 +6,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {GeneralInfoDialogComponent} from "../general-info-dialog/general-info-dialog.component";
 import {ConfirmRegistrationDialogComponent} from "../confirm-registration-dialog/confirm-registration-dialog.component";
+import {Observable, of} from "rxjs";
+import {UnsavedChangesDialogComponent} from "../unsaved-changes-dialog/unsaved-changes-dialog.component";
 
 export interface UploadData {
   logo?: File;
@@ -256,5 +258,16 @@ export class MainComponent implements OnInit {
     }
 
     return false;
+  }
+
+  canDeactivate(): Observable<boolean> {
+    if (this.unsavedChanges) {
+      return this.dialog.open(UnsavedChangesDialogComponent, {
+        disableClose: true,
+        autoFocus: false
+      }).afterClosed();
+    } else {
+      return of(true);
+    }
   }
 }
