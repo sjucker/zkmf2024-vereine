@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {BackendService} from "../service/backend.service";
 import {VereinDTO, VereinSelectionDTO} from "../rest";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -46,6 +46,13 @@ export class MainComponent implements OnInit {
         this.availableVereine = value;
       }
     });
+  }
+
+  @HostListener('window:beforeunload', ['$event'])
+  handleClose($event: BeforeUnloadEvent) {
+    if (this.unsavedChanges) {
+      $event.returnValue = 'unsavedChanges';
+    }
   }
 
   private load() {
