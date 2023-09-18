@@ -31,7 +31,9 @@ export class ProgrammComponent implements OnChanges {
   saving: boolean = false;
 
   @Output()
-  changed = new EventEmitter<boolean>();
+  changed = new EventEmitter<void>();
+  @Output()
+  doSave = new EventEmitter<void>();
 
   newTitel: TitelDTO = {
     pflichtStueck: false,
@@ -166,6 +168,7 @@ export class ProgrammComponent implements OnChanges {
 
   onChange() {
     this.unsavedChanges = true;
+    this.changed.emit();
   }
 
   get isModulAB(): boolean {
@@ -205,7 +208,7 @@ export class ProgrammComponent implements OnChanges {
   }
 
   save() {
-    this.changed.emit(false);
+    this.doSave.emit();
   }
 
   get selbstwahlTitel(): TitelDTO[] {

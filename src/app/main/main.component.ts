@@ -73,7 +73,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  save(silent: boolean) {
+  save() {
     // first, some validations, don't do this per panel only since user is not forced to save before leaving a panel
     if (this.verein) {
       if (this.verein.angaben.direktionDoppeleinsatz && !this.verein.angaben.direktionDoppeleinsatzVerein) {
@@ -133,15 +133,13 @@ export class MainComponent implements OnInit {
           this.saving = false;
           this.unsavedChanges = false;
           this.anmeldungDisabled = value.registrationConfirmed;
-          if (!silent) {
-            this.verein = value;
-            this.snackBar.open('Speichern war erfolgreich', undefined, {
-              verticalPosition: 'top',
-              horizontalPosition: 'center',
-              duration: 2000,
-              panelClass: 'success'
-            });
-          }
+          this.verein = value;
+          this.snackBar.open('Speichern war erfolgreich', undefined, {
+            verticalPosition: 'top',
+            horizontalPosition: 'center',
+            duration: 2000,
+            panelClass: 'success'
+          });
         },
         error: _ => {
           this.saving = false;

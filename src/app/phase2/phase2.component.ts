@@ -17,13 +17,11 @@ export class Phase2Component {
   unsavedChanges = false;
 
   @Output()
-  doSave = new EventEmitter<boolean>();
+  changed = new EventEmitter<void>();
+  @Output()
+  doSave = new EventEmitter<void>();
 
   get trackById(): TrackByFunction<VereinProgrammDTO> {
     return (index, item) => item.id;
-  }
-
-  onChange(silent: boolean) {
-    this.doSave.emit(silent);
   }
 }

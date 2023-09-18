@@ -42,7 +42,7 @@ export class Phase1Component {
   @Output()
   changed = new EventEmitter<void>();
   @Output()
-  doSave = new EventEmitter<boolean>();
+  doSave = new EventEmitter<void>();
   @Output()
   doUpload = new EventEmitter<UploadData>();
   @Output()
@@ -67,7 +67,7 @@ export class Phase1Component {
   }
 
   save(): void {
-    this.doSave.emit(false);
+    this.doSave.emit();
   }
 
   get logoImgSrc(): string {

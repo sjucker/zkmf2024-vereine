@@ -2,5 +2,6 @@
   <app-programm *ngFor="let programm of verein.programme; trackBy: trackById;"
                 [programm]="programm"
                 [saving]="saving"
-                (changed)="onChange($event)"></app-programm>
+                (changed)="changed.emit()"
+                (doSave)="doSave.emit()"></app-programm>
 </mat-accordion>
