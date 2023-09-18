@@ -80,6 +80,26 @@
                maxlength="255">
       </mat-form-field>
     </div>
+    <div class="form-layout">
+      <mat-form-field appearance="outline">
+        <mat-label>Facebook</mat-label>
+        <input type="url"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="verein.angaben.facebook"
+               (ngModelChange)="onChange()"
+               maxlength="255">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Instagram</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="verein.angaben.instagram"
+               (ngModelChange)="onChange()"
+               maxlength="255">
+      </mat-form-field>
+    </div>
 
     <div class="form-layout">
       <mat-checkbox [(ngModel)]="verein.angaben.direktionDoppeleinsatz"

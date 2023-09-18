@@ -24,6 +24,7 @@ export interface JudgeReportDTO {
   score?: number;
   status: JudgeReportStatus;
   titles: JudgeReportTitleDTO[];
+  overallRatings: JudgeReportRatingDTO[];
 }
 
 export interface JudgeReportOverviewDTO {
@@ -161,8 +162,10 @@ export interface VereinDTO {
   info: VereinsinfoDTO;
   registrationConfirmed: boolean;
   programme: VereinProgrammDTO[];
-  phase1Status: PhaseStatus;
+  phase1Done: boolean;
+  phase2Done: boolean;
   phase2Status: PhaseStatus;
+  phase1Status: PhaseStatus;
 }
 
 export interface VereinProgrammDTO extends IsValid {
@@ -219,6 +222,8 @@ export interface VereinsangabenDTO extends IsValid {
   plz?: number;
   ort?: string;
   homepage?: string;
+  facebook?: string;
+  instagram?: string;
   iban?: string;
   direktionDoppeleinsatz: boolean;
   direktionDoppeleinsatzVerein?: string;
@@ -373,11 +378,19 @@ export enum JudgeReportStatus {
 
 export enum JudgeReportCategory {
   STIMMUNG_INTONATION = "STIMMUNG_INTONATION",
+  TONKULTUR = "TONKULTUR",
   RHYTHMUS_METRUM = "RHYTHMUS_METRUM",
   DYNAMIK_KLANGAUSGLEICH = "DYNAMIK_KLANGAUSGLEICH",
-  TONKULTUR_TECHNIK_ARTIKULATION = "TONKULTUR_TECHNIK_ARTIKULATION",
+  TECHNIK_ARTIKULATION = "TECHNIK_ARTIKULATION",
+  TECHNIK_PHRASIERUNG_ARTIKULATION = "TECHNIK_PHRASIERUNG_ARTIKULATION",
   MUSIKALISCHER_AUSDRUCK = "MUSIKALISCHER_AUSDRUCK",
   INTERPRETATION = "INTERPRETATION",
+  INTERPRETATION_STILEMPFINDEN = "INTERPRETATION_STILEMPFINDEN",
+  PROGRAMMAUFBAU = "PROGRAMMAUFBAU",
+  VIELSEITIGKEIT_STILEMPFINDEN = "VIELSEITIGKEIT_STILEMPFINDEN",
+  SCHWIERIGKEITSGRAD = "SCHWIERIGKEITSGRAD",
+  PROGRAMMWAHL = "PROGRAMMWAHL",
+  GESAMTEINDRUCK = "GESAMTEINDRUCK",
 }
 
 export enum JudgeReportCategoryRating {
