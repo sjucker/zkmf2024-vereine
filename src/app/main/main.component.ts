@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {BackendService} from "../service/backend.service";
-import {VereinDTO, VereinSelectionDTO} from "../rest";
+import {Modul, VereinDTO, VereinSelectionDTO} from "../rest";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
@@ -267,5 +267,13 @@ export class MainComponent implements OnInit {
     } else {
       return of(true);
     }
+  }
+
+  get someModulC(): boolean {
+    return this.verein?.programme.some(programm => programm.modul === Modul.C) ?? false;
+  }
+
+  get everyModulC(): boolean {
+    return this.verein?.programme.every(programm => programm.modul === Modul.C) ?? false;
   }
 }
