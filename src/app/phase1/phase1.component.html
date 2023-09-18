@@ -62,20 +62,20 @@
     </div>
     <div class="form-layout">
       <mat-form-field appearance="outline">
-        <mat-label>Homepage</mat-label>
-        <input type="url"
-               autocomplete="off"
-               matInput
-               [(ngModel)]="verein.angaben.homepage"
-               (ngModelChange)="onChange()"
-               maxlength="255">
-      </mat-form-field>
-      <mat-form-field appearance="outline">
         <mat-label>PC/IBAN</mat-label>
         <input type="text"
                autocomplete="off"
                matInput
                [(ngModel)]="verein.angaben.iban"
+               (ngModelChange)="onChange()"
+               maxlength="255">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Homepage</mat-label>
+        <input type="url"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="verein.angaben.homepage"
                (ngModelChange)="onChange()"
                maxlength="255">
       </mat-form-field>
