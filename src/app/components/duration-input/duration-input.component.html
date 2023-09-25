@@ -3,6 +3,7 @@
        matInput
        placeholder="z.B. 0:30"
        size="6"
+       [disabled]="readOnly"
        [ngModel]="durationFormatted"
        (ngModelChange)="onChange($event)"
        [ngClass]="{'invalid': invalid}">
