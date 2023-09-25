@@ -47,6 +47,23 @@ export interface JudgeReportRatingDTO {
   rating: JudgeReportCategoryRating;
 }
 
+export interface JudgeReportScoreDTO {
+  reportId: number;
+  judgeName: string;
+  score?: number;
+  status: JudgeReportStatus;
+}
+
+export interface JudgeReportSummaryDTO {
+  modul: string;
+  klasse?: string;
+  besetzung?: string;
+  verein: string;
+  overallScore?: number;
+  scores: JudgeReportScoreDTO[];
+  done: boolean;
+}
+
 export interface JudgeReportTitleDTO {
   titel: TitelDTO;
   comment?: string;
@@ -164,8 +181,10 @@ export interface VereinDTO {
   programme: VereinProgrammDTO[];
   phase1Done: boolean;
   phase2Done: boolean;
-  phase2Status: PhaseStatus;
+  phase2ConfirmedBy?: string;
+  phase2ConfirmedAt?: DateAsString;
   phase1Status: PhaseStatus;
+  phase2Status: PhaseStatus;
 }
 
 export interface VereinProgrammDTO extends IsValid {

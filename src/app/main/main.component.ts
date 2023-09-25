@@ -276,4 +276,8 @@ export class MainComponent implements OnInit {
   get everyModulC(): boolean {
     return this.verein?.programme.every(programm => programm.modul === Modul.C) ?? false;
   }
+
+  get phase2ReadOnly(): boolean {
+    return !!this.verein?.phase2ConfirmedAt;
+  }
 }

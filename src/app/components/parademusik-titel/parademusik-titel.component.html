@@ -7,7 +7,8 @@
            matInput
            maxlength="255"
            [(ngModel)]="titel.titelName"
-           (ngModelChange)="onChange()">
+           (ngModelChange)="onChange()"
+           [disabled]="readOnly">
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -17,7 +18,8 @@
            matInput
            maxlength="255"
            [(ngModel)]="titel.composer"
-           (ngModelChange)="onChange()">
+           (ngModelChange)="onChange()"
+           [disabled]="readOnly">
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -27,7 +29,8 @@
            matInput
            maxlength="255"
            [(ngModel)]="titel.arrangeur"
-           (ngModelChange)="onChange()">
+           (ngModelChange)="onChange()"
+           [disabled]="readOnly">
   </mat-form-field>
 
   <mat-form-field appearance="outline">
@@ -37,7 +40,8 @@
            matInput
            [pattern]="durationPattern"
            [(ngModel)]="titelDuration"
-           (ngModelChange)="updateDuration()">
+           (ngModelChange)="updateDuration()"
+           [disabled]="readOnly">
   </mat-form-field>
 
   <div>
