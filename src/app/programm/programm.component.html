@@ -186,6 +186,7 @@
           <td *ngIf="isModulAB || isModulH">
             <app-duration-input *ngIf="!last"
                                 [durationInSeconds]="entry.applausInSeconds ?? 0"
+                                [readOnly]="readOnly"
                                 (valueChanged)="updateApplaus(entry, $event)"></app-duration-input>
           </td>
           <td>
