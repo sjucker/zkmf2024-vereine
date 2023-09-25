@@ -39,6 +39,8 @@ export class DurationInputComponent implements OnInit, OnChanges {
   durationInSeconds: number = 0;
   @Input()
   maxDurationInSeconds: number = 30;
+  @Input({required: true})
+  readOnly = false;
 
   durationFormatted: string = "";
   invalid = false;
