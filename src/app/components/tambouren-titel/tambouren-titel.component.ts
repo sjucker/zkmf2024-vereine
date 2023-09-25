@@ -14,6 +14,9 @@ export class TambourenTitelComponent {
     // @ts-ignore
   titel: TitelDTO;
 
+  @Input({required: true})
+  readOnly = false;
+
   @Output()
   changed = new EventEmitter<void>();
 

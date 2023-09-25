@@ -15,6 +15,8 @@ export class Phase2Component {
   saving: boolean = false;
   @Input({required: true})
   unsavedChanges = false;
+  @Input({required: true})
+  readOnly = false;
 
   @Output()
   changed = new EventEmitter<void>();

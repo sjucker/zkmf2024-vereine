@@ -18,6 +18,9 @@ export class ParademusikTitelComponent implements OnInit {
   @Input({required: true})
   label: string = '';
 
+  @Input({required: true})
+  readOnly = false;
+
   @Output()
   changed = new EventEmitter<void>();
 

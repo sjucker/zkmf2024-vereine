@@ -30,6 +30,9 @@ export class ProgrammComponent implements OnChanges {
   @Input({required: true})
   saving: boolean = false;
 
+  @Input({required: true})
+  readOnly = false;
+
   @Output()
   changed = new EventEmitter<void>();
   @Output()
@@ -218,5 +221,4 @@ export class ProgrammComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     this.unsavedChanges = false;
   }
-
 }
