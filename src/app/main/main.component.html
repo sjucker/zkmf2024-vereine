@@ -16,6 +16,13 @@
       </button>
     </p>
 
+    <div class="einsatzzeiten" *ngIf="verein.provWettspiel || verein.provParademusik || verein.provPlatzkonzert">
+      <h2>Provisorische Einsatzzeiten</h2>
+      <div *ngIf="verein.provWettspiel"><b>Wettspiel</b>: {{verein.provWettspiel}}</div>
+      <div *ngIf="verein.provParademusik"><b>Parademusik</b>: {{verein.provParademusik}}</div>
+      <div *ngIf="verein.provPlatzkonzert"><b>Platzkonzert</b>: {{verein.provPlatzkonzert}}</div>
+    </div>
+
     <p>&nbsp;</p>
 
     <h2>Phase 1 (bis 30.06.2023)
