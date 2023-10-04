@@ -183,6 +183,9 @@ export interface VereinDTO {
   phase2Done: boolean;
   phase2ConfirmedBy?: string;
   phase2ConfirmedAt?: DateAsString;
+  provWettspiel?: string;
+  provParademusik?: string;
+  provPlatzkonzert?: string;
   phase1Status: PhaseStatus;
   phase2Status: PhaseStatus;
 }
@@ -303,14 +306,11 @@ export interface LocationSelectionDTO {
 
 export interface TimetableEntryCreateDTO {
   vereinId: number;
-  vereinProgrammId: number;
+  vereinProgrammId?: number;
   locationId: number;
   date: DateAsString;
   start: DateAsString;
   end: DateAsString;
-  judge1Id: number;
-  judge2Id: number;
-  judge3Id: number;
 }
 
 export interface TimetableEntryDTO {
@@ -338,6 +338,20 @@ export interface UserDTO {
   email: string;
   role: UserRole;
   lastLogin?: DateAsString;
+}
+
+export interface VereinAssignmentDTO {
+  id: number;
+  name: string;
+  programme: VereinAssignmentProgrammDTO[];
+}
+
+export interface VereinAssignmentProgrammDTO {
+  id: number;
+  modul: Modul;
+  modulDescription: string;
+  klasse?: string;
+  besetzung?: string;
 }
 
 export interface VereinCommentCreateDTO {
@@ -373,6 +387,7 @@ export interface VereinOverviewDTO {
   tambouren: boolean;
   perkussionsensemble: boolean;
   registrationConfirmed: boolean;
+  phase2Confirmed: boolean;
   phase1: PhaseStatus;
   phase2: PhaseStatus;
   hasComments: boolean;
