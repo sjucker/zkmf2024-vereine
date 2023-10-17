@@ -73,7 +73,7 @@ export class MainComponent implements OnInit {
     });
   }
 
-  save() {
+  save(programmUpdated: boolean) {
     // first, some validations, don't do this per panel only since user is not forced to save before leaving a panel
     if (this.verein) {
       if (this.verein.angaben.direktionDoppeleinsatz && !this.verein.angaben.direktionDoppeleinsatzVerein) {
@@ -128,7 +128,7 @@ export class MainComponent implements OnInit {
       }
 
       this.saving = true;
-      this.backendService.update(this.verein).subscribe({
+      this.backendService.update({...this.verein, programmUpdated: programmUpdated}).subscribe({
         next: value => {
           this.saving = false;
           this.unsavedChanges = false;

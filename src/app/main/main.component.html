@@ -35,7 +35,7 @@
                 [anmeldungDisabled]="anmeldungDisabled"
                 [unsavedChanges]="unsavedChanges"
                 (changed)="onChange()"
-                (doSave)="save()"
+                (doSave)="save(false)"
                 (doUpload)="upload($event)"
                 (doDeleteImage)="deleteImage($event)"></app-phase1>
 
@@ -53,7 +53,7 @@
                   [unsavedChanges]="unsavedChanges"
                   [readOnly]="phase2ReadOnly"
                   (changed)="onChange()"
-                  (doSave)="save()"></app-phase2>
+                  (doSave)="save(true)"></app-phase2>
     </div>
   </div>
 
