@@ -1,0 +1,27 @@
+@use "../../variables";
+@import "../../responsive";
+
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  gap: variables.$padding;
+
+  .message {
+    max-width: 60%;
+    background-color: variables.$blau-transparent;
+    padding: variables.$padding;
+    border-radius: variables.$padding-half;
+    border: solid 1px variables.$blau;
+    align-self: flex-start;
+
+    &.own {
+      background-color: variables.$gelb-transparent;
+      border: solid 1px variables.$gelb;
+      align-self: flex-end
+    }
+  }
+}
+
+.reply-container {
+  margin-top: variables.$padding;
+}

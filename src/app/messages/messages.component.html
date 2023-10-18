@@ -1,0 +1,38 @@
+<div *ngIf="hasMessages">
+  <p>&nbsp;</p>
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>Nachrichten</mat-panel-title>
+        <mat-panel-description>
+          <mat-icon>forum</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="messages-container">
+        <div *ngFor="let msg of messages" class=" mat-typography message" [ngClass]="{'own': msg.ownMessage}">
+          <span class="mat-h3">{{msg.createdAt | date: 'dd.MM.yyyy HH:mm'}}, {{msg.createdBy}}</span>
+          <p style="white-space: pre-wrap;" [ngClass]="">
+            {{msg.message}}
+          </p>
+        </div>
+      </div>
+
+      <div class="reply-container">
+        <mat-form-field appearance="outline" color="primary">
+          <mat-label>Antwort</mat-label>
+          <textarea matInput
+                    cdkTextareaAutosize
+                    cdkAutosizeMinRows="4"
+                    cdkAutosizeMaxRows="10"
+                    maxlength="8000"
+                    [(ngModel)]="message"></textarea>
+        </mat-form-field>
+        <app-action-button (buttonClicked)="saveMessage()"
+                           buttonLabel="Senden"
+                           [processing]="saving"
+                           [disabled]="message.length < 1"
+        ></app-action-button>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

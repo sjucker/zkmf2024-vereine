@@ -29,8 +29,6 @@ export class Phase1Component {
     // @ts-ignore
   verein: VereinDTO;
   @Input({required: true})
-  availableVereine: VereinSelectionDTO[] = [];
-  @Input({required: true})
   saving = false;
   @Input({required: true})
   uploading = false;
