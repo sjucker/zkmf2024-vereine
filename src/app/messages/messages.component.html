@@ -9,9 +9,9 @@
         </mat-panel-description>
       </mat-expansion-panel-header>
       <div class="messages-container">
-        <div *ngFor="let msg of messages" class=" mat-typography message" [ngClass]="{'own': msg.ownMessage}">
-          <span class="mat-h3">{{msg.createdAt | date: 'dd.MM.yyyy HH:mm'}}, {{msg.createdBy}}</span>
-          <p style="white-space: pre-wrap;" [ngClass]="">
+        <div *ngFor="let msg of messages" class="mat-typography message" [ngClass]="{'own': msg.ownMessage}">
+          <div class="message-title">{{msg.createdAt | date: 'dd.MM.yyyy HH:mm'}}, {{msg.createdBy}}</div>
+          <p style="white-space: pre-wrap;">
             {{msg.message}}
           </p>
         </div>

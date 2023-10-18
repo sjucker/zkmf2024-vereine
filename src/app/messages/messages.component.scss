@@ -14,10 +14,21 @@
     border: solid 1px variables.$blau;
     align-self: flex-start;
 
+    .message-title {
+      font-weight: bold;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     &.own {
       background-color: variables.$gelb-transparent;
       border: solid 1px variables.$gelb;
       align-self: flex-end
+    }
+
+    @include responsive('lt-md') {
+      max-width: 80%;
     }
   }
 }
