@@ -6,7 +6,7 @@ import {
   ForgotPasswordRequestDTO,
   RegisterVereinRequestDTO,
   ResetPasswordRequestDTO,
-  VereinDTO, VereinSelectionDTO,
+  VereinDTO, VereinMessageCreateDTO, VereinMessageDTO, VereinSelectionDTO,
   VerifyEmailRequestDTO
 } from "../rest";
 
@@ -87,5 +87,12 @@ export class BackendService {
 
   public deleteImage(imageId: number): Observable<any> {
     return this.httpClient.delete(`${this.baseUrl}/secured/verein/bilder-upload/${imageId}`);
+  }
+
+ public saveMessag(message: string): Observable<VereinMessageDTO> {
+    const request: VereinMessageCreateDTO = {
+      message: message
+    };
+    return this.httpClient.post<VereinMessageDTO>(`${this.baseUrl}/secured/verein/messages`, request);
   }
 }

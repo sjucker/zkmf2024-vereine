@@ -103,7 +103,8 @@
 
     <div class="form-layout">
       <mat-checkbox [(ngModel)]="verein.angaben.direktionDoppeleinsatz"
-                    (ngModelChange)="direktionDoppeleinsatzChanged($event)">
+                    (ngModelChange)="direktionDoppeleinsatzChanged($event)"
+                    [disabled]="true">
         Dirigent/in: Teilnahme mit einem weiteren Verein
       </mat-checkbox>
       <mat-form-field appearance="outline">
@@ -112,54 +113,21 @@
                autocomplete="off"
                matInput
                [(ngModel)]="verein.angaben.direktionDoppeleinsatzVerein"
-               (ngModelChange)="onChange()"
                maxlength="255"
-               [disabled]="!verein.angaben.direktionDoppeleinsatz">
+               [disabled]="true">
       </mat-form-field>
     </div>
 
     <div class="form-layout">
       <mat-checkbox [(ngModel)]="verein.angaben.mitspielerDoppeleinsatz"
-                    (ngModelChange)="onChange()">
+                    [disabled]="true">
         Musikant/innen: Doppelteilnahme <span class="mat-caption">(Doppelteilnahmen von Musikanten/Musikantinnen können nicht zwingend berücksichtigt werden!)</span>
       </mat-checkbox>
-    </div>
-
-    <div *ngIf="verein.angaben.mitspielerDoppeleinsatz" class="form-layout">
-      <mat-form-field appearance="outline">
-        <mat-label>Name Musikant/in</mat-label>
-        <input type="text"
-               autocomplete="off"
-               matInput
-               [(ngModel)]="doppeleinsatzName"
-               maxlength="255">
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Anderer Verein</mat-label>
-        <mat-select [(ngModel)]="doppeleinsatzVerein">
-          <mat-option *ngFor="let v of availableVereine" [value]="v">
-            {{v.name}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-
-      <div class="action-column">
-        <button color="primary" mat-flat-button
-                [disabled]="!newDoppeleinsatzValid"
-                (click)="addNewDoppeleinsatz()">
-          erfassen
-        </button>
-      </div>
     </div>
 
     <div *ngIf="verein.angaben.mitspielerDoppeleinsatz" class="padding-bottom">
       <div *ngFor="let doppelEinsatz of verein.doppelEinsatz" class="doppeleinsatz-container">
         {{doppelEinsatz.mitspielerName}}, {{doppelEinsatz.otherVerein.name}}
-        <button mat-icon-button color="primary"
-                (click)="deleteDoppeleinsatz(doppelEinsatz)">
-          <mat-icon>delete</mat-icon>
-        </button>
       </div>
     </div>
 

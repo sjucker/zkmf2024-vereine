@@ -21,10 +21,7 @@ export interface UploadData {
 })
 export class MainComponent implements OnInit {
 
-
   verein?: VereinDTO;
-
-  availableVereine: VereinSelectionDTO[] = [];
 
   notFound = false;
   error = false;
@@ -43,11 +40,6 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
-    this.backendService.availableVereine().subscribe({
-      next: value => {
-        this.availableVereine = value;
-      }
-    });
   }
 
   @HostListener('window:beforeunload', ['$event'])
