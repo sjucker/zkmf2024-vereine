@@ -45,8 +45,7 @@
     <div *ngIf="phase2Enabled">
       <h2>
         <span *ngIf="everyModulC">Phase 2 (bis 01.04.2024)</span>
-        <span *ngIf="!everyModulC">Phase 2 (bis 30.09.2023<span
-          *ngIf="someModulC">, Modul C bis 01.04.2024</span>)</span>
+        <span *ngIf="!everyModulC">Phase 2 (bis 30.09.2023<span *ngIf="someModulC">, Modul C bis 01.04.2024</span>)</span>
         <app-phase-status [status]="verein.phase2Status"></app-phase-status>
       </h2>
 

@@ -44,9 +44,7 @@ import {TambourenTitelComponent} from './components/tambouren-titel/tambouren-ti
 import {ParademusikTitelComponent} from './components/parademusik-titel/parademusik-titel.component';
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {UnsavedChangesDialogComponent} from './unsaved-changes-dialog/unsaved-changes-dialog.component';
-import { MessagesComponent } from './messages/messages.component';
-import {MatBadgeModule} from "@angular/material/badge";
-import {MatChipsModule} from "@angular/material/chips";
+import {MessagesComponent} from './messages/messages.component';
 
 @NgModule({
   declarations: [
@@ -97,8 +95,6 @@ import {MatChipsModule} from "@angular/material/chips";
     MatDialogModule,
     MatRadioModule,
     MatAutocompleteModule,
-    MatBadgeModule,
-    MatChipsModule,
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},],
   bootstrap: [AppComponent]
