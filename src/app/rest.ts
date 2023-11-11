@@ -200,7 +200,7 @@ export interface VereinDTO {
   phase2Done: boolean;
   phase2ConfirmedBy?: string;
   phase2ConfirmedAt?: DateAsString;
-  timetableEntries?: TimetableEntryDTO[];
+  timetableEntries?: TimetableOverviewEntryDTO[];
   messages: VereinMessageDTO[];
   programmUpdated: boolean;
   phase1Status: PhaseStatus;

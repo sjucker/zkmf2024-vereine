@@ -21,3 +21,15 @@ h2 {
   background-color: variables.$blau-transparent;
   padding: variables.$padding;
 }
+
+.timetable-grid {
+  display: grid;
+  grid-template-columns: repeat(4, max-content) 0fr;
+  column-gap: variables.$padding;
+}
+
+@include responsive('lt-md') {
+  .timetable-grid {
+    grid-template-columns: 1fr;
+  }
+}

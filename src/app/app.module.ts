@@ -1,5 +1,7 @@
-import {NgModule} from '@angular/core';
+import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
+import localeDe from '@angular/common/locales/de';
+import localeDeExtra from '@angular/common/locales/extra/de';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -45,6 +47,7 @@ import {ParademusikTitelComponent} from './components/parademusik-titel/parademu
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {UnsavedChangesDialogComponent} from './unsaved-changes-dialog/unsaved-changes-dialog.component';
 import {MessagesComponent} from './messages/messages.component';
+import {registerLocaleData} from "@angular/common";
 
 @NgModule({
   declarations: [
@@ -96,8 +99,14 @@ import {MessagesComponent} from './messages/messages.component';
     MatRadioModule,
     MatAutocompleteModule,
   ],
-  providers: [{provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},
+    {provide: LOCALE_ID, useValue: 'de-DE'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
+  constructor() {
+    registerLocaleData(localeDe, 'de-DE', localeDeExtra);
+  }
 }
