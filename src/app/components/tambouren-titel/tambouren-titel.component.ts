@@ -11,8 +11,7 @@ export class TambourenTitelComponent {
   klassePattern = /^[1-6]$/;
 
   @Input({required: true})
-    // @ts-ignore
-  titel: TitelDTO;
+  titel!: TitelDTO;
 
   @Input({required: true})
   readOnly = false;

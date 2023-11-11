@@ -20,39 +20,39 @@ export class BackendService {
   constructor(private readonly httpClient: HttpClient) {
   }
 
-  public register(email: string, password: string, vereinsname: string): Observable<any> {
+  public register(email: string, password: string, vereinsname: string): Observable<void> {
     const request: RegisterVereinRequestDTO = {
       email: email,
       password: password,
       vereinsname: vereinsname
     };
 
-    return this.httpClient.post(`${this.baseUrl}/public/verein`, request);
+    return this.httpClient.post<void>(`${this.baseUrl}/public/verein`, request);
   }
 
-  public verifyEmail(email: string, verification: string): Observable<any> {
+  public verifyEmail(email: string, verification: string): Observable<void> {
     const request: VerifyEmailRequestDTO = {
       email: email,
       verification: verification
     };
 
-    return this.httpClient.post(`${this.baseUrl}/public/verein/verification`, request);
+    return this.httpClient.post<void>(`${this.baseUrl}/public/verein/verification`, request);
   }
 
-  public forgotPassword(email: string): Observable<any> {
+  public forgotPassword(email: string): Observable<void> {
     const request: ForgotPasswordRequestDTO = {
       email: email
     };
-    return this.httpClient.post(`${this.baseUrl}/public/verein/forgot-password`, request);
+    return this.httpClient.post<void>(`${this.baseUrl}/public/verein/forgot-password`, request);
   }
 
-  public resetPassword(email: string, token: string, newPassword: string): Observable<any> {
+  public resetPassword(email: string, token: string, newPassword: string): Observable<void> {
     const request: ResetPasswordRequestDTO = {
       email: email,
       token: token,
       newPassword: newPassword
     };
-    return this.httpClient.post(`${this.baseUrl}/public/verein/reset-password`, request);
+    return this.httpClient.post<void>(`${this.baseUrl}/public/verein/reset-password`, request);
   }
 
 
@@ -72,7 +72,7 @@ export class BackendService {
     return this.httpClient.post<VereinDTO>(`${this.baseUrl}/secured/verein/confirm`, {});
   }
 
-  public upload(logo?: File, bild?: File): Observable<any> {
+  public upload(logo?: File, bild?: File): Observable<void> {
     const formData: FormData = new FormData();
 
     if (logo) {
@@ -82,11 +82,11 @@ export class BackendService {
       formData.append('bild', bild);
     }
 
-    return this.httpClient.post(`${this.baseUrl}/secured/verein/bilder-upload`, formData);
+    return this.httpClient.post<void>(`${this.baseUrl}/secured/verein/bilder-upload`, formData);
   }
 
-  public deleteImage(imageId: number): Observable<any> {
-    return this.httpClient.delete(`${this.baseUrl}/secured/verein/bilder-upload/${imageId}`);
+  public deleteImage(imageId: number): Observable<void> {
+    return this.httpClient.delete<void>(`${this.baseUrl}/secured/verein/bilder-upload/${imageId}`);
   }
 
  public saveMessag(message: string): Observable<VereinMessageDTO> {

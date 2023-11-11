@@ -26,8 +26,7 @@ export class Phase1Component {
   maxFileSize = 1000000;
 
   @Input({required: true})
-    // @ts-ignore
-  verein: VereinDTO;
+  verein!: VereinDTO;
   @Input({required: true})
   saving = false;
   @Input({required: true})

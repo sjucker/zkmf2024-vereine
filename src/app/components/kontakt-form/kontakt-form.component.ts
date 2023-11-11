@@ -9,8 +9,7 @@ import {KontaktDTO} from "../../rest";
 export class KontaktFormComponent {
 
   @Input({required: true})
-    // @ts-ignore
-  kontakt: KontaktDTO;
+  kontakt!: KontaktDTO;
 
   @Output()
   changed = new EventEmitter<void>();

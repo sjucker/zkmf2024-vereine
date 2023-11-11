@@ -27,12 +27,12 @@ export class VerificationComponent implements OnInit {
     if (email && verification) {
       this.verifying = true;
       this.backendService.verifyEmail(email, verification).subscribe({
-        next: _ => {
+        next: () => {
           this.verifying = false;
           this.success = true;
           this.loginUrl = `/${LOGIN_PATH}/${email}`;
         },
-        error: _ => {
+        error: () => {
           this.verifying = false;
           this.error = true;
         }

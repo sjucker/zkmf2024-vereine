@@ -1,10 +1,6 @@
-import {Component, EventEmitter, Input, OnChanges, Output, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {Modul, TambourenGrundlage, TitelDTO, VereinProgrammDTO, VereinProgrammTitelDTO} from "../rest";
-import {
-  durationPattern,
-  formatDuration,
-  toDurationInSeconds
-} from "../components/duration-input/duration-input.component";
+import {durationPattern, formatDuration, toDurationInSeconds} from "../components/duration-input/duration-input.component";
 
 @Component({
   selector: 'app-programm',
@@ -24,8 +20,7 @@ export class ProgrammComponent implements OnChanges {
   gradPattern = /^[1-6](\.\d)?$/;
 
   @Input({required: true})
-    // @ts-ignore
-  programm: VereinProgrammDTO;
+  programm!: VereinProgrammDTO;
 
   @Input({required: true})
   saving: boolean = false;
@@ -218,7 +213,7 @@ export class ProgrammComponent implements OnChanges {
     return this.programm.ablauf.map(e => e.titel).filter(t => !t.pflichtStueck);
   }
 
-  ngOnChanges(changes: SimpleChanges) {
+  ngOnChanges() {
     this.unsavedChanges = false;
   }
 }

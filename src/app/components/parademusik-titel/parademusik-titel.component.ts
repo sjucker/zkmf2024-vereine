@@ -12,8 +12,7 @@ export class ParademusikTitelComponent implements OnInit {
   durationPattern = durationPattern;
 
   @Input({required: true})
-    // @ts-ignore
-  titel: TitelDTO;
+  titel!: TitelDTO;
 
   @Input({required: true})
   label: string = '';
