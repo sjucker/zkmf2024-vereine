@@ -21,7 +21,7 @@
 
       <div class="timetable-grid">
         <ng-container *ngFor="let entry of verein.timetableEntries">
-          <div>{{entry.date | date: 'EEEE, dd.MM.yyyy'}}</div>
+          <div>{{entry.date | date: 'EEEE'}}</div>
           <div>{{entry.time}}</div>
           <div>{{entry.competition}}</div>
           <div><a [href]="entry.location.googleMapsAddress" target="_blank">{{entry.location.name}}</a></div>
