@@ -9,8 +9,7 @@ import {VereinDTO, VereinProgrammDTO} from "../rest";
 export class Phase2Component {
 
   @Input({required: true})
-    // @ts-ignore
-  verein: VereinDTO;
+  verein!: VereinDTO;
   @Input({required: true})
   saving: boolean = false;
   @Input({required: true})

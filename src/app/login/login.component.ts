@@ -49,7 +49,7 @@ export class LoginComponent implements OnInit {
           this.authenticationService.setCredentials(response);
           this.router.navigate(['/']).then();
         },
-        error: _ => {
+        error: () => {
           this.authenticating = false;
           this.snackBar.open("Email oder Passwort nicht korrekt", undefined, {
             duration: 3000,

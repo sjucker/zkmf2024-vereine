@@ -35,7 +35,7 @@ export class RegisterComponent {
       const val = this.registerForm.value;
 
       this.backendService.register(val.email!, val.password!, val.vereinsname!).subscribe({
-        next: response => {
+        next: () => {
           this.registering = false;
           this.success = true;
           this.loginUrl = `/${LOGIN_PATH}/${val.email}`;

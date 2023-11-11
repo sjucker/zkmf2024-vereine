@@ -38,12 +38,12 @@ export class ResetPasswordComponent implements OnInit {
     if (this.email && this.token && this.password) {
       this.processing = true;
       this.backendService.resetPassword(this.email, this.token, this.password).subscribe({
-        next: _ => {
+        next: () => {
           this.processing = false;
           this.success = true;
           this.loginUrl = `/${LOGIN_PATH}/${this.email}`;
         },
-        error: _ => {
+        error: () => {
           this.processing = false;
           this.snackBar.open("Es ist ein Fehler aufgetreten.", undefined, {
             verticalPosition: "top",

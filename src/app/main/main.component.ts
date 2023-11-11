@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {BackendService} from "../service/backend.service";
-import {Modul, VereinDTO, VereinSelectionDTO} from "../rest";
+import {Modul, VereinDTO} from "../rest";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
@@ -133,7 +133,7 @@ export class MainComponent implements OnInit {
             panelClass: 'success'
           });
         },
-        error: _ => {
+        error: () => {
           this.saving = false;
           this.snackBar.open('Es ist ein Fehler aufgetreten...', undefined, {
             verticalPosition: 'top',
@@ -150,7 +150,7 @@ export class MainComponent implements OnInit {
   upload(uploadData: UploadData) {
     this.uploading = true;
     this.backendService.upload(uploadData.logo, uploadData.bild).subscribe({
-      next: _ => {
+      next: () => {
         this.load();
         this.uploading = false;
         this.snackBar.open("Bild-Upload war erfolgreich", undefined, {
@@ -160,7 +160,7 @@ export class MainComponent implements OnInit {
           panelClass: 'success'
         });
       },
-      error: _ => {
+      error: () => {
         this.uploading = false;
         this.snackBar.open("Es ist ein Fehler aufgetreten...", undefined, {
           duration: 3000,
@@ -175,11 +175,11 @@ export class MainComponent implements OnInit {
   deleteImage(imageId: number) {
     this.uploading = true;
     this.backendService.deleteImage(imageId).subscribe({
-      next: _ => {
+      next: () => {
         this.load();
         this.uploading = false;
       },
-      error: _ => {
+      error: () => {
         this.uploading = false;
         this.snackBar.open("Es ist ein Fehler aufgetreten...", undefined, {
           duration: 3000,
@@ -226,7 +226,7 @@ export class MainComponent implements OnInit {
           panelClass: 'success'
         });
       },
-      error: _ => {
+      error: () => {
         this.confirming = false;
         this.snackBar.open("Es ist ein Fehler aufgetreten...", undefined, {
           duration: 3000,

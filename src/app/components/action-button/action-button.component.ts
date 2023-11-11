@@ -17,6 +17,6 @@ export class ActionButtonComponent {
   disabled = false;
 
   @Output()
-  buttonClicked = new EventEmitter<any>();
+  buttonClicked = new EventEmitter<void>();
 
 }

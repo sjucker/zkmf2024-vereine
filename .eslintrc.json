@@ -3,16 +3,6 @@
   "ignorePatterns": [
     "projects/**/*"
   ],
-  "plugins": [
-    "deprecation"
-  ],
-  "rules": {
-    "deprecation/deprecation": "error",
-    "semi": [
-      "error",
-      "always"
-    ]
-  },
   "overrides": [
     {
       "files": [
@@ -21,11 +11,17 @@
       "parserOptions": {
         "project": [
           "./tsconfig.json",
-          "./tsconfig.app.json"
+          "./tsconfig.app.json",
+          "./tsconfig.spec.json"
         ],
         "createDefaultProgram": true
       },
+      "plugins": [
+        "deprecation"
+      ],
       "extends": [
+        "eslint:recommended",
+        "plugin:@typescript-eslint/recommended",
         "plugin:@angular-eslint/recommended",
         "plugin:@angular-eslint/template/process-inline-templates"
       ],
@@ -45,7 +41,8 @@
             "prefix": "app",
             "style": "kebab-case"
           }
-        ]
+        ],
+        "deprecation/deprecation": "error"
       }
     },
     {

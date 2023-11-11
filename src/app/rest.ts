@@ -156,6 +156,23 @@ export interface ResetPasswordRequestDTO {
   newPassword: string;
 }
 
+export interface TimetableDayOverviewDTO {
+  day: string;
+  entries: TimetableOverviewEntryDTO[];
+}
+
+export interface TimetableOverviewEntryDTO {
+  vereinId: number;
+  vereinsname: string;
+  modul: string;
+  competition: string;
+  location: LocationDTO;
+  date: DateAsString;
+  start: DateAsString;
+  end: DateAsString;
+  time: string;
+}
+
 export interface TitelDTO extends IsValid {
   id?: number;
   modul?: Modul;
@@ -183,9 +200,7 @@ export interface VereinDTO {
   phase2Done: boolean;
   phase2ConfirmedBy?: string;
   phase2ConfirmedAt?: DateAsString;
-  provWettspiel?: string;
-  provParademusik?: string;
-  provPlatzkonzert?: string;
+  timetableEntries?: TimetableEntryDTO[];
   messages: VereinMessageDTO[];
   programmUpdated: boolean;
   phase1Status: PhaseStatus;
@@ -197,6 +212,17 @@ export interface VereinMessageDTO {
   createdAt: DateAsString;
   createdBy: string;
   ownMessage: boolean;
+}
+
+export interface VereinPresentationDTO {
+  name: string;
+  logoImgId?: number;
+  bildImgId?: number;
+  homepage?: string;
+  facebook?: string;
+  instagram?: string;
+  websiteText?: string;
+  timetableEntries: VereinTimetableEntryDTO[];
 }
 
 export interface VereinProgrammDTO extends IsValid {
@@ -244,7 +270,15 @@ export interface VereinTeilnahmeDTO {
   logoImgId?: number;
   bildImgId?: number;
   homepage?: string;
+  facebook?: string;
+  instagram?: string;
   websiteText?: string;
+}
+
+export interface VereinTimetableEntryDTO {
+  competition: string;
+  location: LocationDTO;
+  dateTime: string;
 }
 
 export interface VereinsangabenDTO extends IsValid {
@@ -296,6 +330,11 @@ export interface VerifyEmailRequestDTO {
   verification: string;
 }
 
+export interface BroadcastCreateDTO {
+  ids: number[];
+  message: string;
+}
+
 export interface JudgeDTO {
   id: number;
   name: string;
@@ -336,6 +375,7 @@ export interface TimetableEntryDTO {
   modul: string;
   klasse?: string;
   besetzung?: string;
+  locationId: number;
   location: string;
   verein: string;
   date: DateAsString;
@@ -467,6 +507,7 @@ export enum LocationType {
   INSTRUMENTENDEPOT = "INSTRUMENTENDEPOT",
   WETTSPIELLOKAL = "WETTSPIELLOKAL",
   JURYFEEDBACK = "JURYFEEDBACK",
+  PLATZKONZERT = "PLATZKONZERT",
 }
 
 export enum UserRole {
