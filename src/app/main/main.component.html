@@ -17,16 +17,16 @@
     </p>
 
     <div class="einsatzzeiten" *ngIf="verein.timetableEntries">
-      <h2>Einsatzzeiten</h2>
+      <h3>Einsatzzeiten</h3>
 
-      <div *ngFor="let entry of verein.timetableEntries">
-        <div style="display: grid; grid-template-columns: repeat(5, minmax(0, 0.5fr)); column-gap: 10px;">
-          <span>{{entry.modul}}</span>
-          <span>{{entry.type}}</span>
-          <span>{{entry.date | date: 'dd.MM.yyyy'}}</span>
-          <span>{{entry.start}} - {{entry.end}}</span>
-          <span>{{entry.location}}</span>
-        </div>
+      <div class="timetable-grid">
+        <ng-container *ngFor="let entry of verein.timetableEntries">
+          <div>{{entry.date | date: 'EEEE, dd.MM.yyyy'}}</div>
+          <div>{{entry.time}}</div>
+          <div>{{entry.competition}}</div>
+          <div><a [href]="entry.location.googleMapsAddress" target="_blank">{{entry.location.name}}</a></div>
+          <div>&nbsp;</div>
+        </ng-container>
       </div>
     </div>
 
