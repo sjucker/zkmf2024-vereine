@@ -24,7 +24,7 @@ h2 {
 
 .timetable-grid {
   display: grid;
-  grid-template-columns: repeat(4, max-content) 0fr;
+  grid-template-columns: repeat(5, max-content) 0fr;
   column-gap: variables.$padding;
 }
 

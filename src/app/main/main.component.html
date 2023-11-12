@@ -23,6 +23,7 @@
         <ng-container *ngFor="let entry of verein.timetableEntries">
           <div>{{entry.date | date: 'EEEE'}}</div>
           <div>{{entry.time}}</div>
+          <div>{{entry.type}}</div>
           <div>{{entry.competition}}</div>
           <div><a [href]="entry.location.googleMapsAddress" target="_blank">{{entry.location.name}}</a></div>
           <div>&nbsp;</div>
