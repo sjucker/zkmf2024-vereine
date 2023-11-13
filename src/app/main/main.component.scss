@@ -22,6 +22,12 @@ h2 {
   padding: variables.$padding;
 }
 
+.errata {
+  border: solid 1px variables.$gelb;
+  background-color: variables.$gelb-transparent;
+  padding: variables.$padding;
+}
+
 .timetable-grid {
   display: grid;
   grid-template-columns: repeat(5, max-content) 0fr;

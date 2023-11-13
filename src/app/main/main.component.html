@@ -30,6 +30,15 @@
         </ng-container>
       </div>
     </div>
+    <p *ngIf="hasTimetableEntries && hasErrata">&nbsp;</p>
+
+    <div class="errata" *ngIf="hasErrata">
+      <h3>Errata</h3>
+      <div *ngFor="let err of verein.errata">
+        <strong>{{err.description}}</strong><br/>
+        <div style="white-space: pre-wrap;">{{err.text}}</div>
+      </div>
+    </div>
 
     <app-messages [messages]="verein.messages"/>
 
