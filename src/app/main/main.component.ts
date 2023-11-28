@@ -274,7 +274,7 @@ export class MainComponent implements OnInit {
   }
 
   get hasTimetableEntries(): boolean {
-    return false && (this.verein?.timetableEntries.length ?? 0) > 0;
+    return (this.verein?.timetableEntries.length ?? 0) > 0;
   }
 
   get hasErrata(): boolean {
