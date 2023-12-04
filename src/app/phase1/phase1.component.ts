@@ -68,11 +68,11 @@ export class Phase1Component {
   }
 
   get logoImgSrc(): string {
-    return `${environment.baseUrl}/public/image/${this.verein?.info.logoImgId}`;
+    return `${environment.imageDeliveryUrl}${this.verein?.info.logoImgCloudflareId}/public`;
   }
 
   get bildImgSrc(): string {
-    return `${environment.baseUrl}/public/image/${this.verein?.info.bildImgId}`;
+    return `${environment.imageDeliveryUrl}${this.verein?.info.bildImgCloudflareId}/public`;
   }
 
   get harmonieVisible(): boolean {
