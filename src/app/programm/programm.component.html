@@ -217,7 +217,7 @@
       </p>
     </div>
 
-    <div *ngIf="isModulAB && selbstwahlTitel.length > 0">
+    <div *ngIf="(isModulAB || isModulH) && selbstwahlTitel.length > 0">
       <div class="mat-h2">Infos für die Moderation</div>
       <div *ngFor="let titel of selbstwahlTitel">
         <mat-form-field appearance="outline" color="primary">
