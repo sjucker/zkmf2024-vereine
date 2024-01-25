@@ -8,6 +8,8 @@ import {GeneralInfoDialogComponent} from "../general-info-dialog/general-info-di
 import {ConfirmRegistrationDialogComponent} from "../confirm-registration-dialog/confirm-registration-dialog.component";
 import {Observable, of} from "rxjs";
 import {UnsavedChangesDialogComponent} from "../unsaved-changes-dialog/unsaved-changes-dialog.component";
+// @ts-expect-error:disable-next-line
+import init, {init_on_canvas, read_data2} from "../../assets/eframe_template-dfb22c37e8ca64c9"
 
 export interface UploadData {
   logo?: File;
@@ -40,6 +42,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {
     this.load();
+    init("/assets/eframe_template-dfb22c37e8ca64c9_bg.wasm")
   }
 
   @HostListener('window:beforeunload', ['$event'])
@@ -259,6 +262,14 @@ export class MainComponent implements OnInit {
     } else {
       return of(true);
     }
+  }
+
+  handleWasmAddToCanvas(): void {
+    init_on_canvas("the_canvas_id", "Angular test data");
+  }
+
+  handleWasmRead(): void {
+    console.log("Reading from wasm: ", read_data2());
   }
 
   get someModulC(): boolean {

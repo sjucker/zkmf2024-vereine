@@ -75,6 +75,13 @@
     </div>
   </div>
 
+  <h1>Egui Test</h1>
+  <p></p><button id="init" (click)="handleWasmAddToCanvas()"><strong>Add to canvas</strong></button><p></p>
+  <p></p><button id="read" (click)="handleWasmRead()"><strong>Read data</strong></button><p></p>
+  <div style="width: 500px; height: 400px; position: relative">
+    <canvas id="the_canvas_id"></canvas>
+  </div>
+
   <mat-card appearance="outlined" *ngIf="notFound">
     <mat-card-content>
       <p>Es wurde kein Verein für diesen Login gefunden.</p>
