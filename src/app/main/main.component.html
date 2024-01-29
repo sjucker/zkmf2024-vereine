@@ -8,6 +8,7 @@
   <div class="max-width-container" *ngIf="verein">
     <h2>Herzlich willkommen bei der Anmeldung für das ZKMF 2024</h2>
     <p class="button-container">
+      <button mat-flat-button color="primary" (click)="openFestkartenDialog()">Festkartenpreise</button>
       <button mat-stroked-button color="primary" (click)="openInfoDialog()">Allgemeine Informationen</button>
       <button mat-flat-button color="primary"
               *ngIf="canConfirmRegistration()"
@@ -21,11 +22,11 @@
 
       <div class="timetable-grid">
         <ng-container *ngFor="let entry of verein.timetableEntries">
-          <div>{{entry.date | date: 'EEEE'}}</div>
-          <div>{{entry.time}}</div>
-          <div>{{entry.type}}</div>
-          <div>{{entry.competition}}</div>
-          <div><a [href]="entry.location.googleMapsAddress" target="_blank">{{entry.location.name}}</a></div>
+          <div>{{ entry.date | date: 'EEEE' }}</div>
+          <div>{{ entry.time }}</div>
+          <div>{{ entry.type }}</div>
+          <div>{{ entry.competition }}</div>
+          <div><a [href]="entry.location.googleMapsAddress" target="_blank">{{ entry.location.name }}</a></div>
           <div>&nbsp;</div>
         </ng-container>
       </div>
@@ -35,8 +36,8 @@
     <div class="errata" *ngIf="hasErrata">
       <h3>Errata</h3>
       <div *ngFor="let err of verein.errata">
-        <strong>{{err.description}}</strong><br/>
-        <div style="white-space: pre-wrap;">{{err.text}}</div>
+        <strong>{{ err.description }}</strong><br/>
+        <div style="white-space: pre-wrap;">{{ err.text }}</div>
       </div>
     </div>
 

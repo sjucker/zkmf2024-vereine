@@ -8,6 +8,7 @@ import {GeneralInfoDialogComponent} from "../general-info-dialog/general-info-di
 import {ConfirmRegistrationDialogComponent} from "../confirm-registration-dialog/confirm-registration-dialog.component";
 import {Observable, of} from "rxjs";
 import {UnsavedChangesDialogComponent} from "../unsaved-changes-dialog/unsaved-changes-dialog.component";
+import {FestkartenDialogComponent} from "../festkarten-dialog/festkarten-dialog.component";
 
 export interface UploadData {
   logo?: File;
@@ -189,6 +190,10 @@ export class MainComponent implements OnInit {
         });
       }
     });
+  }
+
+  openFestkartenDialog() {
+    this.dialog.open(FestkartenDialogComponent);
   }
 
   openInfoDialog() {
