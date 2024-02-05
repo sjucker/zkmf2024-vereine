@@ -48,6 +48,9 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {UnsavedChangesDialogComponent} from './unsaved-changes-dialog/unsaved-changes-dialog.component';
 import {MessagesComponent} from './messages/messages.component';
 import {registerLocaleData} from "@angular/common";
+import {Phase4Component} from "./phase4/phase4.component";
+import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
+import {MatMomentDateModule} from "@angular/material-moment-adapter";
 
 @NgModule({
   declarations: [
@@ -66,8 +69,9 @@ import {registerLocaleData} from "@angular/common";
     ConfirmRegistrationDialogComponent,
     PhaseStatusComponent,
     DurationInputComponent,
-    Phase2Component,
     Phase1Component,
+    Phase2Component,
+    Phase4Component,
     ProgrammComponent,
     TambourenTitelComponent,
     ParademusikTitelComponent,
@@ -98,6 +102,10 @@ import {registerLocaleData} from "@angular/common";
     MatDialogModule,
     MatRadioModule,
     MatAutocompleteModule,
+    MatDatepickerInput,
+    MatDatepickerToggle,
+    MatDatepicker,
+    MatMomentDateModule,
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},
