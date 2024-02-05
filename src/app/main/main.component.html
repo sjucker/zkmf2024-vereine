@@ -45,6 +45,17 @@
 
     <p>&nbsp;</p>
 
+    <h2>Phase 4 (bis 01.04.2024)
+      <app-phase-status [status]="verein.phase4Status"></app-phase-status>
+    </h2>
+    <app-phase4 [detail]="verein.anmeldungDetail"
+                [saving]="saving"
+                [unsavedChanges]="unsavedChanges"
+                (changed)="onChange()"
+                (doSave)="save(false)"></app-phase4>
+
+    <p>&nbsp;</p>
+
     <h2>Phase 1 (bis 30.06.2023)
       <app-phase-status [status]="verein.phase1Status"></app-phase-status>
     </h2>

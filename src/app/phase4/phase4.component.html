@@ -1,0 +1,362 @@
+<mat-accordion>
+  <mat-expansion-panel expanded>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Details</mat-panel-title>
+      <mat-panel-description>
+        <app-validation-state [valid]="detail.valid"></app-validation-state>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <h2>Festunterlagen</h2>
+    <div class="form-layout">
+      <div style="flex: 3"><strong>Festführer</strong><br/>Anzahl Festführer in Papierform – alternativ wird eine Fest-App mit allen wichtigen Angaben zur Verfügung stehen.</div>
+      <mat-form-field appearance="outline">
+        <mat-label>Anzahl</mat-label>
+        <input type="number"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.festfuehrerAmount"
+               (ngModelChange)="onChange()"
+               required>
+      </mat-form-field>
+      <div>&nbsp;</div>
+    </div>
+
+    <div class="form-layout">
+      <div style="flex: 3">
+        <strong>Festkarten</strong><br/>Anzahl benötigter Festkarten für Musizierende / Begleitpersonen
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Anzahl Musizierende</mat-label>
+        <input type="number"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.festkartenMusikerAmount"
+               (ngModelChange)="onChange()"
+               required>
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Anzahl Begleitpersonen</mat-label>
+        <input type="number"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.festkartenBegleiterAmount"
+               (ngModelChange)="onChange()"
+               required>
+      </mat-form-field>
+    </div>
+
+    <div><strong>Anzahl Mittagessen (Verpflegungs-Bons)</strong><br/>Es stehen drei Varianten, «Klassisch», «Vegan» sowie
+      «Gluten- und Laktosefrei» zur Auswahl.<br/>&nbsp;
+    </div>
+    <div class="form-layout padding-bottom">
+      <div style="flex: 3">
+        Fleischschmorgericht mit Kartoffelgericht inkl. Salat und Dessert
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Anzahl «Klassisch»</mat-label>
+        <input type="number"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.verpflegungMeat"
+               (ngModelChange)="onChange()"
+               required>
+      </mat-form-field>
+      <div>&nbsp;</div>
+    </div>
+
+    <div class="form-layout">
+      <div style="flex: 3">
+        rotes Thaicurry mit Gemüse und Reis, inkl. Salat und Dessert
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Anzahl «Vegan»</mat-label>
+        <input type="number"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.verpflegungVegan"
+               (ngModelChange)="onChange()"
+               required>
+      </mat-form-field>
+      <div>&nbsp;</div>
+    </div>
+
+    <div class="form-layout">
+      <div style="flex: 3">
+        rotes Thaicurry mit Poulet, Gemüse und Reis, inkl. Salat und Dessert
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Anzahl «Gluten- und Laktosefrei»</mat-label>
+        <input type="number"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.verpflegungAllergies"
+               (ngModelChange)="onChange()"
+               required>
+      </mat-form-field>
+      <div>&nbsp;</div>
+    </div>
+
+    <div class="form-layout">
+      <div style="flex: 3">
+        Teilnehmer ohne Verpflegung
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Anzahl ohne Verpflegung</mat-label>
+        <input type="number"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.verpflegungNone"
+               (ngModelChange)="onChange()"
+               required>
+      </mat-form-field>
+      <div>&nbsp;</div>
+    </div>
+
+    <div>
+      <strong>Essenservice</strong><br/>
+      Für die schnelle und effiziente Abwicklung beim Mittagessen benötigen wir <strong>pro Verein
+      mindestens 4 Personen</strong> (Teilnehmende oder Begleitpersonen), die uns beim Service ihres Vereins
+      unterstützen.
+    </div>
+
+    <div class="form-layout">
+      <mat-form-field appearance="outline">
+        <mat-label>1. Person (Name, Email)</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.verpflegungHelper1"
+               (ngModelChange)="onChange()"
+               required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>2. Person (Name, Email)</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.verpflegungHelper2"
+               (ngModelChange)="onChange()"
+               required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>3. Person (Name, Email)</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.verpflegungHelper3"
+               (ngModelChange)="onChange()"
+               required>
+      </mat-form-field>
+    </div>
+    <div class="form-layout">
+      <mat-form-field appearance="outline">
+        <mat-label>4. Person (Name, Email)</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.verpflegungHelper4"
+               (ngModelChange)="onChange()"
+               required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>5. Person (Name, Email)</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.verpflegungHelper5"
+               (ngModelChange)="onChange()">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>6. Person (Name, Email)</mat-label>
+        <input type="text"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.verpflegungHelper6"
+               (ngModelChange)="onChange()">
+      </mat-form-field>
+    </div>
+
+    <div class="form-layout">
+      <div style="flex: 3">
+        <strong>Party Freitagabend</strong><br/>Anzahl der Festkarten-InhaberInnen (Teilnehmende und Begleitpersonen), die am Freitagabend (gratis) an den Konzerten der «Swiss Band» und der «Stubete
+        Gäng» dabei sein möchten.
+      </div>
+      <mat-form-field appearance="outline">
+        <mat-label>Anzahl</mat-label>
+        <input type="number"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="detail.freitagabendAmount"
+               (ngModelChange)="onChange()"
+               required>
+      </mat-form-field>
+      <div>&nbsp;</div>
+    </div>
+
+    <h2>Organisatorisches</h2>
+
+    <div class="form-layout padding-bottom">
+      <div style="flex: 3">
+        <strong>Anreise</strong><br/>
+        Die Anzahl Parkplätze in der Nähe des Festgeländes ist sehr beschränkt. Wir empfehlen Euch die Anreise mit Bussen (Busparkplätze stehen zur Verfügung) oder mit dem ÖV. Bitte teilt uns mit,
+        falls Ihr mit einem Bus kommt, damit wir genügend Parkraum sicherstellen können.
+      </div>
+      <mat-checkbox [(ngModel)]="detail.anreisePublicTransport"
+                    (ngModelChange)="onChange()">
+        Anreise mit ÖV
+      </mat-checkbox>
+      @if (detail.anreisePublicTransport) {
+        <div>&nbsp;</div>
+      } @else {
+        <mat-form-field appearance="outline">
+          <mat-label>Andere Anreise mit...</mat-label>
+          <input type="text"
+                 autocomplete="off"
+                 matInput
+                 [(ngModel)]="detail.anreiseOtherwise"
+                 (ngModelChange)="onChange()"
+                 maxlength="1024">
+        </mat-form-field>
+      }
+    </div>
+
+    @if (detail.anreisePublicTransport) {
+      <div class="form-layout padding-bottom">
+        <div style="flex: 3">
+          <strong>Kapazitätsplanung ÖV</strong><br/>Es besteht unsererseits die Möglichkeit, dem ZVV diejenigen Vereine zu melden, die mit dem Zug anreisen möchten, so dass seitens der Bahn genügend
+          Rollmaterial eingeplant werden kann. Bitte teilt uns mit, ob Ihr in der <strong>Gruppe oder individuell</strong> mit dem Zug anreisen werdet.
+        </div>
+        <mat-form-field appearance="outline">
+          <mat-label>Anreise</mat-label>
+          <mat-select [(ngModel)]="detail.anreisePublicTransportType" required
+                      (ngModelChange)="onChange()">
+            <mat-option value="Gruppe">Gruppe</mat-option>
+            <mat-option value="individuell">individuell</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div>&nbsp;</div>
+      </div>
+    }
+
+    <div class="form-layout padding-bottom">
+      <div style="flex: 3">
+        <strong>Gehbehinderung</strong><br/>
+        Gibt es im Verein Personen mit einer Gehbehinderung?
+      </div>
+      <mat-checkbox [(ngModel)]="detail.gehbehinderung"
+                    (ngModelChange)="onChange()">
+        Ja
+      </mat-checkbox>
+      <div>&nbsp;</div>
+    </div>
+
+    <h2>Musikalisches</h2>
+
+    <div class="form-layout padding-bottom">
+      <div style="flex: 3">
+        <strong>Einsenden der Partituren</strong><br/>
+        Bitte sendet Eure Original-Partituren in dreifacher Ausführung und
+        unnummeriert bis spätestens am 1. April 2024 an die folgende Adresse:<br/>
+        Peter Luginbühl, Im Moos 3, 8902 Urdorf
+      </div>
+      <mat-checkbox [(ngModel)]="detail.partiturenSent"
+                    (ngModelChange)="onChange()">
+        Versandt?
+      </mat-checkbox>
+      <mat-form-field appearance="outline">
+        <mat-label>Versanddatum</mat-label>
+        <input matInput [matDatepicker]="pickerDate"
+               [(ngModel)]="partiturenSentAt"
+               (dateChange)="onDateChange()"
+               required>
+        <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
+        <mat-datepicker #pickerDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="form-layout padding-bottom">
+      <div style="flex: 3">
+        <strong>Aufstellung der Bühne</strong><br/>Um für Euch die Infrastruktur auf der Bühne bereitzustellen, brauchen wir
+        Angaben zur Anzahl benötigter Stühle pro Stuhlreihe und zur Aufstellung von Schlagwerk/Perkussion.
+      </div>
+
+    </div>
+
+    <div class="form-layout padding-bottom">
+      <div style="flex: 3">
+        <strong>Teilnahme am Gesamtchor (Sonntag)</strong><br/>
+        Seid Ihr dabei? Wir freuen uns auf einen begeisterten und begeisternden Gesamtchor!
+      </div>
+      <mat-checkbox [(ngModel)]="detail.gesamtchor"
+                    (ngModelChange)="onChange()">
+        Ja
+      </mat-checkbox>
+      <div>&nbsp;</div>
+    </div>
+
+    <div class="form-layout padding-bottom">
+      <div style="flex: 3">
+        <strong>Teilnahme am Ad-hoc-Orchester (Samstag)</strong><br/>
+        Habt Ihr Lust, Teil eines einzigartigen musikalischen Erlebnisses zu werden? Dann seid dabei beim Ad-hoc-Orchester im Rahmen des Zürcher Kantonalmusikfests 2024! Am Samstag werdet Ihr die
+        Rangverkündigung umrahmen und dabei die eigens komponierte Festhymne von Tobi Zwyer zum Leben erwecken.
+      </div>
+      <mat-checkbox [(ngModel)]="detail.adhocOrchester"
+                    (ngModelChange)="onChange()">
+        Ja
+      </mat-checkbox>
+      <div>&nbsp;</div>
+    </div>
+
+
+    @if (detail.adhocOrchester) {
+      <div class="padding-bottom">
+        @for (adhoc of detail.adhocOrchesterTeilnehmer; track adhoc) {
+          <div class="form-layout">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input type="text"
+                     autocomplete="off"
+                     matInput
+                     [(ngModel)]="adhoc.name"
+                     (ngModelChange)="onChange()"
+                     required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Email</mat-label>
+              <input type="text"
+                     autocomplete="off"
+                     matInput
+                     [(ngModel)]="adhoc.email"
+                     (ngModelChange)="onChange()"
+                     required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+              <mat-label>Instrument</mat-label>
+              <input type="text"
+                     autocomplete="off"
+                     matInput
+                     [(ngModel)]="adhoc.instrument"
+                     (ngModelChange)="onChange()"
+                     required>
+            </mat-form-field>
+          </div>
+        }
+        <button mat-icon-button color="primary"
+                (click)="addAdhocTeilnehmer()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    }
+
+    <app-action-button buttonLabel="Speichern"
+                       [processing]="saving"
+                       [disabled]="!unsavedChanges"
+                       (buttonClicked)="save()"></app-action-button>
+  </mat-expansion-panel>
+</mat-accordion>
