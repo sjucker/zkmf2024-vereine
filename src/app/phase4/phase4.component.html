@@ -1,12 +1,8 @@
 <mat-accordion>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
-      <mat-panel-title>Details</mat-panel-title>
-      <mat-panel-description>
-        <app-validation-state [valid]="detail.valid"></app-validation-state>
-      </mat-panel-description>
+      <mat-panel-title>Festunterlagen</mat-panel-title>
     </mat-expansion-panel-header>
-    <h2>Festunterlagen</h2>
     <div class="form-layout">
       <div style="flex: 3"><strong>Festführer</strong><br/>Anzahl Festführer in Papierform – alternativ wird eine Fest-App mit allen wichtigen Angaben zur Verfügung stehen.</div>
       <mat-form-field appearance="outline">
@@ -184,7 +180,7 @@
       </mat-form-field>
     </div>
 
-    <div class="form-layout">
+    <div class="form-layout padding-bottom">
       <div style="flex: 3">
         <strong>Party Freitagabend</strong><br/>Anzahl der Festkarten-InhaberInnen (Teilnehmende und Begleitpersonen), die am Freitagabend (gratis) an den Konzerten der «Swiss Band» und der «Stubete
         Gäng» dabei sein möchten.
@@ -200,9 +196,15 @@
       </mat-form-field>
       <div>&nbsp;</div>
     </div>
-
-    <h2>Organisatorisches</h2>
-
+    <app-action-button buttonLabel="Speichern"
+                       [processing]="saving"
+                       [disabled]="!unsavedChanges"
+                       (buttonClicked)="save()"></app-action-button>
+  </mat-expansion-panel>
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Organisatorisches</mat-panel-title>
+    </mat-expansion-panel-header>
     <div class="form-layout padding-bottom">
       <div style="flex: 3">
         <strong>Anreise</strong><br/>
@@ -257,9 +259,16 @@
       </mat-checkbox>
       <div>&nbsp;</div>
     </div>
+    <app-action-button buttonLabel="Speichern"
+                       [processing]="saving"
+                       [disabled]="!unsavedChanges"
+                       (buttonClicked)="save()"></app-action-button>
+  </mat-expansion-panel>
 
-    <h2>Musikalisches</h2>
-
+  <mat-expansion-panel>
+    <mat-expansion-panel-header>
+      <mat-panel-title>Musikalisches</mat-panel-title>
+    </mat-expansion-panel-header>
     <div class="form-layout padding-bottom">
       <div style="flex: 3">
         <strong>Einsenden der Partituren</strong><br/>
