@@ -112,6 +112,10 @@
       <div>&nbsp;</div>
     </div>
 
+    @if (isInvalidAnzahlMenus()) {
+      <div class="error padding-bottom">Die Anzahl Festkarten stimmt nicht mit der Anzahl Mittagessen überein.</div>
+    }
+
     <div>
       <strong>Essenservice</strong><br/>
       Für die schnelle und effiziente Abwicklung beim Mittagessen benötigen wir <strong>pro Verein
@@ -345,12 +349,17 @@
                      (ngModelChange)="onChange()"
                      required>
             </mat-form-field>
+            <div style="flex: 0; min-width: 50px;">
+              @if ($last) {
+                <button mat-icon-button color="primary"
+                        style="flex: 0"
+                        (click)="addAdhocTeilnehmer()">
+                  <mat-icon>add</mat-icon>
+                </button>
+              }
+            </div>
           </div>
         }
-        <button mat-icon-button color="primary"
-                (click)="addAdhocTeilnehmer()">
-          <mat-icon>add</mat-icon>
-        </button>
       </div>
     }
 
