@@ -1,0 +1,6 @@
+@use "../../variables";
+
+.error {
+  color: variables.$rot;
+  font-weight: bold;
+}

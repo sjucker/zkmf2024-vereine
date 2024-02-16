@@ -52,4 +52,18 @@ export class Phase4Component implements OnChanges {
   addAdhocTeilnehmer(): void {
     this.detail.adhocOrchesterTeilnehmer = [...this.detail.adhocOrchesterTeilnehmer, {}]
   }
+
+  isInvalidAnzahlMenus(): boolean {
+    if (this.detail.festkartenMusikerAmount &&
+      this.detail.festkartenBegleiterAmount &&
+      this.detail.verpflegungMeat &&
+      this.detail.verpflegungVegan &&
+      this.detail.verpflegungAllergies &&
+      this.detail.verpflegungNone) {
+      return (this.detail.festkartenMusikerAmount + this.detail.festkartenBegleiterAmount)
+        !== (this.detail.verpflegungMeat + this.detail.verpflegungVegan + this.detail.verpflegungAllergies + this.detail.verpflegungNone);
+    }
+
+    return false;
+  }
 }
