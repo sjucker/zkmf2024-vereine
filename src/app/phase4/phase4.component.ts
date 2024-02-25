@@ -54,14 +54,9 @@ export class Phase4Component implements OnChanges {
   }
 
   isInvalidAnzahlMenus(): boolean {
-    if (this.detail.festkartenMusikerAmount &&
-      this.detail.festkartenBegleiterAmount &&
-      this.detail.verpflegungMeat &&
-      this.detail.verpflegungVegan &&
-      this.detail.verpflegungAllergies &&
-      this.detail.verpflegungNone) {
-      return (this.detail.festkartenMusikerAmount + this.detail.festkartenBegleiterAmount)
-        !== (this.detail.verpflegungMeat + this.detail.verpflegungVegan + this.detail.verpflegungAllergies + this.detail.verpflegungNone);
+    if (this.detail.festkartenMusikerAmount) {
+      return (this.detail.festkartenMusikerAmount + (this.detail.festkartenBegleiterAmount ?? 0))
+        !== ((this.detail.verpflegungMeat ?? 0) + (this.detail.verpflegungVegan ?? 0) + (this.detail.verpflegungAllergies ?? 0) + (this.detail.verpflegungNone ?? 0));
     }
 
     return false;
