@@ -41,7 +41,7 @@
                matInput
                [(ngModel)]="programm.titel"
                (ngModelChange)="onChange()"
-               [disabled]="readOnly"
+               [disabled]="isReadOnly()"
                maxlength="255"
                required>
       </mat-form-field>
@@ -55,7 +55,7 @@
                   required
                   [(ngModel)]="programm.infoModeration"
                   (ngModelChange)="onChange()"
-                  [disabled]="readOnly"></textarea>
+                  [disabled]="isReadOnly()"></textarea>
       </mat-form-field>
     </div>
 
@@ -63,30 +63,30 @@
       <span class="mat-h2">Weitere Angaben</span><br/>
       <mat-checkbox [(ngModel)]="programm.unterhaltungPA"
                     (ngModelChange)="onChange()"
-                    [disabled]="readOnly">PA wird benötigt
+                    [disabled]="isReadOnly()">PA wird benötigt
       </mat-checkbox>
       <div>
         Wir nutzen diese Zusatzinstrumente:
         <mat-checkbox [(ngModel)]="programm.unterhaltungEGitarre"
                       (ngModelChange)="onChange()"
-                      [disabled]="readOnly">E-Gitarre
+                      [disabled]="isReadOnly()">E-Gitarre
         </mat-checkbox>
         <mat-checkbox [(ngModel)]="programm.unterhaltungEBass"
                       (ngModelChange)="onChange()"
-                      [disabled]="readOnly">E-Bass
+                      [disabled]="isReadOnly()">E-Bass
         </mat-checkbox>
         <mat-checkbox [(ngModel)]="programm.unterhaltungKeyboard"
                       (ngModelChange)="onChange()"
-                      [disabled]="readOnly">Keyboard
+                      [disabled]="isReadOnly()">Keyboard
         </mat-checkbox>
         <mat-checkbox [(ngModel)]="programm.unterhaltungGesang"
                       (ngModelChange)="onChange()"
-                      [disabled]="readOnly">Gesang
+                      [disabled]="isReadOnly()">Gesang
         </mat-checkbox>
       </div>
     </div>
 
-    <div *ngIf="!isModulD && !isModulG && !readOnly">
+    <div *ngIf="!isModulD && !isModulG && !isReadOnly()">
       <div class="mat-h2" *ngIf="isModulAB">Selbstwahlstück hinzufügen</div>
       <div class="mat-h2" *ngIf="!isModulAB">Stück hinzufügen</div>
       <div class="form-layout">
@@ -164,7 +164,7 @@
       </p>
       <table class="titel-table">
         <tr>
-          <th *ngIf="!readOnly"></th>
+          <th *ngIf="!isReadOnly()"></th>
           <th>Nr.</th>
           <th>Musikstück</th>
           <th *ngIf="!isModulC">Dauer Stück</th>
@@ -173,7 +173,7 @@
           <th></th>
         </tr>
         <tr *ngFor="let entry of programm.ablauf; let i = index; let first = first; let last = last;">
-          <td *ngIf="!readOnly">
+          <td *ngIf="!isReadOnly()">
             <div *ngIf="first" class="spacer">&nbsp;</div>
             <mat-icon *ngIf="!first" (click)="moveUp(entry)" class="clickable">arrow_upward</mat-icon>
 
@@ -186,12 +186,12 @@
           <td *ngIf="isModulAB || isModulH">
             <app-duration-input *ngIf="!last"
                                 [durationInSeconds]="entry.applausInSeconds ?? 0"
-                                [readOnly]="readOnly"
+                                [readOnly]="isReadOnly()"
                                 (valueChanged)="updateApplaus(entry, $event)"></app-duration-input>
           </td>
           <td>
             <button mat-icon-button color="primary"
-                    *ngIf="!readOnly"
+                    *ngIf="!isReadOnly()"
                     [disabled]="entry.titel.pflichtStueck || !entry.titel.id"
                     (click)="editProgrammTitel(entry)">
               <mat-icon>edit</mat-icon>
@@ -199,7 +199,7 @@
           </td>
           <td>
             <button mat-icon-button color="primary"
-                    *ngIf="!readOnly"
+                    *ngIf="!isReadOnly()"
                     [disabled]="entry.titel.pflichtStueck"
                     (click)="deleteProgrammTitel(entry)">
               <mat-icon>delete</mat-icon>
@@ -230,7 +230,7 @@
                     required
                     [(ngModel)]="titel.infoModeration"
                     (ngModelChange)="onChange()"
-                    [disabled]="readOnly"></textarea>
+                    [disabled]="isReadOnly()"></textarea>
         </mat-form-field>
       </div>
     </div>
@@ -238,12 +238,12 @@
     <div *ngIf="isModulD">
       <app-parademusik-titel label="Komposition 1 (Schweizer Marsch)"
                              [titel]="programm.parademusikTitel1"
-                             [readOnly]="readOnly"
+                             [readOnly]="isReadOnly()"
                              (changed)="onChange()"></app-parademusik-titel>
 
       <app-parademusik-titel label="Komposition 2"
                              [titel]="programm.parademusikTitel2"
-                             [readOnly]="readOnly"
+                             [readOnly]="isReadOnly()"
                              (changed)="onChange()"></app-parademusik-titel>
     </div>
 
@@ -255,7 +255,7 @@
           <mat-radio-group color="primary"
                            [(ngModel)]="programm.tambourenKatAGrundlage1" required
                            (ngModelChange)="onChange()"
-                           [disabled]="readOnly">
+                           [disabled]="isReadOnly()">
             <mat-radio-button [value]="WIRBEL">Wirbel</mat-radio-button>
             <mat-radio-button [value]="RUF">5er Ruf</mat-radio-button>
           </mat-radio-group>
@@ -265,7 +265,7 @@
           <mat-radio-group color="primary"
                            [(ngModel)]="programm.tambourenKatAGrundlage2" required
                            (ngModelChange)="onChange()"
-                           [disabled]="readOnly">
+                           [disabled]="isReadOnly()">
             <mat-radio-button [value]="BATAFLAFLA">Bataflafla</mat-radio-button>
             <mat-radio-button [value]="DOUBLE">Doublé</mat-radio-button>
           </mat-radio-group>
@@ -274,13 +274,13 @@
         <div>
           <h4>Frei gewählter Baslermarsch (BM) oder Marsch (M)</h4>
           <app-tambouren-titel [titel]="programm.tambourenKatATitel1"
-                               [readOnly]="readOnly"
+                               [readOnly]="isReadOnly()"
                                (changed)="onChange()"></app-tambouren-titel>
         </div>
         <div>
           <h4>Frei gewählte Komposition</h4>
           <app-tambouren-titel [titel]="programm.tambourenKatATitel2"
-                               [readOnly]="readOnly"
+                               [readOnly]="isReadOnly()"
                                (changed)="onChange()"></app-tambouren-titel>
         </div>
       </div>
@@ -289,7 +289,7 @@
         <h2>Kategorie B</h2>
         <h4>Komposition</h4>
         <app-tambouren-titel [titel]="programm.tambourenKatBTitel"
-                             [readOnly]="readOnly"
+                             [readOnly]="isReadOnly()"
                              (changed)="onChange()"></app-tambouren-titel>
       </div>
 
@@ -297,7 +297,7 @@
         <h2>Kategorie C</h2>
         <h4>Komposition</h4>
         <app-tambouren-titel [titel]="programm.tambourenKatCTitel"
-                             [readOnly]="readOnly"
+                             [readOnly]="isReadOnly()"
                              (changed)="onChange()"></app-tambouren-titel>
       </div>
     </div>
@@ -312,12 +312,12 @@
                   maxlength="8192"
                   [(ngModel)]="programm.infoModeration"
                   (ngModelChange)="onChange()"
-                  [disabled]="readOnly"></textarea>
+                  [disabled]="isReadOnly()"></textarea>
       </mat-form-field>
     </div>
 
     <app-action-button buttonLabel="Speichern"
-                       *ngIf="!readOnly"
+                       *ngIf="!isReadOnly()"
                        [processing]="saving"
                        [disabled]="!unsavedChanges"
                        (buttonClicked)="save()"></app-action-button>

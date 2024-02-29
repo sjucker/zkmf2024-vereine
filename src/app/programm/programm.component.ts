@@ -216,4 +216,9 @@ export class ProgrammComponent implements OnChanges {
   ngOnChanges() {
     this.unsavedChanges = false;
   }
+
+  isReadOnly(): boolean {
+    // Platzkonzert is allowed to update programm after phase 2 confirmation
+    return this.readOnly && !this.isModulC;
+  }
 }
