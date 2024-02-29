@@ -272,7 +272,7 @@
     <div class="form-layout padding-bottom">
       <div style="flex: 3">
         <strong>Einsenden der Partituren</strong><br/>
-        Bitte sendet Eure Original-Partituren in dreifacher bzw. vierfacher (Modul D - Parademusik) Ausführung und unnummeriert bis spätestens am 1. April 2024 an die folgende Adresse:<br/>
+        Bitte sendet Eure Original-Partituren in dreifacher bzw. vierfacher Ausführung (Modul D - Parademusik) und unnummeriert bis spätestens am 1. April 2024 an die folgende Adresse:<br/>
         Peter Luginbühl, Im Moos 3, 8902 Urdorf
       </div>
       <mat-checkbox [(ngModel)]="detail.partiturenSent"
@@ -304,18 +304,6 @@
 
     <div class="form-layout padding-bottom">
       <div style="flex: 3">
-        <strong>Teilnahme am Gesamtchor (Sonntag, 17:00)</strong><br/>
-        Seid Ihr dabei? Wir freuen uns auf einen begeisterten und begeisternden Gesamtchor!
-      </div>
-      <mat-checkbox [(ngModel)]="detail.gesamtchor"
-                    (ngModelChange)="onChange()">
-        Ja
-      </mat-checkbox>
-      <div>&nbsp;</div>
-    </div>
-
-    <div class="form-layout padding-bottom">
-      <div style="flex: 3">
         <strong>Teilnahme am Ad-hoc-Orchester (Samstag)</strong><br/>
         Habt Ihr Lust, Teil eines einzigartigen musikalischen Erlebnisses zu werden? Dann seid dabei beim Ad-hoc-Orchester im Rahmen des Zürcher Kantonalmusikfests 2024! Am Samstag werdet Ihr die
         Rangverkündigung umrahmen und dabei die eigens komponierte Festhymne von Tobi Zwyer zum Leben erwecken.
@@ -326,7 +314,6 @@
       </mat-checkbox>
       <div>&nbsp;</div>
     </div>
-
 
     @if (detail.adhocOrchester) {
       <div class="padding-bottom">
@@ -374,6 +361,66 @@
         }
       </div>
     }
+
+    <div class="form-layout padding-bottom">
+      <div style="flex: 3">
+        <strong>Teilnahme am Gesamtchor (Sonntag, 17:00)</strong><br/>
+        Seid Ihr dabei? Wir freuen uns auf einen begeisterten und begeisternden Gesamtchor!
+      </div>
+      <mat-checkbox [(ngModel)]="detail.gesamtchor"
+                    (ngModelChange)="onChange()">
+        Ja
+      </mat-checkbox>
+      <div>&nbsp;</div>
+    </div>
+
+    <div class="form-layout padding-bottom">
+      <div style="flex: 3">
+        <strong>Nicht regelmässig mitspielende Musikant*innen</strong><br/>
+        Gemäss Festreglement Art. 7.4 müssen nicht regelmässig mitspielende Musikant*innen gemeldet
+        werden. Auch Aushilfen &amp; Zuzüger, welche nicht zum ordentlichen Mitgliederbestand zählen,
+        benötigen eine Festkarte (wird kontrolliert). Und das, auch wenn sie schon mit einem anderen Verein
+        am Musikfest teilnehmen. Die Musikerpässe werden nicht benötigt.
+      </div>
+    </div>
+
+    <div class="padding-bottom">
+      @for (nichtmitglied of detail.nichtmitglieder; track nichtmitglied) {
+        <div class="form-layout">
+          <mat-form-field appearance="outline">
+            <mat-label>Anzahl</mat-label>
+            <input type="number"
+                   autocomplete="off"
+                   matInput
+                   [(ngModel)]="nichtmitglied.amount"
+                   (ngModelChange)="onChange()"
+                   required>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" style="flex: 2;">
+            <mat-label>Instrument/Stimme</mat-label>
+            <input type="text"
+                   autocomplete="off"
+                   matInput
+                   [(ngModel)]="nichtmitglied.instrument"
+                   (ngModelChange)="onChange()"
+                   required>
+          </mat-form-field>
+
+          <div style="flex: 0; min-width: 50px;">
+            @if ($last) {
+              <button mat-icon-button color="primary"
+                      style="flex: 0"
+                      (click)="addNichtmitglieder()">
+                <mat-icon>add</mat-icon>
+              </button>
+            }
+          </div>
+
+          <div style="flex: 2;">&nbsp;</div>
+        </div>
+      }
+    </div>
 
     <app-action-button buttonLabel="Speichern"
                        [processing]="saving"

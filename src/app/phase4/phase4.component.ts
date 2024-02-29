@@ -53,6 +53,11 @@ export class Phase4Component implements OnChanges {
     this.detail.adhocOrchesterTeilnehmer = [...this.detail.adhocOrchesterTeilnehmer, {}]
   }
 
+  addNichtmitglieder(): void {
+    this.detail.nichtmitglieder = [...this.detail.nichtmitglieder, {}]
+
+  }
+
   isInvalidAnzahlMenus(): boolean {
     if (this.detail.festkartenMusikerAmount) {
       return (this.detail.festkartenMusikerAmount + (this.detail.festkartenBegleiterAmount ?? 0))
