@@ -20,6 +20,13 @@ export interface ForgotPasswordRequestDTO {
   email: string;
 }
 
+export interface JudgePresentationDTO {
+  name: string;
+  modul: string;
+  cloudflareId?: string;
+  presentationText?: string;
+}
+
 export interface JudgeRankingEntryDTO {
   verein: string;
   score?: number;
@@ -471,6 +478,7 @@ export interface JudgeReportCreateDTO {
 
 export interface JuryLoginCreateDTO {
   name: string;
+  firstName: string;
   email: string;
   password: string;
 }
@@ -701,6 +709,8 @@ export enum LocationType {
   WETTSPIELLOKAL = "WETTSPIELLOKAL",
   JURYFEEDBACK = "JURYFEEDBACK",
   PLATZKONZERT = "PLATZKONZERT",
+  INFOSTAND = "INFOSTAND",
+  FESTZELT = "FESTZELT",
 }
 
 export enum PercussionEquipmentType {
