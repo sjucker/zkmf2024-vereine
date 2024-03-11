@@ -51,6 +51,7 @@ import {registerLocaleData} from "@angular/common";
 import {Phase4Component} from "./phase4/phase4.component";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
+import {StageComponent} from "./stage/stage.component";
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import {MatMomentDateModule} from "@angular/material-moment-adapter";
     ParademusikTitelComponent,
     UnsavedChangesDialogComponent,
     MessagesComponent,
+    StageComponent,
   ],
   imports: [
     BrowserModule,
