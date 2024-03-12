@@ -1,0 +1,39 @@
+@use "../../variables";
+@use "../../responsive";
+
+$canvas-width: 1600px;
+$canvas-height: 700px;
+
+.container {
+  padding: variables.$padding;
+
+  .actions-container {
+    display: flex;
+    gap: variables.$padding;
+    padding-bottom: variables.$padding;
+  }
+
+  @media screen and (min-width: $canvas-width) {
+    .info-container {
+      display: none;
+    }
+  }
+
+  .info-container {
+    padding: variables.$padding;
+    border: solid 1px variables.$gelb;
+    background-color: variables.$gelb-transparent;
+    margin-bottom: variables.$padding;
+  }
+
+  .stage-canvas-container {
+    width: $canvas-width;
+    height: $canvas-height;
+    position: relative;
+    max-width: 100%;
+  }
+}
+
+.loading-indicator {
+  height: 4px;
+}

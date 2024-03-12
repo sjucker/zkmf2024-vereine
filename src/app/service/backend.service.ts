@@ -6,7 +6,11 @@ import {
   ForgotPasswordRequestDTO,
   RegisterVereinRequestDTO,
   ResetPasswordRequestDTO,
-  VereinDTO, VereinMessageCreateDTO, VereinMessageDTO, VereinSelectionDTO,
+  VereinDTO,
+  VereinMessageCreateDTO,
+  VereinMessageDTO,
+  VereinSelectionDTO,
+  VereinStageSetupDTO,
   VerifyEmailRequestDTO
 } from "../rest";
 
@@ -55,9 +59,12 @@ export class BackendService {
     return this.httpClient.post<void>(`${this.baseUrl}/public/verein/reset-password`, request);
   }
 
-
   public get(): Observable<VereinDTO> {
     return this.httpClient.get<VereinDTO>(`${this.baseUrl}/secured/verein`);
+  }
+
+  public getStageSetup(): Observable<VereinStageSetupDTO> {
+    return this.httpClient.get<VereinStageSetupDTO>(`${this.baseUrl}/secured/verein/stage`);
   }
 
   public availableVereine(): Observable<VereinSelectionDTO[]> {
@@ -66,6 +73,10 @@ export class BackendService {
 
   public update(verein: VereinDTO): Observable<VereinDTO> {
     return this.httpClient.put<VereinDTO>(`${this.baseUrl}/secured/verein`, verein);
+  }
+
+  public updateStageSetup(stageSetup: VereinStageSetupDTO): Observable<void> {
+    return this.httpClient.put<void>(`${this.baseUrl}/secured/verein/stage`, stageSetup)
   }
 
   confirmRegistration() {
@@ -89,7 +100,7 @@ export class BackendService {
     return this.httpClient.delete<void>(`${this.baseUrl}/secured/verein/bilder-upload/${imageId}`);
   }
 
- public saveMessag(message: string): Observable<VereinMessageDTO> {
+  public saveMessag(message: string): Observable<VereinMessageDTO> {
     const request: VereinMessageCreateDTO = {
       message: message
     };
