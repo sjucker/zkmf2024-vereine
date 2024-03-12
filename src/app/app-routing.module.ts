@@ -7,12 +7,14 @@ import {RegisterComponent} from "./register/register.component";
 import {VerificationComponent} from "./verification/verification.component";
 import {ForgotPasswordComponent} from "./forgot-password/forgot-password.component";
 import {ResetPasswordComponent} from "./reset-password/reset-password.component";
+import {StageComponent} from "./stage/stage.component";
 
 export const LOGIN_PATH = 'login';
 export const ANMELDUNG_PATH = 'nachmeldung';
 export const VERIFICATION_PATH = 'verification';
 export const FORGOT_PASSWORD_PATH = 'passwort-vergessen';
 export const RESET_PASSWORD_PATH = 'reset-passwort';
+export const STAGE_PATH = 'buehnenplan';
 
 const routes: Routes = [
   {
@@ -20,6 +22,12 @@ const routes: Routes = [
     component: MainComponent,
     canActivate: [() => inject(AuthenticationGuard).canActivate()],
     canDeactivate: [(component: MainComponent) => component.canDeactivate()]
+  },
+  {
+    path: STAGE_PATH,
+    component: StageComponent,
+    canActivate: [() => inject(AuthenticationGuard).canActivate()],
+    canDeactivate: [(component: StageComponent) => component.canDeactivate()]
   },
   {
     path: LOGIN_PATH,

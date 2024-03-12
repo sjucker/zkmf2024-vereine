@@ -1,9 +1,10 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {VereinsanmeldungDetailDTO} from "../rest";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import * as moment from "moment";
 import {Moment} from "moment";
+import {Router} from "@angular/router";
+import {STAGE_PATH} from "../app-routing.module";
 
 @Component({
   selector: 'app-phase4',
@@ -25,7 +26,7 @@ export class Phase4Component implements OnChanges {
 
   partiturenSentAt?: Moment;
 
-  constructor(public snackBar: MatSnackBar,
+  constructor(private router: Router,
               public dialog: MatDialog) {
   }
 
@@ -65,5 +66,11 @@ export class Phase4Component implements OnChanges {
     }
 
     return false;
+  }
+
+  navigateToStage(): void {
+    this.router.navigate([STAGE_PATH]).catch(reason => {
+      console.error(reason);
+    });
   }
 }
