@@ -1,8 +1,29 @@
 <div>
-    <!-- TODO remove the next line and the wrapping div, as it is only for testing-->
-    <p><button id="init" (click)="testWasmAddToCanvas()"><strong>Add to canvas</strong></button>&nbsp;&nbsp;<button id="init-with-data" (click)="testWasmAddToCanvasWithData()"><strong>Add to canvas with data</strong></button></p>
-    <p><button id="set-data" (click)="testWasmSetData()"><strong>Set loaded data</strong></button>&nbsp;&nbsp;<button id="reset-data" (click)="testWasmResetData()"><strong>Reset data</strong></button>&nbsp;&nbsp;<button id="read-data" (click)="testWasmGetData()"><strong>Read data (check logs)</strong></button></p>
-    <div style="width: 1600px; height: 700px; position: relative">
-        <canvas id="stage_canvas"></canvas>
+  <app-header header="ZKMF2024 - Vereinsbereich"></app-header>
+  <div class="loading-indicator">
+    <mat-progress-bar mode="indeterminate" color="accent"
+                      *ngIf="loading()"></mat-progress-bar>
+  </div>
+
+  <div class="container">
+    <div class="info-container">
+      Bitte ein Gerät mit einer höheren Auflösung verwenden.
     </div>
+
+    <h2>Bühnenplan</h2>
+
+    <div class="actions-container">
+      <button mat-stroked-button
+              (click)="navigateBack()">zurück
+      </button>
+
+      <app-action-button buttonLabel="Speichern"
+                         [processing]="saving()"
+                         (buttonClicked)="save()"></app-action-button>
+    </div>
+
+    <div class="stage-canvas-container">
+      <canvas [id]="canvasId"></canvas>
+    </div>
+  </div>
 </div>
