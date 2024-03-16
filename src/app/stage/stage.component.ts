@@ -1,16 +1,18 @@
-import {AfterViewInit, Component, OnInit, signal} from '@angular/core';
+import {Component, OnInit, signal} from '@angular/core';
 import init, {add, read_data} from "../../assets/wasm_stage"
 import {BackendService} from "../service/backend.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {VereinStageSetupDTO} from "../rest";
 import {Router} from "@angular/router";
+import {combineLatestWith} from "rxjs";
+import {fromPromise} from "rxjs/internal/observable/innerFrom";
 
 @Component({
   selector: 'app-stage',
   templateUrl: './stage.component.html',
   styleUrls: ['./stage.component.scss']
 })
-export class StageComponent implements OnInit, AfterViewInit {
+export class StageComponent implements OnInit {
 
   canvasId = 'stage-canvas';
 
@@ -26,7 +28,17 @@ export class StageComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.loading.set(true);
-    init("/assets/stager-3ab7e46af3d2a755_bg.wasm");
+
+    const wasm$ = fromPromise(init("/assets/stager-3ab7e46af3d2a755_bg.wasm"));
+    const data$ = this.backendService.getStageSetup();
+
+    wasm$.pipe(
+      combineLatestWith(data$)
+    ).subscribe((data) => {
+      this.stageSetup = data[1];
+      this.addToCanvas(data[1].stageSetup);
+      this.loading.set(false);
+    });
   }
 
   save() {
@@ -54,19 +66,7 @@ export class StageComponent implements OnInit, AfterViewInit {
       });
   }
 
-  ngAfterViewInit(): void {
-    this.backendService.getStageSetup().subscribe(value => {
-      this.stageSetup = value;
-      setTimeout(() => {
-        // wait some time so stage is initialised
-        // TODO better solution? wait for some signal from canvas?
-        this.loading.set(false);
-        this.addToCanvas(value.stageSetup);
-      }, 1000);
-    });
-  }
-
-  addToCanvas(data: string): void {
+  private addToCanvas(data: string): void {
     add(this.canvasId, data);
   }
 
