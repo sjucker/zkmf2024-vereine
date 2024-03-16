@@ -13,7 +13,7 @@ $canvas-height: 700px;
     padding-bottom: variables.$padding;
   }
 
-  @media screen and (min-width: $canvas-width) {
+  @media screen and (min-width: ($canvas-width + (2 * variables.$padding))) {
     .info-container {
       display: none;
     }
