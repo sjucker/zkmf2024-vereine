@@ -53,6 +53,7 @@
       <app-phase-status [status]="verein.phase4Status"></app-phase-status>
     </h2>
     <app-phase4 [detail]="verein.anmeldungDetail"
+                [showStageSetup]="hasStageSetup"
                 [saving]="saving"
                 [unsavedChanges]="unsavedChanges"
                 (changed)="onChange()"
