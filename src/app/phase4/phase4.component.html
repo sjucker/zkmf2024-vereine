@@ -290,16 +290,17 @@
       </mat-form-field>
     </div>
 
-    <div class="form-layout padding-bottom">
-      <div style="flex: 3">
-        <strong>Aufstellung der Bühne</strong><br/>Um für Euch die Infrastruktur auf der Bühne bereitzustellen, brauchen wir
-        Angaben zur Anzahl benötigter Stühle pro Stuhlreihe und zur Aufstellung von Schlagwerk/Perkussion.
+    @if (showStageSetup) {
+      <div class="form-layout padding-bottom">
+        <div style="flex: 3">
+          <strong>Aufstellung der Bühne</strong><br/>Um für Euch die Infrastruktur auf der Bühne bereitzustellen, brauchen wir
+          Angaben zur Anzahl benötigter Stühle pro Stuhlreihe und zur Aufstellung von Schlagwerk/Perkussion.
+        </div>
+        <div style="flex: 2">
+          <button color="primary" mat-flat-button (click)="navigateToStage()">Zum Bühnenplan</button>
+        </div>
       </div>
-      <div style="flex: 2">
-        <button color="primary" mat-flat-button (click)="navigateToStage()">Zum Bühnenplan</button>
-      </div>
-
-    </div>
+    }
 
     <div class="form-layout padding-bottom">
       <div style="flex: 3">

@@ -274,6 +274,10 @@ export class MainComponent implements OnInit {
     return this.verein?.programme.every(programm => programm.modul === Modul.C) ?? false;
   }
 
+  get hasStageSetup(): boolean {
+    return this.verein?.programme.some(programm => programm.modul === Modul.A || programm.modul === Modul.B || programm.modul === Modul.H) ?? false;
+  }
+
   get phase2ReadOnly(): boolean {
     return !!this.verein?.phase2ConfirmedAt;
   }
