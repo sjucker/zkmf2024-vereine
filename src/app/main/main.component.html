@@ -30,7 +30,10 @@
           <div>&nbsp;</div>
         </ng-container>
       </div>
-      <div><b>Mittagessen</b>: {{ verein.lunchTime | slice: 0 : 5 }} Uhr (bitte pünktlich erscheinen)</div>
+      <div><b>Mittagessen</b>: {{ verein.lunchTime | slice: 0 : 5 }} Uhr im
+        <a href="https://www.google.com/maps?q=47.386092494172,8.424727317603" target="_blank">Festzelt Urdorf</a>
+        (bitte pünktlich erscheinen)
+      </div>
     </div>
     <p *ngIf="hasTimetableEntries && hasErrata">&nbsp;</p>
 
