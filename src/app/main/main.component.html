@@ -20,7 +20,7 @@
     <div class="einsatzzeiten" *ngIf="hasTimetableEntries">
       <h3>Einsatzzeiten</h3>
 
-      <div class="timetable-grid">
+      <div class="timetable-grid padding-bottom">
         <ng-container *ngFor="let entry of verein.timetableEntries">
           <div>{{ entry.date | date: 'EEEE' }}</div>
           <div>{{ entry.time }}</div>
@@ -30,6 +30,7 @@
           <div>&nbsp;</div>
         </ng-container>
       </div>
+      <div><b>Mittagessen</b>: {{ verein.lunchTime | slice: 0 : 5 }} Uhr (bitte pünktlich erscheinen)</div>
     </div>
     <p *ngIf="hasTimetableEntries && hasErrata">&nbsp;</p>
 
