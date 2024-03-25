@@ -71,9 +71,9 @@ export class StageComponent implements OnInit {
   private addToCanvas(data: string): void {
     if (this.stageSetup) {
       if (this.stageSetup.modul === Modul.A || this.stageSetup.modul === Modul.B) {
-        add_modul_ab_editor(this.canvasId, 850, this.stageSetup.locationIdentifier, data);
+        add_modul_ab_editor(this.canvasId, 900, this.stageSetup.locationIdentifier, data);
       } else if (this.stageSetup.modul === Modul.H) {
-        add_modul_h_editor(this.canvasId, 850, this.stageSetup.locationIdentifier, data);
+        add_modul_h_editor(this.canvasId, 900, this.stageSetup.locationIdentifier, data);
       }
     }
   }
