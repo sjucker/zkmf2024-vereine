@@ -1,7 +1,7 @@
 @use "../../variables";
 @use "../../responsive";
 
-$canvas-width: 1300px;
+$canvas-width: 1280px;
 $canvas-height: 600px;
 
 .container {
@@ -24,6 +24,14 @@ $canvas-height: 600px;
     border: solid 1px variables.$gelb;
     background-color: variables.$gelb-transparent;
     margin-bottom: variables.$padding;
+  }
+
+  .help-container {
+    padding: variables.$padding;
+    border: solid 1px variables.$blau;
+    background-color: variables.$blau-transparent;
+    margin-bottom: variables.$padding;
+    margin-top: variables.$padding;
   }
 
   .stage-canvas-container {
