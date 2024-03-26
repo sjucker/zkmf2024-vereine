@@ -26,29 +26,44 @@
       <canvas [id]="canvasId"></canvas>
     </div>
 
-    <div class="form-layout">
-      <mat-checkbox [(ngModel)]="stageSetup.dirigentenpodest"
-                    (ngModelChange)="onChange()">Dirigentenpodest benötigt
-      </mat-checkbox>
+    <div class="max-width-container">
+      <div class="form-layout">
+        <mat-checkbox [(ngModel)]="stageSetup.dirigentenpodest"
+                      (ngModelChange)="onChange()">Dirigentenpodest benötigt
+        </mat-checkbox>
 
-      <mat-form-field appearance="outline">
-        <mat-label>Anzahl Schlägelablagen</mat-label>
-        <input type="number"
-               autocomplete="off"
-               matInput
-               [(ngModel)]="stageSetup.ablagenAmount"
-               (ngModelChange)="onChange()">
+        <mat-form-field appearance="outline">
+          <mat-label>Anzahl Schlägelablagen</mat-label>
+          <input type="number"
+                 autocomplete="off"
+                 matInput
+                 [(ngModel)]="stageSetup.ablagenAmount"
+                 (ngModelChange)="onChange()">
+        </mat-form-field>
+        <div style="flex: 3;"></div>
+      </div>
+
+      <mat-form-field appearance="outline" color="primary">
+        <mat-label>Erläuterungen zum Bühnenplan</mat-label>
+        <textarea matInput
+                  cdkTextareaAutosize
+                  cdkAutosizeMinRows="3"
+                  cdkAutosizeMaxRows="15"
+                  maxlength="4096"
+                  [(ngModel)]="stageSetup.comment"
+                  (ngModelChange)="onChange()"></textarea>
       </mat-form-field>
-      <div style="flex: 3;"></div>
     </div>
 
-    <div class="max-width-container help-container">
-      <h3>Informationen</h3>
-      <ul>
-        <li>Ziehe die Instrumente auf die blauen Bühnenelemente, um sie zu platzieren. Um ein Instrument zu entfernen, ziehe es auf das Abfallsymbol.</li>
-        <li>Die Anzahl der benötigten Stühle muss pro Sitzreihe eingegeben werden.</li>
-        <li>Dies ist eine schematische Darstellung zur Vorbereitung der Bühne. Die genaue Platzierung der Instrumente/Stühle/Notenständer obliegt dem Verein.</li>
-      </ul>
+    <div class="max-width-container">
+      <div class="help-container">
+        <h3>Informationen</h3>
+        <ul>
+          <li>Ziehe die Instrumente auf die blauen Bühnenelemente, um sie zu platzieren. Um ein Instrument zu entfernen, ziehe es auf das Abfallsymbol.</li>
+          <li>Die Anzahl der benötigten Stühle muss pro Sitzreihe eingegeben werden.</li>
+          <li>Dies ist eine schematische Darstellung zur Vorbereitung der Bühne. Die genaue Platzierung der Instrumente/Stühle/Notenständer obliegt dem Verein.</li>
+        </ul>
+      </div>
     </div>
   </div>
 </div>
