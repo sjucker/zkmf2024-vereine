@@ -18,7 +18,9 @@ export class StageComponent implements OnInit {
 
   canvasId = 'stage-canvas';
 
-  stageSetup?: VereinStageSetupDTO;
+  stageSetup: VereinStageSetupDTO = {stageSetup: "{}", dirigentenpodest: false, locationIdentifier: ""};
+
+  pendingChanges = signal(false);
 
   loading = signal(false);
   saving = signal(false);
@@ -51,6 +53,7 @@ export class StageComponent implements OnInit {
         .subscribe({
           next: () => {
             this.saving.set(false);
+            this.pendingChanges.set(false);
             this.snackBar.open('Speichern war erfolgreich', undefined, {
               verticalPosition: 'top',
               horizontalPosition: 'center',
@@ -78,7 +81,7 @@ export class StageComponent implements OnInit {
   }
 
   canDeactivate(): Observable<boolean> {
-    if (is_data_dirty()) {
+    if (this.pendingChanges() || is_data_dirty()) {
       return this.dialog.open(UnsavedChangesDialogComponent, {
         disableClose: true,
         autoFocus: false
@@ -92,5 +95,9 @@ export class StageComponent implements OnInit {
     this.router.navigate(['/']).catch(reason => {
       console.error(reason);
     })
+  }
+
+  onChange() {
+    this.pendingChanges.set(true);
   }
 }
