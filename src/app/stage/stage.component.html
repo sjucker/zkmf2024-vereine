@@ -26,6 +26,22 @@
       <canvas [id]="canvasId"></canvas>
     </div>
 
+    <div class="form-layout">
+      <mat-checkbox [(ngModel)]="stageSetup.dirigentenpodest"
+                    (ngModelChange)="onChange()">Dirigentenpodest benötigt
+      </mat-checkbox>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Anzahl Schlägelablagen</mat-label>
+        <input type="number"
+               autocomplete="off"
+               matInput
+               [(ngModel)]="stageSetup.ablagenAmount"
+               (ngModelChange)="onChange()">
+      </mat-form-field>
+      <div style="flex: 3;"></div>
+    </div>
+
     <div class="max-width-container help-container">
       <h3>Informationen</h3>
       <ul>

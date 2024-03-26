@@ -26,12 +26,14 @@ $canvas-height: 600px;
     margin-bottom: variables.$padding;
   }
 
+  .form-layout {
+    margin-top: variables.$padding;
+  }
+
   .help-container {
     padding: variables.$padding;
     border: solid 1px variables.$blau;
     background-color: variables.$blau-transparent;
-    margin-bottom: variables.$padding;
-    margin-top: variables.$padding;
   }
 
   .stage-canvas-container {
