@@ -1,4 +1,4 @@
-import {Component, OnInit, signal} from '@angular/core';
+import {Component, HostListener, OnInit, signal} from '@angular/core';
 import init, {add_editor, is_data_dirty, read_data_for_save} from "../../assets/wasm_stage"
 import {BackendService} from "../service/backend.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -80,8 +80,15 @@ export class StageComponent implements OnInit {
     }
   }
 
+  @HostListener('window:beforeunload', ['$event'])
+  handleClose($event: BeforeUnloadEvent) {
+    if (this.hasUnsavedChanges()) {
+      $event.returnValue = 'unsavedChanges';
+    }
+  }
+
   canDeactivate(): Observable<boolean> {
-    if (this.pendingChanges() || is_data_dirty()) {
+    if (this.hasUnsavedChanges()) {
       return this.dialog.open(UnsavedChangesDialogComponent, {
         disableClose: true,
         autoFocus: false
@@ -89,6 +96,10 @@ export class StageComponent implements OnInit {
     } else {
       return of(true);
     }
+  }
+
+  private hasUnsavedChanges() {
+    return this.pendingChanges() || is_data_dirty();
   }
 
   navigateBack() {
