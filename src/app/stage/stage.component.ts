@@ -1,11 +1,13 @@
 import {Component, OnInit, signal} from '@angular/core';
-import init, {add_modul_ab_editor, add_modul_h_editor, read_data} from "../../assets/wasm_stage"
+import init, {add_editor, is_data_dirty, read_data_for_save} from "../../assets/wasm_stage"
 import {BackendService} from "../service/backend.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Modul, VereinStageSetupDTO} from "../rest";
+import {VereinStageSetupDTO} from "../rest";
 import {Router} from "@angular/router";
-import {combineLatestWith} from "rxjs";
+import {combineLatestWith, Observable, of} from "rxjs";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
+import {UnsavedChangesDialogComponent} from "../unsaved-changes-dialog/unsaved-changes-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-stage',
@@ -23,7 +25,8 @@ export class StageComponent implements OnInit {
 
   constructor(private backendService: BackendService,
               private router: Router,
-              public snackBar: MatSnackBar) {
+              public snackBar: MatSnackBar,
+              public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
@@ -44,7 +47,7 @@ export class StageComponent implements OnInit {
   save() {
     if (this.stageSetup) {
       this.saving.set(true);
-      this.backendService.updateStageSetup({...this.stageSetup, stageSetup: read_data()})
+      this.backendService.updateStageSetup({...this.stageSetup, stageSetup: read_data_for_save()})
         .subscribe({
           next: () => {
             this.saving.set(false);
@@ -70,17 +73,19 @@ export class StageComponent implements OnInit {
 
   private addToCanvas(data: string): void {
     if (this.stageSetup) {
-      if (this.stageSetup.modul === Modul.A || this.stageSetup.modul === Modul.B) {
-        add_modul_ab_editor(this.canvasId, 900, this.stageSetup.locationIdentifier, data);
-      } else if (this.stageSetup.modul === Modul.H) {
-        add_modul_h_editor(this.canvasId, 900, this.stageSetup.locationIdentifier, data);
-      }
+      add_editor(this.canvasId, 900, this.stageSetup.locationIdentifier, data);
     }
   }
 
-  canDeactivate(): boolean {
-    // TODO handle pending changes
-    return true;
+  canDeactivate(): Observable<boolean> {
+    if (is_data_dirty()) {
+      return this.dialog.open(UnsavedChangesDialogComponent, {
+        disableClose: true,
+        autoFocus: false
+      }).afterClosed();
+    } else {
+      return of(true);
+    }
   }
 
   navigateBack() {
