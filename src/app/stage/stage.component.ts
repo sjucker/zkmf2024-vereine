@@ -1,5 +1,5 @@
 import {Component, HostListener, OnInit, signal} from '@angular/core';
-import init, {add_editor, is_data_dirty, read_data_for_save} from "../../assets/wasm_stage"
+import init, {add_editor, is_data_dirty, read_data_for_save} from "../../assets/stage/wasm_stage"
 import {BackendService} from "../service/backend.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {VereinStageSetupDTO} from "../rest";
@@ -34,7 +34,7 @@ export class StageComponent implements OnInit {
   ngOnInit(): void {
     this.loading.set(true);
 
-    const wasm$ = fromPromise(init("/assets/stager.wasm"));
+    const wasm$ = fromPromise(init("/assets/stage/stager.wasm"));
     const data$ = this.backendService.getStageSetup();
 
     wasm$.pipe(
@@ -110,5 +110,9 @@ export class StageComponent implements OnInit {
 
   onChange() {
     this.pendingChanges.set(true);
+  }
+
+  get percussionListUrl(): string {
+    return `https://www.zkmf2024.ch/info/perkussion/${this.stageSetup.locationIdentifier}.pdf`;
   }
 }
