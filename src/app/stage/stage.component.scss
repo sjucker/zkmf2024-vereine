@@ -10,7 +10,13 @@ $canvas-height: 600px;
   .actions-container {
     display: flex;
     gap: variables.$padding;
+    align-items: baseline;
     padding-bottom: variables.$padding;
+
+    a {
+      margin-left: 120px;
+      color: variables.$blau;
+    }
   }
 
   @media screen and (min-width: ($canvas-width + (2 * variables.$padding))) {

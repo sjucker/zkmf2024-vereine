@@ -20,6 +20,8 @@
       <app-action-button buttonLabel="Speichern"
                          [processing]="saving()"
                          (buttonClicked)="save()"></app-action-button>
+
+      <a [href]="percussionListUrl" target="_blank">Perkussionsmaterial (PDF)</a>
     </div>
 
     <div class="stage-canvas-container">
@@ -33,12 +35,14 @@
         </mat-checkbox>
 
         <mat-form-field appearance="outline">
-          <mat-label>Anzahl Schlägelablagen</mat-label>
+          <mat-label>Anzahl Schlägelablagen (max. 5)</mat-label>
           <input type="number"
                  autocomplete="off"
                  matInput
                  [(ngModel)]="stageSetup.ablagenAmount"
-                 (ngModelChange)="onChange()">
+                 (ngModelChange)="onChange()"
+                 min="0"
+                 max="5">
         </mat-form-field>
         <div style="flex: 3;"></div>
       </div>
