@@ -101,7 +101,7 @@ export class StageComponent implements OnInit {
   @HostListener('window:beforeunload', ['$event'])
   handleClose($event: BeforeUnloadEvent) {
     if (this.hasUnsavedChanges()) {
-      $event.returnValue = 'unsavedChanges';
+      $event.preventDefault();
     }
   }
 
