@@ -34,16 +34,20 @@ export class StageComponent implements OnInit {
   ngOnInit(): void {
     this.loading.set(true);
 
-    const wasm$ = fromPromise(init("/assets/stage/stager.wasm"));
-    const data$ = this.backendService.getStageSetup();
+    try {
+      const wasm$ = fromPromise(init("/assets/stage/stager.wasm"));
+      const data$ = this.backendService.getStageSetup();
 
-    wasm$.pipe(
-      combineLatestWith(data$)
-    ).subscribe((data) => {
-      this.stageSetup = data[1];
-      this.addToCanvas(data[1].stageSetup);
-      this.loading.set(false);
-    });
+      wasm$.pipe(
+        combineLatestWith(data$)
+      ).subscribe((data) => {
+        this.stageSetup = data[1];
+        this.addToCanvas(data[1].stageSetup);
+        this.loading.set(false);
+      });
+    } catch (e) {
+      this.generalErrorHandling(e);
+    }
   }
 
   save() {
@@ -76,8 +80,22 @@ export class StageComponent implements OnInit {
 
   private addToCanvas(data: string): void {
     if (this.stageSetup) {
-      add_editor(this.canvasId, 900, this.stageSetup.locationIdentifier, data);
+      try {
+        add_editor(this.canvasId, 900, this.stageSetup.locationIdentifier, data);
+      } catch (e) {
+        this.generalErrorHandling(e);
+      }
     }
+  }
+
+  private generalErrorHandling(e: unknown) {
+    console.error(e);
+    this.snackBar.open('Es ist ein Fehler aufgetreten. Bitte die Seite neu laden.', undefined, {
+      verticalPosition: 'top',
+      horizontalPosition: 'center',
+      duration: 5000,
+      panelClass: 'error'
+    });
   }
 
   @HostListener('window:beforeunload', ['$event'])
