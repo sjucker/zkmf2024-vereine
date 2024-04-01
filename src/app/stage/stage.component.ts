@@ -4,7 +4,7 @@ import {BackendService} from "../service/backend.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {VereinStageSetupDTO} from "../rest";
 import {Router} from "@angular/router";
-import {combineLatestWith, Observable, of} from "rxjs";
+import {combineLatestWith, delay, Observable, of} from "rxjs";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
 import {UnsavedChangesDialogComponent} from "../unsaved-changes-dialog/unsaved-changes-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
@@ -39,7 +39,8 @@ export class StageComponent implements OnInit {
       const data$ = this.backendService.getStageSetup();
 
       wasm$.pipe(
-        combineLatestWith(data$)
+        combineLatestWith(data$),
+        delay(200)
       ).subscribe((data) => {
         this.stageSetup = data[1];
         this.addToCanvas(data[1].stageSetup);
