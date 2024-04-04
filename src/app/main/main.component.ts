@@ -282,6 +282,10 @@ export class MainComponent implements OnInit {
     return !!this.verein?.phase2ConfirmedAt;
   }
 
+  get phase4ReadOnly(): boolean {
+    return !!this.verein?.phase4ConfirmedAt;
+  }
+
   get hasTimetableEntries(): boolean {
     return (this.verein?.timetableEntries.length ?? 0) > 0;
   }

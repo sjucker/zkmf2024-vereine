@@ -12,6 +12,7 @@
                matInput
                [(ngModel)]="detail.festfuehrerAmount"
                (ngModelChange)="onChange()"
+               [disabled]="readOnly"
                required>
       </mat-form-field>
       <div>&nbsp;</div>
@@ -28,6 +29,7 @@
                matInput
                [(ngModel)]="detail.festkartenMusikerAmount"
                (ngModelChange)="onChange()"
+               [disabled]="readOnly"
                required>
       </mat-form-field>
       <mat-form-field appearance="outline">
@@ -37,6 +39,7 @@
                matInput
                [(ngModel)]="detail.festkartenBegleiterAmount"
                (ngModelChange)="onChange()"
+               [disabled]="readOnly"
                required>
       </mat-form-field>
     </div>
@@ -55,6 +58,7 @@
                matInput
                [(ngModel)]="detail.verpflegungMeat"
                (ngModelChange)="onChange()"
+               [disabled]="readOnly"
                required>
       </mat-form-field>
       <div>&nbsp;</div>
@@ -71,6 +75,7 @@
                matInput
                [(ngModel)]="detail.verpflegungVegan"
                (ngModelChange)="onChange()"
+               [disabled]="readOnly"
                required>
       </mat-form-field>
       <div>&nbsp;</div>
@@ -87,6 +92,7 @@
                matInput
                [(ngModel)]="detail.verpflegungAllergies"
                (ngModelChange)="onChange()"
+               [disabled]="readOnly"
                required>
       </mat-form-field>
       <div>&nbsp;</div>
@@ -103,6 +109,7 @@
                matInput
                [(ngModel)]="detail.verpflegungNone"
                (ngModelChange)="onChange()"
+               [disabled]="readOnly"
                required>
       </mat-form-field>
       <div>&nbsp;</div>
@@ -127,6 +134,7 @@
                matInput
                [(ngModel)]="detail.verpflegungHelper1"
                (ngModelChange)="onChange()"
+               [disabled]="readOnly"
                required>
       </mat-form-field>
 
@@ -137,6 +145,7 @@
                matInput
                [(ngModel)]="detail.verpflegungHelper2"
                (ngModelChange)="onChange()"
+               [disabled]="readOnly"
                required>
       </mat-form-field>
 
@@ -147,6 +156,7 @@
                matInput
                [(ngModel)]="detail.verpflegungHelper3"
                (ngModelChange)="onChange()"
+               [disabled]="readOnly"
                required>
       </mat-form-field>
     </div>
@@ -158,6 +168,7 @@
                matInput
                [(ngModel)]="detail.verpflegungHelper4"
                (ngModelChange)="onChange()"
+               [disabled]="readOnly"
                required>
       </mat-form-field>
 
@@ -167,7 +178,8 @@
                autocomplete="off"
                matInput
                [(ngModel)]="detail.verpflegungHelper5"
-               (ngModelChange)="onChange()">
+               (ngModelChange)="onChange()"
+               [disabled]="readOnly">
       </mat-form-field>
 
       <mat-form-field appearance="outline">
@@ -176,7 +188,8 @@
                autocomplete="off"
                matInput
                [(ngModel)]="detail.verpflegungHelper6"
-               (ngModelChange)="onChange()">
+               (ngModelChange)="onChange()"
+               [disabled]="readOnly">
       </mat-form-field>
     </div>
 
@@ -192,14 +205,17 @@
                matInput
                [(ngModel)]="detail.freitagabendAmount"
                (ngModelChange)="onChange()"
+               [disabled]="readOnly"
                required>
       </mat-form-field>
       <div>&nbsp;</div>
     </div>
-    <app-action-button buttonLabel="Speichern"
-                       [processing]="saving"
-                       [disabled]="!unsavedChanges"
-                       (buttonClicked)="save()"></app-action-button>
+    @if (!readOnly) {
+      <app-action-button buttonLabel="Speichern"
+                         [processing]="saving"
+                         [disabled]="!unsavedChanges"
+                         (buttonClicked)="save()"></app-action-button>
+    }
   </mat-expansion-panel>
   <mat-expansion-panel>
     <mat-expansion-panel-header>
@@ -212,7 +228,8 @@
         falls Ihr mit einem Bus kommt, damit wir genügend Parkraum sicherstellen können.
       </div>
       <mat-checkbox [(ngModel)]="detail.anreisePublicTransport"
-                    (ngModelChange)="onChange()">
+                    (ngModelChange)="onChange()"
+                    [disabled]="readOnly">
         Anreise mit ÖV
       </mat-checkbox>
       @if (detail.anreisePublicTransport) {
@@ -225,6 +242,7 @@
                  matInput
                  [(ngModel)]="detail.anreiseOtherwise"
                  (ngModelChange)="onChange()"
+                 [disabled]="readOnly"
                  maxlength="1024">
         </mat-form-field>
       }
@@ -239,7 +257,8 @@
         <mat-form-field appearance="outline">
           <mat-label>Anreise</mat-label>
           <mat-select [(ngModel)]="detail.anreisePublicTransportType" required
-                      (ngModelChange)="onChange()">
+                      (ngModelChange)="onChange()"
+                      [disabled]="readOnly">
             <mat-option value="Gruppe">Gruppe</mat-option>
             <mat-option value="individuell">individuell</mat-option>
           </mat-select>
@@ -254,15 +273,18 @@
         Gibt es im Verein Personen mit einer Gehbehinderung?
       </div>
       <mat-checkbox [(ngModel)]="detail.gehbehinderung"
-                    (ngModelChange)="onChange()">
+                    (ngModelChange)="onChange()"
+                    [disabled]="readOnly">
         Ja
       </mat-checkbox>
       <div>&nbsp;</div>
     </div>
-    <app-action-button buttonLabel="Speichern"
-                       [processing]="saving"
-                       [disabled]="!unsavedChanges"
-                       (buttonClicked)="save()"></app-action-button>
+    @if (!readOnly) {
+      <app-action-button buttonLabel="Speichern"
+                         [processing]="saving"
+                         [disabled]="!unsavedChanges"
+                         (buttonClicked)="save()"></app-action-button>
+    }
   </mat-expansion-panel>
 
   <mat-expansion-panel>
@@ -276,7 +298,8 @@
         Peter Luginbühl, Im Moos 3, 8902 Urdorf
       </div>
       <mat-checkbox [(ngModel)]="detail.partiturenSent"
-                    (ngModelChange)="onChange()">
+                    (ngModelChange)="onChange()"
+                    [disabled]="readOnly">
         Versandt?
       </mat-checkbox>
       <mat-form-field appearance="outline">
@@ -284,6 +307,7 @@
         <input matInput [matDatepicker]="pickerDate"
                [(ngModel)]="partiturenSentAt"
                (dateChange)="onDateChange()"
+               [disabled]="readOnly"
                required>
         <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
         <mat-datepicker #pickerDate></mat-datepicker>
@@ -309,7 +333,8 @@
         Rangverkündigung umrahmen und dabei die eigens komponierte Festhymne von Tobi Zwyer zum Leben erwecken.
       </div>
       <mat-checkbox [(ngModel)]="detail.adhocOrchester"
-                    (ngModelChange)="onChange()">
+                    (ngModelChange)="onChange()"
+                    [disabled]="readOnly">
         Ja
       </mat-checkbox>
       <div>&nbsp;</div>
@@ -326,6 +351,7 @@
                      matInput
                      [(ngModel)]="adhoc.name"
                      (ngModelChange)="onChange()"
+                     [disabled]="readOnly"
                      required>
             </mat-form-field>
 
@@ -336,6 +362,7 @@
                      matInput
                      [(ngModel)]="adhoc.email"
                      (ngModelChange)="onChange()"
+                     [disabled]="readOnly"
                      required>
             </mat-form-field>
 
@@ -346,10 +373,11 @@
                      matInput
                      [(ngModel)]="adhoc.instrument"
                      (ngModelChange)="onChange()"
+                     [disabled]="readOnly"
                      required>
             </mat-form-field>
             <div style="flex: 0; min-width: 50px;">
-              @if ($last) {
+              @if ($last && !readOnly) {
                 <button mat-icon-button color="primary"
                         style="flex: 0"
                         (click)="addAdhocTeilnehmer()">
@@ -368,7 +396,8 @@
         Seid Ihr dabei? Wir freuen uns auf einen begeisterten und begeisternden Gesamtchor!
       </div>
       <mat-checkbox [(ngModel)]="detail.gesamtchor"
-                    (ngModelChange)="onChange()">
+                    (ngModelChange)="onChange()"
+                    [disabled]="readOnly">
         Ja
       </mat-checkbox>
       <div>&nbsp;</div>
@@ -392,6 +421,7 @@
                    matInput
                    [(ngModel)]="nichtmitglied.amount"
                    (ngModelChange)="onChange()"
+                   [disabled]="readOnly"
                    required>
           </mat-form-field>
 
@@ -402,11 +432,12 @@
                    matInput
                    [(ngModel)]="nichtmitglied.instrument"
                    (ngModelChange)="onChange()"
+                   [disabled]="readOnly"
                    required>
           </mat-form-field>
 
           <div style="flex: 0; min-width: 50px;">
-            @if ($last) {
+            @if ($last && !readOnly) {
               <button mat-icon-button color="primary"
                       style="flex: 0"
                       (click)="addNichtmitglieder()">
@@ -420,9 +451,11 @@
       }
     </div>
 
-    <app-action-button buttonLabel="Speichern"
-                       [processing]="saving"
-                       [disabled]="!unsavedChanges"
-                       (buttonClicked)="save()"></app-action-button>
+    @if (!readOnly) {
+      <app-action-button buttonLabel="Speichern"
+                         [processing]="saving"
+                         [disabled]="!unsavedChanges"
+                         (buttonClicked)="save()"></app-action-button>
+    }
   </mat-expansion-panel>
 </mat-accordion>

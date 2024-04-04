@@ -20,6 +20,8 @@ export class Phase4Component implements OnChanges {
   unsavedChanges = false;
   @Input({required: true})
   showStageSetup = true;
+  @Input({required: true})
+  readOnly = false;
 
   @Output()
   changed = new EventEmitter<void>();

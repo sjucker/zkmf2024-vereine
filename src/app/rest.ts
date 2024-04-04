@@ -291,6 +291,7 @@ export interface UnterhaltungsEntryDTO {
   end?: DateAsString;
   title: string;
   subtitle?: string;
+  text?: string;
   location: LocationDTO;
   cloudflareId?: string;
   vereinIdentifier?: string;
@@ -313,6 +314,7 @@ export interface VereinDTO {
   phase4Done: boolean;
   phase2ConfirmedBy?: string;
   phase2ConfirmedAt?: DateAsString;
+  phase4ConfirmedAt?: DateAsString;
   timetableEntries: TimetableOverviewEntryDTO[];
   messages: VereinMessageDTO[];
   errata: VereinErrataDTO[];
@@ -644,6 +646,7 @@ export interface VereinOverviewDTO {
   perkussionsensemble: boolean;
   registrationConfirmed: boolean;
   phase2Confirmed: boolean;
+  phase4Confirmed: boolean;
   phase1: PhaseStatus;
   phase2: PhaseStatus;
   phase4: PhaseStatus;
