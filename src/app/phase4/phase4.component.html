@@ -291,28 +291,30 @@
     <mat-expansion-panel-header>
       <mat-panel-title>Musikalisches</mat-panel-title>
     </mat-expansion-panel-header>
-    <div class="form-layout padding-bottom">
-      <div style="flex: 3">
-        <strong>Einsenden der Partituren</strong><br/>
-        Bitte sendet Eure Original-Partituren in dreifacher bzw. vierfacher Ausführung (Modul D - Parademusik) und unnummeriert bis spätestens am 1. April 2024 an die folgende Adresse:<br/>
-        Peter Luginbühl, Im Moos 3, 8902 Urdorf
+    @if (detail.hasPartituren) {
+      <div class="form-layout padding-bottom">
+        <div style="flex: 3">
+          <strong>Einsenden der Partituren</strong><br/>
+          Bitte sendet Eure Original-Partituren in dreifacher bzw. vierfacher Ausführung (Modul D - Parademusik) und unnummeriert bis spätestens am 1. April 2024 an die folgende Adresse:<br/>
+          Peter Luginbühl, Im Moos 3, 8902 Urdorf
+        </div>
+        <mat-checkbox [(ngModel)]="detail.partiturenSent"
+                      (ngModelChange)="onChange()"
+                      [disabled]="readOnly">
+          Versandt?
+        </mat-checkbox>
+        <mat-form-field appearance="outline">
+          <mat-label>Versanddatum</mat-label>
+          <input matInput [matDatepicker]="pickerDate"
+                 [(ngModel)]="partiturenSentAt"
+                 (dateChange)="onDateChange()"
+                 [disabled]="readOnly"
+                 required>
+          <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
+          <mat-datepicker #pickerDate></mat-datepicker>
+        </mat-form-field>
       </div>
-      <mat-checkbox [(ngModel)]="detail.partiturenSent"
-                    (ngModelChange)="onChange()"
-                    [disabled]="readOnly">
-        Versandt?
-      </mat-checkbox>
-      <mat-form-field appearance="outline">
-        <mat-label>Versanddatum</mat-label>
-        <input matInput [matDatepicker]="pickerDate"
-               [(ngModel)]="partiturenSentAt"
-               (dateChange)="onDateChange()"
-               [disabled]="readOnly"
-               required>
-        <mat-datepicker-toggle matSuffix [for]="pickerDate"></mat-datepicker-toggle>
-        <mat-datepicker #pickerDate></mat-datepicker>
-      </mat-form-field>
-    </div>
+    }
 
     @if (showStageSetup) {
       <div class="form-layout padding-bottom">
