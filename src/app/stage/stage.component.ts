@@ -18,7 +18,7 @@ export class StageComponent implements OnInit {
 
   canvasId = 'stage-canvas';
 
-  stageSetup: VereinStageSetupDTO = {stageSetup: "{}", dirigentenpodest: false, locationIdentifier: ""};
+  stageSetup: VereinStageSetupDTO = {stageSetup: "{}", dirigentenpodest: false, locationIdentifier: "", vereinId: 0};
 
   pendingChanges = signal(false);
 

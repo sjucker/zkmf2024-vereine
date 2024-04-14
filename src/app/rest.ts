@@ -129,6 +129,21 @@ export interface JudgeReportTitleDTO {
   ratings: JudgeReportRatingDTO[];
 }
 
+export interface JudgeReportViewDTO {
+  judge: string;
+  modul: Modul;
+  modulDescription: string;
+  klasse?: string;
+  besetzung?: string;
+  category?: JudgeReportModulCategory;
+  categoryDescription?: string;
+  verein: string;
+  score?: number;
+  status: JudgeReportStatus;
+  titles: JudgeReportTitleDTO[];
+  overallRatings: JudgeReportRatingDTO[];
+}
+
 export interface KontaktDTO extends IsValid {
   vorname?: string;
   nachname?: string;
@@ -386,6 +401,7 @@ export interface VereinSelectionDTO {
 }
 
 export interface VereinStageSetupDTO {
+  vereinId: number;
   locationIdentifier: string;
   stageSetup: string;
   dirigentenpodest: boolean;
