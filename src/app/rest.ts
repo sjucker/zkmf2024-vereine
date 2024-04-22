@@ -6,6 +6,15 @@ export interface AdhocOrchesterTeilnehmerDTO {
   instrument?: string;
 }
 
+export interface AppPageDTO {
+  id: number;
+  markdown: string;
+  title: string;
+  createdAt: DateAsString;
+  news: boolean;
+  cloudflareId?: string;
+}
+
 export interface CoordinatesDTO {
   latitude: number;
   longitude: number;
@@ -510,6 +519,13 @@ export interface VerifyEmailRequestDTO {
   verification: string;
 }
 
+export interface AppPageCreateDTO {
+  markdown: string;
+  title: string;
+  news: boolean;
+  cloudflareId?: string;
+}
+
 export interface BroadcastCreateDTO {
   ids: number[];
   message: string;
@@ -555,6 +571,19 @@ export interface JuryLoginCreateDTO {
 export interface LocationSelectionDTO {
   id: number;
   name: string;
+}
+
+export interface MessageFavoriteDTO {
+  identifier: string;
+  title: string;
+  body: string;
+}
+
+export interface MessageSendDTO {
+  type: MessageType;
+  title: string;
+  body: string;
+  route: string;
 }
 
 export interface TimetableEntryCreateDTO {
@@ -883,6 +912,11 @@ export enum Besetzung {
   FANFARE = "FANFARE",
   TAMBOUREN = "TAMBOUREN",
   PERKUSSIONSENSEMBLE = "PERKUSSIONSENSEMBLE",
+}
+
+export enum MessageType {
+  EMERGENCY = "EMERGENCY",
+  GENERAL = "GENERAL",
 }
 
 export enum TimetableEntryType {
