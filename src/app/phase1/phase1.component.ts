@@ -23,7 +23,7 @@ export class Phase1Component {
   MITTELSTUFE = Klasse.MITTELSTUFE;
   UNTERSTUFE = Klasse.UNTERSTUFE;
 
-  maxFileSize = 1000000;
+  maxFileSize = 1024 * 1024;
 
   @Input({required: true})
   verein!: VereinDTO;

@@ -79,6 +79,22 @@ export class BackendService {
     return this.httpClient.put<void>(`${this.baseUrl}/secured/verein/stage`, stageSetup)
   }
 
+  public uploadAdditionalStageSetup(file: File): Observable<void> {
+    const formData: FormData = new FormData();
+    formData.append('file', file);
+    return this.httpClient.post<void>(`${this.baseUrl}/secured/verein/stage/additional`, formData);
+  }
+
+  public deleteAdditionalStageSetup(): Observable<void> {
+    return this.httpClient.delete<void>(`${this.baseUrl}/secured/verein/stage/additional`);
+  }
+
+  public getAdditionalStageSetup(): Observable<Blob> {
+    return this.httpClient.get(`${this.baseUrl}/secured/verein/stage/additional`, {
+      responseType: "blob"
+    });
+  }
+
   confirmRegistration() {
     return this.httpClient.post<VereinDTO>(`${this.baseUrl}/secured/verein/confirm`, {});
   }
