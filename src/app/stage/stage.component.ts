@@ -162,7 +162,6 @@ export class StageComponent implements OnInit {
   }
 
   downloadAdditionalImage() {
-    this.uploading.set(true);
     this.backendService.getAdditionalStageSetup().subscribe({
       next: response => {
         saveAs(response, "skizze.jpg");
