@@ -1,4 +1,4 @@
-import {Component, HostListener, OnInit, signal} from '@angular/core';
+import {Component, computed, HostListener, OnInit, signal} from '@angular/core';
 import init, {add_editor, is_data_dirty, read_data_for_save} from "../../assets/stage/wasm_stage"
 import {BackendService} from "../service/backend.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -8,6 +8,8 @@ import {combineLatestWith, delay, Observable, of} from "rxjs";
 import {fromPromise} from "rxjs/internal/observable/innerFrom";
 import {UnsavedChangesDialogComponent} from "../unsaved-changes-dialog/unsaved-changes-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {NgxDropzoneChangeEvent} from "ngx-dropzone";
+import {saveAs} from "file-saver";
 
 @Component({
   selector: 'app-stage',
@@ -15,15 +17,19 @@ import {MatDialog} from "@angular/material/dialog";
   styleUrls: ['./stage.component.scss']
 })
 export class StageComponent implements OnInit {
+  maxFileSize = 4 * 1024 * 1024;
 
   canvasId = 'stage-canvas';
 
-  stageSetup: VereinStageSetupDTO = {stageSetup: "{}", dirigentenpodest: false, locationIdentifier: "", vereinId: 0};
+  stageSetup: VereinStageSetupDTO = {stageSetup: "{}", dirigentenpodest: false, locationIdentifier: "", vereinId: 0, hasAdditionalImage: false};
 
   pendingChanges = signal(false);
 
   loading = signal(false);
   saving = signal(false);
+  uploading = signal(false);
+
+  showProgressBar = computed(() => this.loading() || this.saving() || this.uploading());
 
   constructor(private backendService: BackendService,
               private router: Router,
@@ -77,6 +83,91 @@ export class StageComponent implements OnInit {
           }
         });
     }
+  }
+
+  onDrop(event: NgxDropzoneChangeEvent) {
+    if (event.rejectedFiles.length > 0) {
+      let errorMessage = "Es sind nur Dateien vom Typ 'jpg' erlaubt.";
+      if (event.rejectedFiles[0].size > this.maxFileSize) {
+        errorMessage = "Maximal-Grösse von 4 MB überschritten.";
+      }
+
+      this.snackBar.open(errorMessage, undefined, {
+        duration: 3000,
+        verticalPosition: 'top',
+        horizontalPosition: 'center',
+        panelClass: 'info'
+      });
+    }
+
+    if (event.addedFiles.length === 1) {
+      this.upload(event.addedFiles[0]);
+    }
+  }
+
+  private upload(file: File) {
+    this.uploading.set(true);
+    this.backendService.uploadAdditionalStageSetup(file).subscribe({
+      next: () => {
+        this.uploading.set(false);
+        this.snackBar.open("Bild-Upload war erfolgreich", undefined, {
+          duration: 2000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          panelClass: 'success'
+        });
+        this.stageSetup = {
+          ...this.stageSetup,
+          hasAdditionalImage: true
+        };
+      },
+      error: () => {
+        this.uploading.set(false);
+        this.snackBar.open("Es ist ein Fehler aufgetreten...", undefined, {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          panelClass: 'error'
+        });
+      }
+    });
+  }
+
+  public deleteAdditionalImage() {
+    this.uploading.set(true);
+    this.backendService.deleteAdditionalStageSetup().subscribe({
+      next: () => {
+        this.snackBar.open("Erfolgreich gelöscht", undefined, {
+          duration: 2000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          panelClass: 'success'
+        });
+        this.stageSetup = {
+          ...this.stageSetup,
+          hasAdditionalImage: false
+        };
+        this.uploading.set(false);
+      },
+      error: () => {
+        this.uploading.set(false);
+        this.snackBar.open("Es ist ein Fehler aufgetreten...", undefined, {
+          duration: 3000,
+          verticalPosition: 'top',
+          horizontalPosition: 'center',
+          panelClass: 'error'
+        });
+      },
+    })
+  }
+
+  downloadAdditionalImage() {
+    this.uploading.set(true);
+    this.backendService.getAdditionalStageSetup().subscribe({
+      next: response => {
+        saveAs(response, "skizze.jpg");
+      },
+    });
   }
 
   private addToCanvas(data: string): void {

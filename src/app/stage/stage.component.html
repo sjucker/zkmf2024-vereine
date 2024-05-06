@@ -2,7 +2,7 @@
   <app-header header="ZKMF2024 - Vereinsbereich"></app-header>
   <div class="loading-indicator">
     <mat-progress-bar mode="indeterminate" color="accent"
-                      *ngIf="loading()"></mat-progress-bar>
+                      *ngIf="showProgressBar()"></mat-progress-bar>
   </div>
 
   <div class="container">
@@ -57,6 +57,25 @@
                   [(ngModel)]="stageSetup.comment"
                   (ngModelChange)="onChange()"></textarea>
       </mat-form-field>
+    </div>
+
+    <div class="max-width-container">
+      <h3>Zusätzliche Bühnenplan-Skizze</h3>
+      @if (stageSetup.hasAdditionalImage) {
+        <p class="actions-container">
+          <button mat-flat-button color="primary" (click)="deleteAdditionalImage()">bestehende Bühnenplan-Skizze löschen</button>
+          <button mat-stroked-button color="primary" (click)="downloadAdditionalImage()">Bühnenplan-Skizze herunterladen</button>
+        </p>
+      } @else {
+        <p>Falls ihr nicht alles auf dem Bühnenplan abbilden könnt, könnt ihr hier eine Skizze hochladen (jpg, max. 4 MB, am besten im Querformat).</p>
+        <ngx-dropzone (change)="onDrop($event)"
+                      [multiple]="false"
+                      accept="image/jpeg,image/jpg"
+                      [maxFileSize]="maxFileSize"
+                      [disabled]="uploading()">
+          <ngx-dropzone-label>Zusätzliches Bild (max. 4 MB, Querformat)<br/>(Drag-and-Drop oder hier klicken)</ngx-dropzone-label>
+        </ngx-dropzone>
+      }
     </div>
 
     <div class="max-width-container">
