@@ -24,14 +24,22 @@
         <ng-container *ngFor="let entry of verein.timetableEntries">
           <div>{{ entry.date | date: 'EEEE' }}</div>
           <div>{{ entry.time }}</div>
-          <div>{{ entry.type }}</div>
+          <div>{{ entry.typeDescription }}</div>
           <div>{{ entry.competition }}</div>
-          <div><a [href]="entry.location.googleMapsAddress" target="_blank">{{ entry.location.name }}</a></div>
+          <div><a [href]="entry.location.googleMapsAddress" target="_blank">{{ entry.location.name }}</a> (<b>{{ entry.location.mapId }}</b>)</div>
           <div>&nbsp;</div>
         </ng-container>
       </div>
+      @if (verein.instrumentenDepot) {
+        <p>
+          <b>Instrumentendepot</b>: <a [href]="verein.instrumentenDepot.googleMapsAddress" target="_blank">{{ verein.instrumentenDepot.name }}</a> (<b>{{ verein.instrumentenDepot.mapId }}</b>)
+          @if (verein.instrumentenDepotParademusik && verein.instrumentenDepot.id !== verein.instrumentenDepotParademusik.id) {
+            und <a [href]="verein.instrumentenDepotParademusik.googleMapsAddress" target="_blank">{{ verein.instrumentenDepotParademusik.name }}</a> (<b>{{ verein.instrumentenDepotParademusik.mapId }}</b>)
+          }
+        </p>
+      }
       <div><b>Mittagessen</b>: {{ verein.lunchTime | slice: 0 : 5 }} Uhr im
-        <a href="https://www.google.com/maps?q=47.386092494172,8.424727317603" target="_blank">Festzelt Urdorf</a>
+        <a href="https://www.google.com/maps?q=47.386092494172,8.424727317603" target="_blank">Festzelt Urdorf</a> (<b>FU</b>)
         (bitte pünktlich erscheinen)
       </div>
     </div>
