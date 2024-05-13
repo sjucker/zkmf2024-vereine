@@ -55,6 +55,21 @@
 
     <app-messages [messages]="verein.messages"/>
 
+    @if (showFesthymne) {
+      <p>&nbsp;</p>
+      <h2>Festhymne</h2>
+      <ul>
+        <li><a href="https://www.zkmf2024.ch/contrasts/contrasts.mp3" download target="_blank">Aufnahme</a> (MP3, 8 MB)</li>
+        @if (brassBand) {
+          <li><a href="https://www.zkmf2024.ch/contrasts/brass-band-parts.pdf" download target="_blank">Noten (Parts)</a> (PDF)</li>
+          <li><a href="https://www.zkmf2024.ch/contrasts/brass-band-score.pdf" download target="_blank">Noten (Score)</a> (PDF)</li>
+        } @else {
+          <li><a href="https://www.zkmf2024.ch/contrasts/concert-band-parts.pdf" download target="_blank">Noten (Parts)</a> (PDF)</li>
+          <li><a href="https://www.zkmf2024.ch/contrasts/concert-band-score.pdf" download target="_blank">Noten (Score)</a> (PDF)</li>
+        }
+      </ul>
+    }
+
     <p>&nbsp;</p>
 
     <h2>Phase 4 (bis 01.04.2024)
@@ -99,21 +114,6 @@
                   (changed)="onChange()"
                   (doSave)="save(true)"></app-phase2>
     </div>
-
-    @if (showFesthymne) {
-      <p>&nbsp;</p>
-      <h2>Festhymne</h2>
-      <ul>
-        <li><a href="https://www.zkmf2024.ch/contrasts/contrasts.mp3" download target="_blank">Aufnahme</a> (MP3, 8 MB)</li>
-        @if (brassBand) {
-          <li><a href="https://www.zkmf2024.ch/contrasts/brass-band-parts.pdf" download target="_blank">Noten (Parts)</a> (PDF)</li>
-          <li><a href="https://www.zkmf2024.ch/contrasts/brass-band-score.pdf" download target="_blank">Noten (Score)</a> (PDF)</li>
-        } @else {
-          <li><a href="https://www.zkmf2024.ch/contrasts/concert-band-parts.pdf" download target="_blank">Noten (Parts)</a> (PDF)</li>
-          <li><a href="https://www.zkmf2024.ch/contrasts/concert-band-score.pdf" download target="_blank">Noten (Score)</a> (PDF)</li>
-        }
-      </ul>
-    }
   </div>
 
   <mat-card appearance="outlined" *ngIf="notFound">
