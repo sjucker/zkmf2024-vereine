@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {BackendService} from "../service/backend.service";
-import {Modul, VereinDTO} from "../rest";
+import {Besetzung, Modul, VereinDTO} from "../rest";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
@@ -292,5 +292,19 @@ export class MainComponent implements OnInit {
 
   get hasErrata(): boolean {
     return (this.verein?.errata.length ?? 0) > 0;
+  }
+
+  get showFesthymne(): boolean {
+    if (this.verein) {
+      return this.verein.anmeldung.modulA || this.verein.anmeldung.modulB || this.verein.anmeldung.modulC;
+    }
+    return false;
+  }
+
+  get brassBand(): boolean {
+    if (this.verein) {
+      return this.verein.anmeldung.brassBand;
+    }
+    return false;
   }
 }
