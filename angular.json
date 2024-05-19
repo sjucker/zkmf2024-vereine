@@ -36,7 +36,8 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-              "moment"
+              "moment",
+              "file-saver"
             ]
           },
           "configurations": {
