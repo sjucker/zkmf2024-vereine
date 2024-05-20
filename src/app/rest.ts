@@ -20,6 +20,12 @@ export interface CoordinatesDTO {
   longitude: number;
 }
 
+export interface CurrentTimetablePreviewDTO {
+  current?: TimetablePreviewDTO;
+  next?: TimetablePreviewDTO;
+  sponsoren: SponsorDTO[];
+}
+
 export interface DoppelEinsatzDTO {
   otherVerein: VereinSelectionDTO;
   mitspielerName: string;
@@ -59,12 +65,15 @@ export interface JudgeReportDTO {
   id: number;
   modul: Modul;
   modulDescription: string;
+  judgeName: string;
   role: JudgeRole;
   roleDescription: string;
   klasse?: string;
   besetzung?: string;
   category?: JudgeReportModulCategory;
   categoryDescription?: string;
+  start: DateAsString;
+  end: DateAsString;
   location: string;
   verein: string;
   dirigent: string;
@@ -111,6 +120,7 @@ export interface JudgeReportRatingDTO {
 
 export interface JudgeReportScoreDTO {
   reportId: number;
+  judgeEmail: string;
   judgeName: string;
   judgeRole: string;
   score?: number;
@@ -120,9 +130,12 @@ export interface JudgeReportScoreDTO {
 
 export interface JudgeReportSummaryDTO {
   programmId: number;
-  modul: string;
-  klasse?: string;
-  besetzung?: string;
+  modul: Modul;
+  modulDescription: string;
+  klasse?: Klasse;
+  klasseDescription?: string;
+  besetzung?: Besetzung;
+  besetzungDescription?: string;
   verein: string;
   overallScore?: number;
   scores: JudgeReportScoreDTO[];
@@ -291,6 +304,16 @@ export interface TimetableOverviewEntryDTO {
   start: DateAsString;
   end: DateAsString;
   time: string;
+}
+
+export interface TimetablePreviewDTO {
+  header1: string;
+  header2?: string;
+  header3?: string;
+  location: LocationDTO;
+  startTime: DateAsString;
+  endTime: DateAsString;
+  minutesUntilStart: number;
 }
 
 export interface TitelDTO extends IsValid {
