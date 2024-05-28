@@ -1,5 +1,5 @@
-import {Component, computed, HostListener, OnInit, signal} from '@angular/core';
-import init, {add_editor, is_data_dirty, read_data_for_save} from "../../assets/stage/wasm_stage"
+import {Component, computed, HostListener, Input, OnInit, signal} from '@angular/core';
+import init, {add_editor, add_viewer, is_data_dirty, read_data_for_save} from "../../assets/stage/wasm_stage"
 import {BackendService} from "../service/backend.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {VereinStageSetupDTO} from "../rest";
@@ -17,6 +17,10 @@ import {saveAs} from "file-saver";
   styleUrls: ['./stage.component.scss']
 })
 export class StageComponent implements OnInit {
+
+  @Input({required: false})
+  readOnly = false;
+
   maxFileSize = 4 * 1024 * 1024;
 
   canvasId = 'stage-canvas';
@@ -172,7 +176,11 @@ export class StageComponent implements OnInit {
   private addToCanvas(data: string): void {
     if (this.stageSetup) {
       try {
-        add_editor(this.canvasId, 900, this.stageSetup.locationIdentifier, data);
+        if (this.readOnly) {
+          add_viewer(this.canvasId, 900, this.stageSetup.locationIdentifier, data, false);
+        } else {
+          add_editor(this.canvasId, 900, this.stageSetup.locationIdentifier, data);
+        }
       } catch (e) {
         this.generalErrorHandling(e);
       }

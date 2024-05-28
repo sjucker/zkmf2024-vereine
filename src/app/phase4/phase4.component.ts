@@ -4,7 +4,7 @@ import {MatDialog} from "@angular/material/dialog";
 import * as moment from "moment";
 import {Moment} from "moment";
 import {Router} from "@angular/router";
-import {STAGE_PATH} from "../app-routing.module";
+import {STAGE_PATH, STAGE_VIEW_PATH} from "../app-routing.module";
 
 @Component({
   selector: 'app-phase4',
@@ -22,6 +22,8 @@ export class Phase4Component implements OnChanges {
   showStageSetup = true;
   @Input({required: true})
   readOnly = false;
+  @Input({required: true})
+  stageSetupReadonly = false;
 
   @Output()
   changed = new EventEmitter<void>();
@@ -73,7 +75,7 @@ export class Phase4Component implements OnChanges {
   }
 
   navigateToStage(): void {
-    this.router.navigate([STAGE_PATH]).catch(reason => {
+    this.router.navigate(this.stageSetupReadonly ? [STAGE_VIEW_PATH] : [STAGE_PATH]).catch(reason => {
       console.error(reason);
     });
   }

@@ -52,6 +52,7 @@ import {Phase4Component} from "./phase4/phase4.component";
 import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/material/datepicker";
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import {StageComponent} from "./stage/stage.component";
+import {StageViewComponent} from "./stage-view/stage-view.component";
 
 @NgModule({
   declarations: [
@@ -79,6 +80,7 @@ import {StageComponent} from "./stage/stage.component";
     UnsavedChangesDialogComponent,
     MessagesComponent,
     StageComponent,
+    StageViewComponent,
   ],
   imports: [
     BrowserModule,

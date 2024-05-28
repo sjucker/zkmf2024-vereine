@@ -24,11 +24,20 @@ export interface CurrentTimetablePreviewDTO {
   current?: TimetablePreviewDTO;
   next?: TimetablePreviewDTO;
   sponsoren: SponsorDTO[];
+  currentTime: DateAsString;
+  emergencyMessage?: EmergencyMessageDTO;
 }
 
 export interface DoppelEinsatzDTO {
   otherVerein: VereinSelectionDTO;
   mitspielerName: string;
+}
+
+export interface EmergencyMessageDTO {
+  id?: number;
+  header: string;
+  message: string;
+  active: boolean;
 }
 
 export interface FestprogrammDayDTO {
@@ -311,6 +320,7 @@ export interface TimetablePreviewDTO {
   header2?: string;
   header3?: string;
   location: LocationDTO;
+  date: DateAsString;
   startTime: DateAsString;
   endTime: DateAsString;
   minutesUntilStart: number;
@@ -348,6 +358,16 @@ export interface UnterhaltungsEntryDTO {
   unterhaltungIdentifier?: string;
 }
 
+export interface UpcomingVereinDTO {
+  timetableEntryId: number;
+  vereinIdentifier: string;
+  vereinName: string;
+  location: string;
+  startTime: DateAsString;
+  minutesUntilStart: number;
+  id?: string;
+}
+
 export interface VereinDTO {
   email: string;
   angaben: VereinsangabenDTO;
@@ -365,6 +385,7 @@ export interface VereinDTO {
   phase2ConfirmedBy?: string;
   phase2ConfirmedAt?: DateAsString;
   phase4ConfirmedAt?: DateAsString;
+  stageSetupConfirmedAt?: DateAsString;
   timetableEntries: TimetableOverviewEntryDTO[];
   messages: VereinMessageDTO[];
   errata: VereinErrataDTO[];
@@ -615,6 +636,13 @@ export interface MessageSendDTO {
   route: string;
 }
 
+export interface MessageSendTokenDTO {
+  token: string;
+  title: string;
+  body: string;
+  route: string;
+}
+
 export interface TimetableEntryCreateDTO {
   vereinProgrammId: number;
   modul: Modul;
@@ -851,6 +879,25 @@ export enum JudgeReportCategoryRating {
   VERY_POSITIVE = "VERY_POSITIVE",
 }
 
+export enum Klasse {
+  HOECHSTKLASSE = "HOECHSTKLASSE",
+  KLASSE_1 = "KLASSE_1",
+  KLASSE_2 = "KLASSE_2",
+  KLASSE_3 = "KLASSE_3",
+  KLASSE_4 = "KLASSE_4",
+  OBERSTUFE = "OBERSTUFE",
+  MITTELSTUFE = "MITTELSTUFE",
+  UNTERSTUFE = "UNTERSTUFE",
+}
+
+export enum Besetzung {
+  HARMONIE = "HARMONIE",
+  BRASS_BAND = "BRASS_BAND",
+  FANFARE = "FANFARE",
+  TAMBOUREN = "TAMBOUREN",
+  PERKUSSIONSENSEMBLE = "PERKUSSIONSENSEMBLE",
+}
+
 export enum LocationType {
   PARADEMUSIK = "PARADEMUSIK",
   EINSPIELLOKAL = "EINSPIELLOKAL",
@@ -904,6 +951,14 @@ export enum Einsatzzeit {
   NACHT = "NACHT",
 }
 
+export enum TimetableEntryType {
+  EINSPIEL = "EINSPIEL",
+  WETTSPIEL = "WETTSPIEL",
+  BESPRECHUNG = "BESPRECHUNG",
+  PLATZKONZERT = "PLATZKONZERT",
+  MARSCHMUSIK = "MARSCHMUSIK",
+}
+
 export enum UnterhaltungEntryType {
   FREITAG_ABEND = "FREITAG_ABEND",
   SAMSTAG_TAG = "SAMSTAG_TAG",
@@ -924,34 +979,7 @@ export enum TambourenGrundlage {
   DOUBLE = "DOUBLE",
 }
 
-export enum Klasse {
-  HOECHSTKLASSE = "HOECHSTKLASSE",
-  KLASSE_1 = "KLASSE_1",
-  KLASSE_2 = "KLASSE_2",
-  KLASSE_3 = "KLASSE_3",
-  KLASSE_4 = "KLASSE_4",
-  OBERSTUFE = "OBERSTUFE",
-  MITTELSTUFE = "MITTELSTUFE",
-  UNTERSTUFE = "UNTERSTUFE",
-}
-
-export enum Besetzung {
-  HARMONIE = "HARMONIE",
-  BRASS_BAND = "BRASS_BAND",
-  FANFARE = "FANFARE",
-  TAMBOUREN = "TAMBOUREN",
-  PERKUSSIONSENSEMBLE = "PERKUSSIONSENSEMBLE",
-}
-
 export enum MessageType {
   EMERGENCY = "EMERGENCY",
   GENERAL = "GENERAL",
-}
-
-export enum TimetableEntryType {
-  EINSPIEL = "EINSPIEL",
-  WETTSPIEL = "WETTSPIEL",
-  BESPRECHUNG = "BESPRECHUNG",
-  PLATZKONZERT = "PLATZKONZERT",
-  MARSCHMUSIK = "MARSCHMUSIK",
 }

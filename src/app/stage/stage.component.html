@@ -17,9 +17,11 @@
               (click)="navigateBack()">zurück
       </button>
 
-      <app-action-button buttonLabel="Speichern"
-                         [processing]="saving()"
-                         (buttonClicked)="save()"></app-action-button>
+      @if (!readOnly) {
+        <app-action-button buttonLabel="Speichern"
+                           [processing]="saving()"
+                           (buttonClicked)="save()"></app-action-button>
+      }
 
       <a [href]="percussionListUrl" target="_blank">Perkussionsmaterial (PDF)</a>
     </div>
@@ -31,6 +33,7 @@
     <div class="max-width-container">
       <div class="form-layout">
         <mat-checkbox [(ngModel)]="stageSetup.dirigentenpodest"
+                      [disabled]="readOnly"
                       (ngModelChange)="onChange()">Dirigentenpodest benötigt
         </mat-checkbox>
 
@@ -39,6 +42,7 @@
           <input type="number"
                  autocomplete="off"
                  matInput
+                 [disabled]="true"
                  [(ngModel)]="stageSetup.ablagenAmount"
                  (ngModelChange)="onChange()"
                  min="0"
@@ -54,6 +58,7 @@
                   cdkAutosizeMinRows="3"
                   cdkAutosizeMaxRows="15"
                   maxlength="4096"
+                  [disabled]="true"
                   [(ngModel)]="stageSetup.comment"
                   (ngModelChange)="onChange()"></textarea>
       </mat-form-field>
@@ -63,18 +68,22 @@
       <h3>Zusätzliche Bühnenplan-Skizze</h3>
       @if (stageSetup.hasAdditionalImage) {
         <p class="actions-container">
-          <button mat-flat-button color="primary" (click)="deleteAdditionalImage()">bestehende Bühnenplan-Skizze löschen</button>
+          @if (!readOnly) {
+            <button mat-flat-button color="primary" (click)="deleteAdditionalImage()">bestehende Bühnenplan-Skizze löschen</button>
+          }
           <button mat-stroked-button color="primary" (click)="downloadAdditionalImage()">Bühnenplan-Skizze herunterladen</button>
         </p>
       } @else {
-        <p>Falls ihr nicht alles auf dem Bühnenplan abbilden könnt, könnt ihr hier eine Skizze hochladen (jpg, max. 4 MB, am besten im Querformat).</p>
-        <ngx-dropzone (change)="onDrop($event)"
-                      [multiple]="false"
-                      accept="image/jpeg,image/jpg"
-                      [maxFileSize]="maxFileSize"
-                      [disabled]="uploading()">
-          <ngx-dropzone-label>Zusätzliches Bild (max. 4 MB, Querformat)<br/>(Drag-and-Drop oder hier klicken)</ngx-dropzone-label>
-        </ngx-dropzone>
+        @if (!readOnly) {
+          <p>Falls ihr nicht alles auf dem Bühnenplan abbilden könnt, könnt ihr hier eine Skizze hochladen (jpg, max. 4 MB, am besten im Querformat).</p>
+          <ngx-dropzone (change)="onDrop($event)"
+                        [multiple]="false"
+                        accept="image/jpeg,image/jpg"
+                        [maxFileSize]="maxFileSize"
+                        [disabled]="uploading()">
+            <ngx-dropzone-label>Zusätzliches Bild (max. 4 MB, Querformat)<br/>(Drag-and-Drop oder hier klicken)</ngx-dropzone-label>
+          </ngx-dropzone>
+        }
       }
     </div>
 
