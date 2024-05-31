@@ -41,14 +41,6 @@ export class AuthenticationService {
     return localStorage.getItem(this.token);
   }
 
-  getUserId(): number | null {
-    const userId = localStorage.getItem(this.userId);
-    if (userId) {
-      return parseInt(userId);
-    }
-    return null;
-  }
-
   isLoggedIn(): boolean {
     return localStorage.getItem(this.token) !== null;
   }
