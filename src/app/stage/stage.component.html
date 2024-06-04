@@ -42,7 +42,7 @@
           <input type="number"
                  autocomplete="off"
                  matInput
-                 [disabled]="true"
+                 [disabled]="readOnly"
                  [(ngModel)]="stageSetup.ablagenAmount"
                  (ngModelChange)="onChange()"
                  min="0"
@@ -58,7 +58,7 @@
                   cdkAutosizeMinRows="3"
                   cdkAutosizeMaxRows="15"
                   maxlength="4096"
-                  [disabled]="true"
+                  [disabled]="readOnly"
                   [(ngModel)]="stageSetup.comment"
                   (ngModelChange)="onChange()"></textarea>
       </mat-form-field>
