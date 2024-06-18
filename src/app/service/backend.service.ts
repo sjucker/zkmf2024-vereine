@@ -4,6 +4,7 @@ import {environment} from "../../environments/environment";
 import {Observable} from "rxjs";
 import {
   ForgotPasswordRequestDTO,
+  JudgeReportFeedbackDTO,
   RegisterVereinRequestDTO,
   ResetPasswordRequestDTO,
   VereinDTO,
@@ -121,5 +122,13 @@ export class BackendService {
       message: message
     };
     return this.httpClient.post<VereinMessageDTO>(`${this.baseUrl}/secured/verein/messages`, request);
+  }
+
+  public feedback(modul: string, category?: string): Observable<JudgeReportFeedbackDTO> {
+    let url = `${this.baseUrl}/secured/verein/feedback/${modul}`;
+    if (category) {
+      url += `?category=${category}`;
+    }
+    return this.httpClient.get<JudgeReportFeedbackDTO>(url);
   }
 }

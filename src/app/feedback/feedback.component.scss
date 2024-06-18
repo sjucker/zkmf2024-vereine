@@ -1,0 +1,28 @@
+@use "../../variables";
+@import "../../responsive";
+
+.max-width-container {
+  padding: variables.$padding;
+}
+
+.very-negative,
+.negative {
+  color: variables.$rot;
+  font-weight: bold;
+}
+
+.very-positive,
+.positive {
+  color: variables.$gruen;
+  font-weight: bold;
+}
+
+.comment {
+  white-space: pre-wrap;
+}
+
+h3 {
+  padding-top: variables.$padding;
+  margin-bottom: 0;
+  color: variables.$blau;
+}
