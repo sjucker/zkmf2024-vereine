@@ -17,6 +17,18 @@
       </button>
     </p>
 
+    @if (verein.availableFeedbacks.length > 0) {
+      <div class="feedbacks">
+        <p><b>Jury-Berichte</b></p>
+        <ul>
+          @for (feedback of verein.availableFeedbacks; track feedback.modul) {
+            <li><a [routerLink]="feedback.category ? [FEEDBACK_PATH, feedback.modul, feedback.category] : [FEEDBACK_PATH, feedback.modul]">{{ feedback.modulDescription }}</a></li>
+          }
+        </ul>
+      </div>
+      <p>&nbsp;</p>
+    }
+
     <div class="einsatzzeiten" *ngIf="hasTimetableEntries">
       <p><b>Informationen ZKMF2024</b>: <a href="https://www.zkmf2024.ch/vereine/informationen.pdf" target="_blank">PDF</a></p>
 

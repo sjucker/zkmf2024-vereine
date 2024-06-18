@@ -1,7 +1,7 @@
 import {LOCALE_ID, NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-import localeDe from '@angular/common/locales/de';
-import localeDeExtra from '@angular/common/locales/extra/de';
+import localeDeCh from '@angular/common/locales/de-CH';
+import localeDeChExtra from '@angular/common/locales/extra/de-CH';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
@@ -53,6 +53,7 @@ import {MatDatepicker, MatDatepickerInput, MatDatepickerToggle} from "@angular/m
 import {MatMomentDateModule} from "@angular/material-moment-adapter";
 import {StageComponent} from "./stage/stage.component";
 import {StageViewComponent} from "./stage-view/stage-view.component";
+import {FeedbackComponent} from "./feedback/feedback.component";
 
 @NgModule({
   declarations: [
@@ -81,6 +82,7 @@ import {StageViewComponent} from "./stage-view/stage-view.component";
     MessagesComponent,
     StageComponent,
     StageViewComponent,
+    FeedbackComponent,
   ],
   imports: [
     BrowserModule,
@@ -113,12 +115,12 @@ import {StageViewComponent} from "./stage-view/stage-view.component";
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: AuthenticationInterceptor, multi: true},
-    {provide: LOCALE_ID, useValue: 'de-DE'},
+    {provide: LOCALE_ID, useValue: 'de-CH'},
   ],
   bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor() {
-    registerLocaleData(localeDe, 'de-DE', localeDeExtra);
+    registerLocaleData(localeDeCh, 'de-CH', localeDeChExtra);
   }
 }

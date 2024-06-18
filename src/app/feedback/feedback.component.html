@@ -1,0 +1,158 @@
+<div>
+  <app-header header="ZKMF2024 - Vereinsbereich"></app-header>
+  <div class="loading-indicator">
+    @if (loading()) {
+      <mat-progress-bar mode="indeterminate" color="accent"></mat-progress-bar>
+    }
+  </div>
+
+  @if (feedbacks) {
+    <mat-card appearance="outlined" class="max-width-container">
+      <mat-card-header>
+        <mat-card-title>{{ feedbacks.verein }}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          <span><b>{{ feedbacks.modulDescription }}</b></span>
+        </p>
+        <p>
+          Punktezahl: <b>{{ feedbacks.score ?? 0 | number: '1.2-2' }}</b>
+          @if (feedbacks.penalty) {
+            <span> (davon {{ feedbacks.penalty }} Punkte Abzug)</span>
+          }
+        </p>
+        <p>
+          Prädikat: {{ feedbacks.scoreRange }}
+        </p>
+      </mat-card-content>
+    </mat-card>
+
+    <div class="max-width-container">
+
+
+      <mat-accordion>
+        @for (feedback of judgeFeedbacks; track feedback.judge) {
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>{{ feedback.judge }}</mat-panel-title>
+              <mat-panel-description>{{ feedback.score }}</mat-panel-description>
+            </mat-expansion-panel-header>
+            <div>
+              @if (isModulG()) {
+                @if (isModulGKatA()) {
+                  <mat-card appearance="outlined">
+                    <mat-card-content>
+                      <p><b>Grundlage I</b>: {{ getGrundlage1Rating(feedback).score ?? '-' }} Punkte</p>
+                      <p><b>Grundlage II</b>: {{ getGrundlage2Rating(feedback).score ?? '-' }} Punkte</p>
+                      <p><b>Frei gewählter Baslermarsch (BM) oder Marsch (M)</b>
+                        ({{ getKatATitel1(feedback)?.titel?.titelName }}, {{ getKatATitel1(feedback)?.titel?.composer }})<br/>
+                        {{ getKatATitel1(feedback)!.ratings[0].categoryDescription }}: {{ getKatATitel1(feedback)!.ratings[0].score ?? '-' }} Punkte<br/>
+                        {{ getKatATitel1(feedback)!.ratings[1].categoryDescription }}: {{ getKatATitel1(feedback)!.ratings[1].score ?? '-' }} Punkte<br/>
+                        {{ getKatATitel1(feedback)!.ratings[2].categoryDescription }}: {{ getKatATitel1(feedback)!.ratings[2].score ?? '-' }} Punkte<br/>
+                        {{ getKatATitel1(feedback)!.ratings[3].categoryDescription }}: {{ getKatATitel1(feedback)!.ratings[3].score ?? '-' }} Punkte<br/>
+                      </p>
+                      <p><b>Frei gewählte Komposition</b>
+                        ({{ getKatATitel2(feedback)?.titel?.titelName }}, {{ getKatATitel2(feedback)?.titel?.composer }})<br/>
+                        {{ getKatATitel2(feedback)!.ratings[0].categoryDescription }}: {{ getKatATitel2(feedback)!.ratings[0].score ?? '-' }} Punkte<br/>
+                        {{ getKatATitel2(feedback)!.ratings[1].categoryDescription }}: {{ getKatATitel2(feedback)!.ratings[1].score ?? '-' }} Punkte<br/>
+                        {{ getKatATitel2(feedback)!.ratings[2].categoryDescription }}: {{ getKatATitel2(feedback)!.ratings[2].score ?? '-' }} Punkte<br/>
+                        {{ getKatATitel2(feedback)!.ratings[3].categoryDescription }}: {{ getKatATitel2(feedback)!.ratings[3].score ?? '-' }} Punkte<br/>
+                      </p>
+                    </mat-card-content>
+                  </mat-card>
+                } @else if (isModulGKatB()) {
+                  <mat-card appearance="outlined">
+                    <mat-card-content>
+                      <p><b>Frei gewählter Vortrag</b>
+                        ({{ getKatBTitel(feedback)?.titel?.titelName }}, {{ getKatBTitel(feedback)?.titel?.composer }})<br/>
+                        {{ getKatBTitel(feedback)!.ratings[0].categoryDescription }}: {{ getKatBTitel(feedback)!.ratings[0].score ?? '-' }} Punkte<br/>
+                        {{ getKatBTitel(feedback)!.ratings[1].categoryDescription }}: {{ getKatBTitel(feedback)!.ratings[1].score ?? '-' }} Punkte<br/>
+                        {{ getKatBTitel(feedback)!.ratings[2].categoryDescription }}: {{ getKatBTitel(feedback)!.ratings[2].score ?? '-' }} Punkte<br/>
+                        {{ getKatBTitel(feedback)!.ratings[3].categoryDescription }}: {{ getKatBTitel(feedback)!.ratings[3].score ?? '-' }} Punkte<br/>
+                        Begründung Abzug: {{ getKatBTitel(feedback)!.ratings[3].comment }}
+                      </p>
+                    </mat-card-content>
+                  </mat-card>
+                } @else if (isModulGKatC()) {
+                  <mat-card appearance="outlined">
+                    <mat-card-content>
+                      <p><b>Frei gewählter Vortrag</b>
+                        ({{ getKatCTitel(feedback)?.titel?.titelName }}, {{ getKatCTitel(feedback)?.titel?.composer }})<br/>
+                        {{ getKatCTitel(feedback)!.ratings[0].categoryDescription }}: {{ getKatCTitel(feedback)!.ratings[0].score ?? '-' }} Punkte<br/>
+                        {{ getKatCTitel(feedback)!.ratings[1].categoryDescription }}: {{ getKatCTitel(feedback)!.ratings[1].score ?? '-' }} Punkte<br/>
+                        {{ getKatCTitel(feedback)!.ratings[2].categoryDescription }}: {{ getKatCTitel(feedback)!.ratings[2].score ?? '-' }} Punkte<br/>
+                        {{ getKatCTitel(feedback)!.ratings[3].categoryDescription }}: {{ getKatCTitel(feedback)!.ratings[3].score ?? '-' }} Punkte<br/>
+                        {{ getKatCTitel(feedback)!.ratings[4].categoryDescription }}: {{ getKatCTitel(feedback)!.ratings[4].score ?? '-' }} Punkte<br/>
+                        {{ getKatCTitel(feedback)!.ratings[5].categoryDescription }}: {{ getKatCTitel(feedback)!.ratings[5].score ?? '-' }} Punkte<br/>
+                        {{ getKatCTitel(feedback)!.ratings[6].categoryDescription }}: {{ getKatCTitel(feedback)!.ratings[6].score ?? '-' }} Punkte<br/>
+                      </p>
+                    </mat-card-content>
+                  </mat-card>
+                }
+
+              } @else {
+                @for (title of feedback.titles; track title) {
+                  <mat-card appearance="outlined">
+                    <mat-card-header>
+                      <mat-card-title>
+                        {{ title.titel.titelName }}
+                        @if (title.titel.pflichtStueck) {
+                          <span>*</span>
+                        }
+                      </mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                      <p class="comment"><b>Kurzbericht</b>:<br/>{{ title.comment ?? '-' }}</p>
+                      @for (group of getGroups(title); track group) {
+                        @if (group.length > 0) {
+                          <h3>{{ group }}</h3>
+                        }
+                        @for (rating of getRatings(title, group); track rating) {
+                          <div>
+                            {{ rating.categoryDescription }}:
+                            <span [ngClass]="getRatingClass(rating.rating)">{{ getRatingDescription(rating.rating) }}</span>
+                            @if (rating.comment) {
+                              <span> ({{ rating.comment }})</span>
+                            }
+                          </div>
+                        }
+                      }
+                    </mat-card-content>
+                  </mat-card>
+                }
+
+                @if (feedback.overallRatings.length > 0) {
+                  <mat-card appearance="outlined">
+                    <mat-card-header>
+                      <mat-card-title>Gesamteindruck</mat-card-title>
+                    </mat-card-header>
+                    <mat-card-content>
+                      @for (rating of feedback.overallRatings; track rating) {
+                        <div>
+                          {{ rating.categoryDescription }}:
+                          <span [ngClass]="getRatingClass(rating.rating)">{{ getRatingDescription(rating.rating) }}</span>
+                          @if (rating.comment) {
+                            <span> ({{ rating.comment }})</span>
+                          }
+                        </div>
+                      }
+                    </mat-card-content>
+                  </mat-card>
+                }
+              }
+            </div>
+          </mat-expansion-panel>
+        }
+      </mat-accordion>
+
+    </div>
+  }
+
+  @if (errorMessage()) {
+    <mat-card appearance="outlined">
+      <mat-card-content>
+        <p>{{ errorMessage() }}</p>
+      </mat-card-content>
+    </mat-card>
+  }
+</div>

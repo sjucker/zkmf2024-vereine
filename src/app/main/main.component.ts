@@ -9,6 +9,7 @@ import {ConfirmRegistrationDialogComponent} from "../confirm-registration-dialog
 import {Observable, of} from "rxjs";
 import {UnsavedChangesDialogComponent} from "../unsaved-changes-dialog/unsaved-changes-dialog.component";
 import {FestkartenDialogComponent} from "../festkarten-dialog/festkarten-dialog.component";
+import {FEEDBACK_PATH} from "../app-routing.module";
 
 export interface UploadData {
   logo?: File;
@@ -311,4 +312,6 @@ export class MainComponent implements OnInit {
     }
     return false;
   }
+
+  protected readonly FEEDBACK_PATH = FEEDBACK_PATH;
 }

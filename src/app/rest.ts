@@ -15,17 +15,24 @@ export interface AppPageDTO {
   cloudflareId?: string;
 }
 
+export interface ConfirmScoreDTO {
+  vereinProgrammId: number;
+  category?: JudgeReportModulCategory;
+  score: number;
+}
+
 export interface CoordinatesDTO {
   latitude: number;
   longitude: number;
 }
 
 export interface CurrentTimetablePreviewDTO {
-  current?: TimetablePreviewDTO;
+  current?: TimetableCurrentDTO;
   next?: TimetablePreviewDTO;
   sponsoren: SponsorDTO[];
   currentTime: DateAsString;
   emergencyMessage?: EmergencyMessageDTO;
+  screen?: ScreenDTO;
 }
 
 export interface DoppelEinsatzDTO {
@@ -42,6 +49,7 @@ export interface EmergencyMessageDTO {
 
 export interface FestprogrammDayDTO {
   day: string;
+  inPast: boolean;
   entries: FestprogrammEntryDTO[];
 }
 
@@ -99,6 +107,27 @@ export interface JudgeReportDTO {
   overallRatings: JudgeReportRatingDTO[];
 }
 
+export interface JudgeReportFeedbackDTO {
+  verein: string;
+  modul: Modul;
+  modulDescription: string;
+  category?: JudgeReportModulCategory;
+  score?: number;
+  scoreRange: string;
+  penalty?: number;
+  bonus?: number;
+  judge1: JudgeReportViewDTO;
+  judge2: JudgeReportViewDTO;
+  judge3: JudgeReportViewDTO;
+  judge4?: JudgeReportViewDTO;
+}
+
+export interface JudgeReportFeedbackSelectionDTO {
+  modul: Modul;
+  modulDescription: string;
+  category?: JudgeReportModulCategory;
+}
+
 export interface JudgeReportOverviewDTO {
   id: number;
   verein: string;
@@ -139,19 +168,23 @@ export interface JudgeReportScoreDTO {
 
 export interface JudgeReportSummaryDTO {
   programmId: number;
+  date: DateAsString;
+  location: LocationDTO;
   modul: Modul;
   modulDescription: string;
   klasse?: Klasse;
   klasseDescription?: string;
   besetzung?: Besetzung;
   besetzungDescription?: string;
+  category?: JudgeReportModulCategory;
+  categoryDescription?: string;
   verein: string;
   overallScore?: number;
+  penalty?: number;
+  bonus?: number;
   scores: JudgeReportScoreDTO[];
   done: boolean;
   scoresConfirmed: boolean;
-  scoresConfirmedBy?: string;
-  scoresConfirmedAt?: DateAsString;
 }
 
 export interface JudgeReportTitleDTO {
@@ -170,6 +203,8 @@ export interface JudgeReportViewDTO {
   categoryDescription?: string;
   verein: string;
   score?: number;
+  penalty?: number;
+  bonus?: number;
   status: JudgeReportStatus;
   titles: JudgeReportTitleDTO[];
   overallRatings: JudgeReportRatingDTO[];
@@ -244,9 +279,52 @@ export interface NichtmitgliederDTO {
   instrument?: string;
 }
 
+export interface PublicRankingDTO {
+  intermediate: boolean;
+}
+
+export interface RankingBonusDTO {
+  vereinProgrammId: number;
+  category: JudgeReportModulCategory;
+  bonus: number;
+}
+
 export interface RankingDTO {
-  modul: string;
+  modul: Modul;
+  modulDescription: string;
+  score?: number;
+}
+
+export interface RankingListDTO {
+  id: number;
+  modul: Modul;
+  modulDescription: string;
+  klasse?: Klasse;
+  klasseDescription?: string;
+  besetzung?: Besetzung;
+  besetzungDescription?: string;
+  category?: JudgeReportModulCategory;
+  categoryDescription?: string;
+  location: LocationDTO;
+  description: string;
+  status: RankingStatus;
+  entries: RankingListEntryDTO[];
+  final: boolean;
+  notPending: boolean;
+}
+
+export interface RankingListEntryDTO {
+  rank: number;
+  vereinIdentifier: string;
+  vereinsName: string;
   score: number;
+  additionalInfo?: string;
+}
+
+export interface RankingPenaltyDTO {
+  vereinProgrammId: number;
+  actualDurationInSeconds: number;
+  minutesOverrun: number;
 }
 
 export interface RegisterHelperRequestDTO {
@@ -285,6 +363,13 @@ export interface ResetPasswordRequestDTO {
   newPassword: string;
 }
 
+export interface ScreenDTO {
+  locationIdentifier?: string;
+  header?: string;
+  message?: string;
+  cloudflareId?: string;
+}
+
 export interface SponsorDTO {
   name: string;
   cloudflareId?: string;
@@ -300,8 +385,17 @@ export interface SponsoringDTO {
   goenner: SponsorDTO[];
 }
 
+export interface TimetableCurrentDTO {
+  vereinsname: string;
+  direktion: string;
+  competition: string;
+  programmTitel: string;
+  titles: string[];
+}
+
 export interface TimetableDayOverviewDTO {
   day: string;
+  inPast: boolean;
   entries: TimetableOverviewEntryDTO[];
 }
 
@@ -310,6 +404,8 @@ export interface TimetableOverviewEntryDTO {
   vereinIdentifier: string;
   vereinsname: string;
   modul: string;
+  klasse?: string;
+  besetzung?: string;
   competition: string;
   type: TimetableEntryType;
   typeDescription: string;
@@ -318,6 +414,7 @@ export interface TimetableOverviewEntryDTO {
   start: DateAsString;
   end: DateAsString;
   time: string;
+  inPast: boolean;
 }
 
 export interface TimetablePreviewDTO {
@@ -346,6 +443,7 @@ export interface TitelDTO extends IsValid {
 
 export interface UnterhaltungTypeDTO {
   type: UnterhaltungEntryType;
+  inPast: boolean;
   entries: UnterhaltungsEntryDTO[];
 }
 
@@ -353,7 +451,7 @@ export interface UnterhaltungsEntryDTO {
   type: UnterhaltungEntryType;
   date: DateAsString;
   start: DateAsString;
-  end?: DateAsString;
+  end: DateAsString;
   title: string;
   subtitle?: string;
   text?: string;
@@ -361,6 +459,7 @@ export interface UnterhaltungsEntryDTO {
   cloudflareId?: string;
   vereinIdentifier?: string;
   unterhaltungIdentifier?: string;
+  inPast: boolean;
 }
 
 export interface UpcomingVereinDTO {
@@ -398,9 +497,17 @@ export interface VereinDTO {
   instrumentenDepot?: LocationDTO;
   instrumentenDepotParademusik?: LocationDTO;
   programmUpdated: boolean;
+  availableFeedbacks: JudgeReportFeedbackSelectionDTO[];
   phase1Status: PhaseStatus;
   phase2Status: PhaseStatus;
   phase4Status: PhaseStatus;
+}
+
+export interface VereinMemberInfoDTO {
+  timetableEntries: TimetableOverviewEntryDTO[];
+  lunchTime: DateAsString;
+  instrumentenDepot?: LocationDTO;
+  instrumentenDepotParademusik?: LocationDTO;
 }
 
 export interface VereinMessageDTO {
@@ -408,6 +515,26 @@ export interface VereinMessageDTO {
   createdAt: DateAsString;
   createdBy: string;
   ownMessage: boolean;
+}
+
+export interface VereinPlayingDTO {
+  timetableEntryId: number;
+  vereinProgrammId: number;
+  vereinsname: string;
+  modul: Modul;
+  categories: JudgeReportModulCategory[];
+  startTime: DateAsString;
+  endTime: DateAsString;
+  minDurationInSeconds?: number;
+  maxDurationInSeconds?: number;
+  started: boolean;
+  ended: boolean;
+  jury: string;
+  actualDurationInSeconds?: number;
+  minutesOverrun?: number;
+  bonusKatA?: number;
+  bonusKatB?: number;
+  bonusKatC?: number;
 }
 
 export interface VereinPresentationDTO {
@@ -421,6 +548,7 @@ export interface VereinPresentationDTO {
   instagram?: string;
   websiteText?: string;
   timetableEntries: VereinTimetableEntryDTO[];
+  rankings: RankingListDTO[];
 }
 
 export interface VereinProgrammDTO extends IsValid {
@@ -634,6 +762,13 @@ export interface MessageFavoriteDTO {
   body: string;
 }
 
+export interface MessageMemberDTO {
+  identifier: string;
+  title: string;
+  body: string;
+  route: string;
+}
+
 export interface MessageSendDTO {
   type: MessageType;
   title: string;
@@ -703,20 +838,6 @@ export interface UserDTO {
   lastLogin?: DateAsString;
 }
 
-export interface VereinAssignmentDTO {
-  id: number;
-  name: string;
-  programme: VereinAssignmentProgrammDTO[];
-}
-
-export interface VereinAssignmentProgrammDTO {
-  id: number;
-  modul: Modul;
-  modulDescription: string;
-  klasse?: string;
-  besetzung?: string;
-}
-
 export interface VereinCommentCreateDTO {
   comment: string;
 }
@@ -783,6 +904,12 @@ export interface IsValid {
 
 export type DateAsString = string;
 
+export enum JudgeReportModulCategory {
+  MODUL_G_KAT_A = "MODUL_G_KAT_A",
+  MODUL_G_KAT_B = "MODUL_G_KAT_B",
+  MODUL_G_KAT_C = "MODUL_G_KAT_C",
+}
+
 export enum Modul {
   A = "A",
   B = "B",
@@ -802,12 +929,6 @@ export enum JudgeRole {
   JUROR_2_MUSIKALISCH = "JUROR_2_MUSIKALISCH",
   JUROR_3_MUSIKALISCH = "JUROR_3_MUSIKALISCH",
   JUROR_4_OPTISCH = "JUROR_4_OPTISCH",
-}
-
-export enum JudgeReportModulCategory {
-  MODUL_G_KAT_A = "MODUL_G_KAT_A",
-  MODUL_G_KAT_B = "MODUL_G_KAT_B",
-  MODUL_G_KAT_C = "MODUL_G_KAT_C",
 }
 
 export enum JudgeReportStatus {
@@ -868,7 +989,9 @@ export enum JudgeReportCategory {
   SCHLUSSPHASE_ANHALTEN = "SCHLUSSPHASE_ANHALTEN",
   MUSIKALISCH_GESAMTEINDRUCK4 = "MUSIKALISCH_GESAMTEINDRUCK4",
   GRUNDLAGE_1 = "GRUNDLAGE_1",
+  GRUNDLAGE_1_ABZUG = "GRUNDLAGE_1_ABZUG",
   GRUNDLAGE_2 = "GRUNDLAGE_2",
+  GRUNDLAGE_2_ABZUG = "GRUNDLAGE_2_ABZUG",
   TECHNISCHE_AUSFUEHRUNG = "TECHNISCHE_AUSFUEHRUNG",
   RHYTHMIK = "RHYTHMIK",
   DYNAMIK = "DYNAMIK",
@@ -930,12 +1053,19 @@ export enum UserRole {
   ADMIN = "ADMIN",
   ADMIN_READ_ONLY = "ADMIN_READ_ONLY",
   JUDGE = "JUDGE",
+  JUDGE_HELPER = "JUDGE_HELPER",
   IMPERSONATE = "IMPERSONATE",
 }
 
 export enum ModulDSelection {
   TITEL_1 = "TITEL_1",
   TITEL_2 = "TITEL_2",
+}
+
+export enum RankingStatus {
+  PENDING = "PENDING",
+  INTERMEDIATE = "INTERMEDIATE",
+  FINAL = "FINAL",
 }
 
 export enum Aufgaben {
