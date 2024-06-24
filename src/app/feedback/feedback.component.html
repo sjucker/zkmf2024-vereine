@@ -22,7 +22,7 @@
         <div>
           Punktezahl: <b>{{ feedbacks.score ?? 0 | number: '1.2-2' }}</b>
           @if (feedbacks.penalty) {
-            <span> - {{ feedbacks.penalty }} Punkte Abzug (Zeitunter- oder überschreitung)</span>
+            <span>, {{ feedbacks.penalty }} Punkte Abzug (Zeitunter- oder überschreitung)</span>
           }
         </div>
         <div>
