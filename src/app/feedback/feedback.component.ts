@@ -115,9 +115,29 @@ export class FeedbackComponent implements OnInit {
     };
   }
 
+  getGrundlage1Abzug(feedback: JudgeReportViewDTO): JudgeReportRatingDTO {
+    return feedback.overallRatings.find(dto => dto.category === JudgeReportCategory.GRUNDLAGE_1_ABZUG) ?? {
+      category: JudgeReportCategory.GRUNDLAGE_1_ABZUG,
+      categoryDescription: '',
+      group: '',
+      ratingDescriptions: [],
+      rating: JudgeReportCategoryRating.NEUTRAL
+    };
+  }
+
   getGrundlage2Rating(feedback: JudgeReportViewDTO): JudgeReportRatingDTO {
     return feedback.overallRatings.find(dto => dto.category === JudgeReportCategory.GRUNDLAGE_2) ?? {
       category: JudgeReportCategory.GRUNDLAGE_2,
+      categoryDescription: '',
+      group: '',
+      ratingDescriptions: [],
+      rating: JudgeReportCategoryRating.NEUTRAL
+    };
+  }
+
+  getGrundlage2Abzug(feedback: JudgeReportViewDTO): JudgeReportRatingDTO {
+    return feedback.overallRatings.find(dto => dto.category === JudgeReportCategory.GRUNDLAGE_2_ABZUG) ?? {
+      category: JudgeReportCategory.GRUNDLAGE_2_ABZUG,
       categoryDescription: '',
       group: '',
       ratingDescriptions: [],
