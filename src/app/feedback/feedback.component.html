@@ -28,9 +28,11 @@
         @if (feedbacks.actualDurationInSeconds) {
           <div>Spieldauer: {{ Math.floor(feedbacks.actualDurationInSeconds / 60) | number: '1.0-0' }}:{{ feedbacks.actualDurationInSeconds % 60 | number: '2.0-0' }}</div>
         }
-        <div>
-          Prädikat: {{ feedbacks.scoreRange }}
-        </div>
+        @if (!isModulG()) {
+          <div>
+            Prädikat: {{ feedbacks.scoreRange }}
+          </div>
+        }
       </mat-card-content>
     </mat-card>
 
