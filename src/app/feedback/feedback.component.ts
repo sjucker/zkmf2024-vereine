@@ -161,4 +161,5 @@ export class FeedbackComponent implements OnInit {
     return feedback.titles[0];
   }
 
+  protected readonly Math = Math;
 }
