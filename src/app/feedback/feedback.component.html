@@ -16,18 +16,21 @@
         <mat-card-title>{{ feedbacks.verein }}</mat-card-title>
       </mat-card-header>
       <mat-card-content>
-        <p>
+        <div>
           <span><b>{{ feedbacks.modulDescription }}</b></span>
-        </p>
-        <p>
+        </div>
+        <div>
           Punktezahl: <b>{{ feedbacks.score ?? 0 | number: '1.2-2' }}</b>
           @if (feedbacks.penalty) {
-            <span> (davon {{ feedbacks.penalty }} Punkte Abzug)</span>
+            <span> - {{ feedbacks.penalty }} Punkte Abzug (Zeitunter- oder überschreitung)</span>
           }
-        </p>
-        <p>
+        </div>
+        <div>
           Prädikat: {{ feedbacks.scoreRange }}
-        </p>
+        </div>
+        @if (feedbacks.actualDurationInSeconds) {
+          <div>Spieldauer: {{ (feedbacks.actualDurationInSeconds / 60) | number: '1.0-0' }}:{{ feedbacks.actualDurationInSeconds % 60 | number: '2.0-0' }}</div>
+        }
       </mat-card-content>
     </mat-card>
 

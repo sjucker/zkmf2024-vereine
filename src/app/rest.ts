@@ -116,6 +116,7 @@ export interface JudgeReportFeedbackDTO {
   scoreRange: string;
   penalty?: number;
   bonus?: number;
+  actualDurationInSeconds?: number;
   judge1: JudgeReportViewDTO;
   judge2: JudgeReportViewDTO;
   judge3: JudgeReportViewDTO;
@@ -205,6 +206,7 @@ export interface JudgeReportViewDTO {
   score?: number;
   penalty?: number;
   bonus?: number;
+  actualDurationInSeconds?: number;
   status: JudgeReportStatus;
   titles: JudgeReportTitleDTO[];
   overallRatings: JudgeReportRatingDTO[];
@@ -293,6 +295,7 @@ export interface RankingDTO {
   modul: Modul;
   modulDescription: string;
   score?: number;
+  day: DateAsString;
 }
 
 export interface RankingListDTO {
@@ -426,6 +429,7 @@ export interface TimetablePreviewDTO {
   startTime: DateAsString;
   endTime: DateAsString;
   minutesUntilStart: number;
+  startDateTime?: DateAsString;
 }
 
 export interface TitelDTO extends IsValid {
@@ -1002,7 +1006,6 @@ export enum JudgeReportCategory {
   DYNAMIK_UND_AUSGEWOGENHEIT = "DYNAMIK_UND_AUSGEWOGENHEIT",
   STIMMUNG_KLANG_UND_WAHL_INSTRUMENTE = "STIMMUNG_KLANG_UND_WAHL_INSTRUMENTE",
   MUSIKALISCHE_UMSETZUNG_VISUELLE_SCHLEGEL_EFFEKTE = "MUSIKALISCHE_UMSETZUNG_VISUELLE_SCHLEGEL_EFFEKTE",
-  SCHWIERIGKEITSBONUS = "SCHWIERIGKEITSBONUS",
 }
 
 export enum JudgeReportCategoryRating {
