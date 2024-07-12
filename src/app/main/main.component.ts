@@ -35,6 +35,8 @@ export class MainComponent implements OnInit {
   anmeldungDisabled = true;
   unsavedChanges = false;
 
+  suisaConfirmed = false;
+
   constructor(private backendService: BackendService,
               public snackBar: MatSnackBar,
               public dialog: MatDialog) {

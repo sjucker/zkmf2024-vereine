@@ -29,6 +29,22 @@
       <p>&nbsp;</p>
     }
 
+    @if (verein.audioUrl) {
+      <div class="audio">
+        <p><b>Aufnahme Wettspiele</b></p>
+        <p>
+          @if (!suisaConfirmed) {
+            Download
+          } @else {
+            <a [href]="verein.audioUrl" target="_blank">Download</a>
+          }
+        </p>
+        <mat-checkbox [(ngModel)]="suisaConfirmed">Hiermit bestätige ich, dass ich die <a href="/assets/suisa-merkblatt.pdf" target="_blank">Richtlinien</a> zur Verbreitung von Musik gelesen und
+          verstanden habe.
+        </mat-checkbox>
+      </div>
+    }
+
     <div class="einsatzzeiten" *ngIf="hasTimetableEntries && false">
       <p><b>Informationen ZKMF2024</b>: <a href="https://www.zkmf2024.ch/vereine/informationen.pdf" target="_blank">PDF</a></p>
 
@@ -48,7 +64,8 @@
         <p>
           <b>Instrumentendepot</b>: <a [href]="verein.instrumentenDepot.googleMapsAddress" target="_blank">{{ verein.instrumentenDepot.name }}</a> (<b>{{ verein.instrumentenDepot.mapId }}</b>)
           @if (verein.instrumentenDepotParademusik && verein.instrumentenDepot.id !== verein.instrumentenDepotParademusik.id) {
-            und <a [href]="verein.instrumentenDepotParademusik.googleMapsAddress" target="_blank">{{ verein.instrumentenDepotParademusik.name }}</a> (<b>{{ verein.instrumentenDepotParademusik.mapId }}</b>)
+            und <a [href]="verein.instrumentenDepotParademusik.googleMapsAddress" target="_blank">{{ verein.instrumentenDepotParademusik.name }}</a> (
+            <b>{{ verein.instrumentenDepotParademusik.mapId }}</b>)
           }
         </p>
       }
