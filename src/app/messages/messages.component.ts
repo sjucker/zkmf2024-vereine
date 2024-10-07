@@ -17,7 +17,7 @@ export class MessagesComponent {
   saving = false;
 
   constructor(private service: BackendService,
-              public snackBar: MatSnackBar  ) {
+              public snackBar: MatSnackBar) {
   }
 
   saveMessage() {
@@ -35,7 +35,7 @@ export class MessagesComponent {
           panelClass: 'success'
         });
       },
-      error: ()=> {
+      error: () => {
         this.saving = false;
         this.snackBar.open("Es ist ein Fehler aufgetreten...", undefined, {
           duration: 3000,

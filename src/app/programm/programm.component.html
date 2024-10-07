@@ -1,6 +1,6 @@
 <mat-expansion-panel>
   <mat-expansion-panel-header>
-    <mat-panel-title>Modul {{programm.modul}} - Programm</mat-panel-title>
+    <mat-panel-title>Modul {{ programm.modul }} - Programm</mat-panel-title>
     <mat-panel-description>
       <app-validation-state [valid]="programm.valid"></app-validation-state>
     </mat-panel-description>
@@ -10,11 +10,11 @@
     <div>
       <span class="mat-h2">Allgemeine Angaben</span>
       <div class="allgemeine-angaben">
-        <span><b>Modul</b>: {{programm.modulDescription}}</span>
-        <span *ngIf="programm.klasse"><b>Klasse</b>: {{programm.klasse}}</span>
-        <span *ngIf="programm.besetzung"><b>Besetzung</b>: {{programm.besetzung}}</span>
+        <span><b>Modul</b>: {{ programm.modulDescription }}</span>
+        <span *ngIf="programm.klasse"><b>Klasse</b>: {{ programm.klasse }}</span>
+        <span *ngIf="programm.besetzung"><b>Besetzung</b>: {{ programm.besetzung }}</span>
         <span *ngIf="hasVorgabeDauer"><b>Vorgabe Dauer</b>:
-          {{formatDuration(programm.minDurationInSeconds)}} - {{formatDuration(programm.maxDurationInSeconds)}}</span>
+          {{ formatDuration(programm.minDurationInSeconds) }} - {{ formatDuration(programm.maxDurationInSeconds) }}</span>
       </div>
       <div *ngIf="isModulAB">
         <a href="https://www.zkmf2024.ch/reglement/festreglement.pdf" target="_blank">Reglement</a>
@@ -150,7 +150,7 @@
           <button color="primary" mat-flat-button
                   [disabled]="!newTitelValid"
                   (click)="addNewProgrammTitel()">
-            {{newTitel.id ? 'aktualisieren' : 'erfassen'}}
+            {{ newTitel.id ? 'aktualisieren' : 'erfassen' }}
           </button>
         </div>
       </div>
@@ -180,9 +180,9 @@
             <mat-icon *ngIf="!last" (click)="moveDown(entry)" class="clickable">arrow_downward</mat-icon>
             <div *ngIf="last" class="spacer">&nbsp;</div>
           </td>
-          <td>{{i + 1}}</td>
-          <td>{{entry.titel.titelName}} ({{entry.titel.composer}})<span *ngIf="entry.titel.pflichtStueck">*</span></td>
-          <td *ngIf="!isModulC">{{formatDuration(entry.titel.durationInSeconds)}}</td>
+          <td>{{ i + 1 }}</td>
+          <td>{{ entry.titel.titelName }} ({{ entry.titel.composer }})<span *ngIf="entry.titel.pflichtStueck">*</span></td>
+          <td *ngIf="!isModulC">{{ formatDuration(entry.titel.durationInSeconds) }}</td>
           <td *ngIf="isModulAB || isModulH">
             <app-duration-input *ngIf="!last"
                                 [durationInSeconds]="entry.applausInSeconds ?? 0"
@@ -210,10 +210,10 @@
 
       <p *ngIf="hasVorgabeDauer && !this.isModulC && programm.ablauf.length > 0">
         <b><span
-          [ngClass]="{'valid': isInRange}">Total Dauer</span></b>: {{formatDuration(programm.totalDurationInSeconds)}}
+          [ngClass]="{'valid': isInRange}">Total Dauer</span></b>: {{ formatDuration(programm.totalDurationInSeconds) }}
         <br/>
         <span *ngIf="!isInRange"
-              class="invalid"><b>Differenz zur Vorgabe</b>: {{formatDuration(diffToVorgabe)}}</span>
+              class="invalid"><b>Differenz zur Vorgabe</b>: {{ formatDuration(diffToVorgabe) }}</span>
       </p>
     </div>
 
@@ -221,7 +221,7 @@
       <div class="mat-h2">Infos für die Moderation</div>
       <div *ngFor="let titel of selbstwahlTitel">
         <mat-form-field appearance="outline" color="primary">
-          <mat-label>Infos für die Moderation: {{titel.titelName}}</mat-label>
+          <mat-label>Infos für die Moderation: {{ titel.titelName }}</mat-label>
           <textarea matInput
                     cdkTextareaAutosize
                     cdkAutosizeMinRows="3"
