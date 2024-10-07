@@ -1,7 +1,7 @@
 import {Component, EventEmitter, Input, OnChanges, Output} from '@angular/core';
 import {VereinsanmeldungDetailDTO} from "../rest";
 import {MatDialog} from "@angular/material/dialog";
-import * as moment from "moment";
+import moment from "moment";
 import {Moment} from "moment";
 import {Router} from "@angular/router";
 import {STAGE_PATH, STAGE_VIEW_PATH} from "../app-routing.module";
